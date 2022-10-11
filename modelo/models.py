@@ -1,3 +1,4 @@
+from tkinter import _TakeFocusValue
 from django.db import models
 from email.policy import default
 
@@ -65,6 +66,7 @@ class Usuario(models.Model):
     def __str__(self):
         return self.email
 
+usuario = Usuario()
 
 #deterioros
 class AgenteDeterioro(models.Model):

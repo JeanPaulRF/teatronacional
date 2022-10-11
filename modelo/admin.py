@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Area, Elemento, AgenteDeterioro, Encargado, Inspeccion, Usuario
+from .models import *
 
 # Register your models here.
-admin.site.register(Area, Elemento, AgenteDeterioro, Encargado, Inspeccion), Usuario
+admin.site.register(Area)
+admin.site.register(Elemento)
+admin.site.register(AgenteDeterioro)
+admin.site.register(Encargado)
+admin.site.register(Inspeccion)
+admin.site.register(Usuario)
