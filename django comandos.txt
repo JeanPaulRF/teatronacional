@@ -1,0 +1,128 @@
+//crear virtual env
+
+pip install virtualenv
+
+virtualenv venv
+
+--activar venv con archivo activate
+
+
+
+//correr servidor
+
+pip install django
+
+django-admin startproject teatro
+
+django-admin startproject teatro .
+
+python manage.py runserver
+
+python manage.py runserver #puerto
+
+python manage.py startapp newapp
+
+
+//db
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+
+//shell django
+
+python manage.py shell
+
+
+
+
+
+
+
+
+// heroku
+
+pip install gunicorn
+
+python --version
+
+pip freeze > requirements.txt
+
+heroku 
+
+git
+
+heroku login
+
+heroku create teatrodjango
+ 
+git status
+
+git init
+
+git status
+
+git remote -v
+
+git remote add heroku https://git.heroku.com/teatrodjango.git
+
+git remote -v
+
+git add .
+
+git commit -m"message"
+
+git push heroku master
+
+
+// runserver
+git add .
+
+git commit -m"message"
+
+git push heroku main
+
+heroku local -f Procfile.windows
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
