@@ -1,20 +1,19 @@
 #from tkinter import _TakeFocusValue
+from configparser import ExtendedInterpolation
+from dis import show_code
 from django.db import models
 from email.policy import default
+import random, string, uuid
 
 
 # Create your models here.
 
+
 #areas
-class Imagen(models.Model):
-    imagen = models.ImageField(upload_to='images/', null=True, blank=True)
-
-    def __str__(self):
-        return self.imagen.url
-
 class Parte(models.Model):
     nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=8, )
+    codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
+    readonly_fields = ('codigo',)
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
     imagen1 = models.ImageField(upload_to='images/', blank=True, null=True)
@@ -26,6 +25,7 @@ class Parte(models.Model):
 
     class Meta:
         abstract = True
+    
 
 
 class Elemento(Parte):
@@ -40,6 +40,7 @@ class Area(Parte):
 
     def __str__(self):
         return self.nombre
+
 
 
 #encargados
@@ -106,9 +107,9 @@ class Inspeccion(models.Model):
         EJECUTADA_CON_RETRASO = 'EJECUTADA_CON_RETRASO', 'EJECUTADA_CON_RETRASO'
         RETRASADA = 'RETRASADA', 'RETRASADA'
 
-    codigo = models.CharField(max_length=8)
-    fechaInicio = models.DateField()
-    fechaFin = models.DateField()
+    codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
+    fechaInicio = models.DateField(null=False)
+    fechaFin = models.DateField(null=False)
     tResultado = models.CharField(max_length=25 , choices=TResultado.choices)
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.OneToOneField(Encargado, on_delete=models.CASCADE)
