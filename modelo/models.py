@@ -116,6 +116,7 @@ class Inspeccion(models.Model):
     area = models.OneToOneField(Area, on_delete=models.CASCADE)
     deterio = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE)
     comentario = models.TextField(default='')
+    pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 
     def __str__(self):
         return self.codigo
