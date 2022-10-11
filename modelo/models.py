@@ -1,4 +1,4 @@
-from tkinter import _TakeFocusValue
+#from tkinter import _TakeFocusValue
 from django.db import models
 from email.policy import default
 
@@ -6,11 +6,20 @@ from email.policy import default
 # Create your models here.
 
 #areas
+class Imagen(models.Model):
+    imagen = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.imagen.url
+
 class Parte(models.Model):
     nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=8)
+    codigo = models.CharField(max_length=8, )
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
+    imagen1 = models.ImageField(upload_to='images/', blank=True, null=True)
+    imagen2 = models.ImageField(upload_to='images/', blank=True, null=True)
+    imagen3 = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -27,7 +36,7 @@ class Elemento(Parte):
 
 class Area(Parte):
     dimensiones = models.CharField(max_length=100)
-    listaElementos = models.ManyToManyField(Elemento)
+    listaElementos = models.ManyToManyField(Elemento, blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -105,7 +114,7 @@ class Inspeccion(models.Model):
     encargado = models.OneToOneField(Encargado, on_delete=models.CASCADE)
     area = models.OneToOneField(Area, on_delete=models.CASCADE)
     deterio = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE)
-    comentario = models.TextField()
+    comentario = models.TextField(default='')
 
     def __str__(self):
         return self.codigo

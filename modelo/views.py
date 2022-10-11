@@ -1,12 +1,9 @@
-from contextlib import redirect_stderr
-import email
-from http.client import HTTPResponse
-from pyexpat import model
 from tkinter.messagebox import NO
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from modelo.models import Usuario
+
 
 # Create your views here.
 def autenticarUsuario(request):
@@ -52,5 +49,5 @@ def signout(request):
 
 
 def crearUsuario(request):
-    user = models.Usuario(email=request.POST['email'], password=request.POST['password'])
+    user = Usuario(email=request.POST['email'], password=request.POST['password'])
     user.save()
