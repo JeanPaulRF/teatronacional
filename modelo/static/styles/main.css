@@ -1,0 +1,27 @@
+@font-face {
+    font-family:'Inria Serif';
+    src:url(InriaSerif-Regular.ttf)
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-family:'Inria Serif';
+}
+
+header {
+    background-color: black;
+    color: white;
+    height: 114px;
+    text-align: center;
+    line-height: 114px;
+    grid-column: auto;
+}
+
+#titulo {
+    margin: auto;
+}
