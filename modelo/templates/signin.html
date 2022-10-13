@@ -20,17 +20,18 @@
       <image id="logoPrincipal" src="{% static '/images/teatrologo.jpg'%}" alt="Logo teatro nacional">
       <div id="loginContainer">
         {{error}}
-        <form action="" method="post">
+        <form action="{% url 'hola' email='email' password='pass' %}" method="post">
             {% comment %} {% csrf_token %}
             {{form.as_p}} {% endcomment %}
             <div class="form_group">
-              <input type="text" id="correo" class="form_input" placeholder=" ">
+              <input type="email" id="correo" class="form_input" placeholder=" " name="email">
               <label for="correo" class="form_label">Correo electronico</label>
             </div>
             <div class="form_group">
-              <input type="text" id="password" class="form_input" placeholder=" ">
+              <input type="text" id="password" class="form_input" placeholder=" " name="pass">
               <label for="password" class="form_label">Contraseña</label>
             </div>
+            {% comment %} <input class="boton" type="submit" value="INGRESAR"> {% endcomment %}
             <button class="iniciarSecion">
                 <span class="letraEstandar">INGRESAR</span>
             </button>
