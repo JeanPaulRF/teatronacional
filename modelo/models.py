@@ -1,9 +1,5 @@
-#from tkinter import _TakeFocusValue
-from configparser import ExtendedInterpolation
-from dis import show_code
 from django.db import models
-from email.policy import default
-import random, string, uuid
+import uuid
 
 
 # Create your models here.
