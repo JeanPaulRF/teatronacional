@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout, User
+from django.contrib.auth import login, logout
 from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
 from .forms import SigninForm, CreateUserForm
@@ -10,12 +10,6 @@ from .forms import SigninForm, CreateUserForm
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
 
-
-def hola(email, password):
-    print(email)
-
-
-
 def signin(request):
     if request.method == 'POST':
         try:
@@ -23,7 +17,7 @@ def signin(request):
 
             if usuario.contrasena == request.POST['contrasena']:
                 if usuario.tUsuario == 'ADMINISTRADOR':
-                    return redirect('admin/')
+                    return redirect('menuAdmin/')
                 elif usuario.tUsuario == 'SUPERUSUARIO':
                     return redirect('home/')
                 elif usuario.tUsuario == 'OPERATIVO':

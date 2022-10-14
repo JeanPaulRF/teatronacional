@@ -33,6 +33,10 @@ body {
     /* background-color: aqua; */
 }
 
+#logoPrincipal {
+    width: 192px;
+}
+
 header {
     background-color: black;
     color: white;
@@ -42,10 +46,6 @@ header {
     line-height: 114px;
     grid-column: auto;
 
-}
-
-#titulo {
-    margin: auto;
 }
 
 footer {
