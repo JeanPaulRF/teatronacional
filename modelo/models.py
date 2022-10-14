@@ -122,13 +122,14 @@ class Inspeccion(models.Model):
         RETRASADA = 'RETRASADA', 'RETRASADA'
 
     codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
+    readonly_fields = ('codigo',)
     fechaInicio = models.DateField(null=False)
     fechaFin = models.DateField(null=False)
     tResultado = models.CharField(max_length=25 , choices=TResultado.choices)
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.OneToOneField(Encargado, on_delete=models.CASCADE)
     area = models.OneToOneField(Area, on_delete=models.CASCADE)
-    deterio = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE)
+    deterioro = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE)
     comentario = models.TextField(default='')
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 
