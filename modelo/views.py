@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, User
 from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
-from .forms import SigninForm
+from .forms import SigninForm, CreateUserForm
 
 
 # Create your views here.
@@ -61,6 +61,27 @@ def signout(request):
     return redirect('signin')	
 
 
-def crearUsuario(request):
-    user = Usuario(email=request.POST['email'], password=request.POST['password'])
-    user.save()
+def createUser(request):
+    if request.method == 'POST':
+        try:
+            User.objects.create_superuser(request.POST['email'], request.POST['email'], request.POST['contrasena'])
+            form = CreateUserForm(request.POST)
+            usuario = form.save(commit=False)
+            usuario.user = request.user
+            usuario.save()
+
+            return render(request, 'signin.html', {
+                'form' : CreateUserForm,
+                'error' : 'Usuario creado correctamente'
+            })
+
+        except Exception as e:
+            return render(request, 'signin.html', {
+                'form' : CreateUserForm,
+                'error' : 'Error al crear usuario'
+            })
+
+    else:
+        return render(request, 'signin.html', {
+            'form' : CreateUserForm
+        })

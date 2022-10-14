@@ -6,4 +6,9 @@ class SigninForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'contrasena']
-    
+
+
+class CreateUserForm(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['email', 'contrasena', 'tUsuario']
