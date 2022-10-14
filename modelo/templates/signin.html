@@ -1,45 +1,52 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">  
-  <head>    
-    <title>Teatro Nacional</title>    
-    <meta charset="UTF-8">
-    <meta name="TEC" content="TEC">
-    <meta name="description" content="Descripción de la WEB">    
-    <link href="{% static '/styles/main.css' %}" rel="stylesheet" type="text/css"/>    
-  </head>  
-  <body>
-    <div id="mainContainer">
-      <header>
-        <h1 id="titulo">Sistema de Restauración y Mantenimiento</h1>      
-      </header>    
-      {% comment %} <nav>
-        <a href="http://dominio.com/seccion2.html">IR SECCIÓN 2</a>
-        <a href="http://dominio.com/seccion2.html">IR SECCIÓN 3</a>
-      </nav> {% endcomment %}
-      <image id="logoPrincipal" src="{% static '/images/teatrologo.jpg'%}" alt="Logo teatro nacional">
+<html lang="es">
+
+<head>
+  <title>Teatro Nacional</title>
+  <meta charset="UTF-8">
+  <meta name="TEC" content="TEC">
+  <meta name="description" content="Descripción de la WEB">
+  <link href="{% static '/styles/main.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="mainContainer">
+    <header>
+      <h1 id="titulo">Sistema de Restauración y Mantenimiento</h1>
+    </header>
+    {% comment %} <nav>
+      <a href="http://dominio.com/seccion2.html">IR SECCIÓN 2</a>
+      <a href="http://dominio.com/seccion2.html">IR SECCIÓN 3</a>
+    </nav> {% endcomment %}
+    <image id="logoPrincipal" src="{% static '/images/teatrologo.jpg'%}" alt="Logo teatro nacional">
       <div id="loginContainer">
         {{error}}
-        <form action="{% url 'hola' email='email' password='pass' %}" method="post">
-            {% comment %} {% csrf_token %}
-            {{form.as_p}} {% endcomment %}
-            <div class="form_group">
-              <input type="email" id="correo" class="form_input" placeholder=" " name="email">
-              <label for="correo" class="form_label">Correo electronico</label>
-            </div>
-            <div class="form_group">
-              <input type="text" id="password" class="form_input" placeholder=" " name="pass">
-              <label for="password" class="form_label">Contraseña</label>
-            </div>
-            {% comment %} <input class="boton" type="submit" value="INGRESAR"> {% endcomment %}
-            <button class="iniciarSecion">
-                <span class="letraEstandar">INGRESAR</span>
-            </button>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{form.as_p}}
+          {% comment %}
+          <div class="form_group">
+            <input type="text" id="correo" class="form_input" placeholder=" ">
+            <label for="correo" class="form_label">Correo electronico</label>
+          </div>
+          <div class="form_group">
+            <input type="text" id="password" class="form_input" placeholder=" ">
+            <label for="password" class="form_label">Contraseña</label>
+          </div>
+          {% endcomment %}
+
+          <button class="iniciarSecion">
+            <span class="letraEstandar">INGRESAR</span>
+          </button>
+
+
         </form>
       </div>
       <footer>
-          <span id="copy">Copyright &copy;TEC 2022</span>
+        <span id="copy">Copyright &copy;TEC 2022</span>
       </footer>
-    </div>
-  </body>  
+  </div>
+</body>
+
 </html>
