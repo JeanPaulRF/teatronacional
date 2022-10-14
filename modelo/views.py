@@ -10,14 +10,11 @@ from .forms import SigninForm
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
 
-def autenticarUsuario(request):
-    try:
-        return get_object_or_404(Usuario, email=request.POST['username'])
-    except Usuario.DoesNotExist:
-        return None
 
 def hola(email, password):
     print(email)
+
+
 
 def signin(request):
     if request.method == 'POST':
@@ -33,20 +30,20 @@ def signin(request):
                     return redirect('home/')
             else:
                 return render(request, 'signin.html', {
-                'form' : SigninForm,
-                'error' : 'Contraseña incorrecta'
+                    'form' : SigninForm,
+                    'error' : 'Contraseña incorrecta'
                 })
 
         except Exception as e:
             return render(request, 'signin.html', {
                 'form' : SigninForm,
-                    'error' : 'El usuario no existe'
-                    })
-
-        else:
-            return render(request, 'signin.html', {
-                    'form' : SigninForm
+                'error' : 'El usuario no existe'
             })
+
+    else:
+        return render(request, 'signin.html', {
+            'form' : SigninForm
+        })
 
 
 
