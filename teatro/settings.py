@@ -122,7 +122,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 FILES_URL = '/files/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 FILES_ROOT = os.path.join(BASE_DIR, 'files')
 
 STATICFILES_DIRS = (

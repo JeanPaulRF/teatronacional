@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, get_user_model
 from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
 from .forms import SigninForm, CreateUserForm
 
 
 # Create your views here.
+def areasLista(request):
+    return render(request, 'listaAreas.html')
+
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
 
@@ -58,7 +61,8 @@ def signout(request):
 def createUser(request):
     if request.method == 'POST':
         try:
-            User.objects.create_superuser(request.POST['email'], request.POST['email'], request.POST['contrasena'])
+            user = get_user_model()
+            user.objects.create_superuser(request.POST['email'], request.POST['email'], request.POST['contrasena'])
             form = CreateUserForm(request.POST)
             usuario = form.save(commit=False)
             usuario.user = request.user
