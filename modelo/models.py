@@ -1,5 +1,8 @@
+from contextlib import nullcontext
 from django.db import models
+from django.utils.html import mark_safe
 import uuid
+
 
 
 # Create your models here.
@@ -12,12 +15,27 @@ class Parte(models.Model):
     readonly_fields = ('codigo',)
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
-    imagen1 = models.ImageField(upload_to='images/', blank=True, null=True)
-    imagen2 = models.ImageField(upload_to='images/', blank=True, null=True)
-    imagen3 = models.ImageField(upload_to='images/', blank=True, null=True)
+    imagen1 = models.ImageField(null=True)
+    imagen2 = models.ImageField(null=True)
+    imagen3 = models.ImageField(null=True)
 
     def __str__(self):
         return self.nombre
+
+    def img_preview1(self): #new
+        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
+             url = self.imagen1.url
+         ))
+
+    def img_preview2(self): #new
+        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
+             url = self.imagen2.url
+         ))
+
+    def img_preview3(self): #new
+        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
+             url = self.imagen3.url
+         ))
 
     class Meta:
         abstract = True
