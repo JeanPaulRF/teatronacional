@@ -27,7 +27,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
-    path('areasLista/' views.areasLista, name='areasLista'),
+    path('areasLista/', views.areasLista, name='areasLista')
 
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
