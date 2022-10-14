@@ -6,12 +6,14 @@
     <meta charset="UTF-8">
     <meta name="TEC" content="TEC">
     <meta name="description" content="Descripción de la WEB">    
-    <link href="{% static '/styles/admins.css' %}" rel="stylesheet" type="text/css"/>    
+    <link href="{% static 'styles/admins.css' %}" rel="stylesheet" type="text/css"/>
   </head>  
   <body>
     <div id="mainContainer">
       <header>
-        <image id="logoPrincipal" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional">   
+        <div class="logoContenedor">
+          <image id="logoPrincipal" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"/>
+        </div>
       </header>    
       {% block content %}{% endblock content %}
       <footer>
