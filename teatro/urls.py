@@ -29,6 +29,7 @@ urlpatterns = [
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
     path('areasLista/', views.areasLista, name='areasLista')
 
+<<<<<<< HEAD
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -39,3 +40,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> 108e7b851ba58844eeb250d1807a19f967172f26
