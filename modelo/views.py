@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
+from .forms import SigninForm
 
 
 # Create your views here.
@@ -19,20 +20,33 @@ def hola(email, password):
     print(email)
 
 def signin(request):
-    print(request.GET)
-    if request.method == 'GET':
-        return render(request, 'signin.html')
-    else:
-        usuario = autenticarUsuario(request)
+    if request.method == 'POST':
+        try:
+            usuario = Usuario.objects.get(email=request.POST['email'])
 
-        if usuario is None:
+            if usuario.contrasena == request.POST['contrasena']:
+                if usuario.tUsuario == 'ADMINISTRADOR':
+                    return redirect('admin/')
+                elif usuario.tUsuario == 'SUPERUSUARIO':
+                    return redirect('home/')
+                elif usuario.tUsuario == 'OPERATIVO':
+                    return redirect('home/')
+            else:
+                return render(request, 'signin.html', {
+                'form' : SigninForm,
+                'error' : 'Contraseña incorrecta'
+                })
+
+        except Exception as e:
             return render(request, 'signin.html', {
-            'error' : 'Username o password son incorrectas'
-        })
+                'form' : SigninForm,
+                    'error' : 'El usuario no existe'
+                    })
 
-    return render(request, 'signin.html')
-
-
+        else:
+            return render(request, 'signin.html', {
+                    'form' : SigninForm
+            })
 
 
 
