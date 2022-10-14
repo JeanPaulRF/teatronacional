@@ -143,8 +143,8 @@ footer {
 .cardImg {
     width: 156px;
     height: 183;
-    background-color: aqua;
     display: flex;
+    border-right: 1px;
 }
 
 .imageList {
