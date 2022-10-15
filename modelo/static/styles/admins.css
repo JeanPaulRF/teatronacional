@@ -101,6 +101,7 @@ footer {
     width: 100%;
     height: auto;
     display: grid;
+    margin-top: 20px;
     grid-template-columns: 50% 50%;
     /* align-items: center; */
 
@@ -179,6 +180,21 @@ footer {
     color: red;
 }
 
+.subTituloLista {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.subtituloLista {
+    width: 50%;
+    border-bottom: 1px solid black;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .sides {
     width: 591px;
     height: 643px;
@@ -203,7 +219,43 @@ footer {
 }
 
 #imagesContainer {
-    margin-top: 10px;
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
+}
+
+#infoAreaAdmin {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+}
+
+.filaInfoArea {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.reverRowButton {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btnAreas {
+    height: 41px;
+    width: 167px;
+    margin-right: 5px;
+}
+
+#sideRight {
+    width: 591px;
+    /* height: 643px; */
+    /* background-color: #D9D9D9; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FontSize20 {
+    font-size: 20px;
 }
