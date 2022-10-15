@@ -218,7 +218,7 @@ footer {
     border-radius: 20px;
 }
 
-#imagesContainer {
+.imagesContainer {
     margin-top: 50px;
     display: flex;
     flex-direction: row;
@@ -258,4 +258,8 @@ footer {
 
 .FontSize20 {
     font-size: 20px;
+}
+
+.elementosMarginTop {
+    margin-top: 50px;
 }
