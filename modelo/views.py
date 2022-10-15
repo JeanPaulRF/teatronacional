@@ -123,13 +123,11 @@ def createElemento(request):
         })
 
 
-# crudUsuarios.html
+# crud Usuarios
 
 def createUser(request):
     if request.method == 'POST':
         try:
-            user = get_user_model()
-            user.objects.create_superuser(request.POST['email'], request.POST['email'], request.POST['contrasena'])
             form = CreateUserForm(request.POST)
             usuario = form.save(commit=False)
             usuario.user = request.user
@@ -150,3 +148,35 @@ def createUser(request):
         return render(request, 'signin.html', {
             'form' : CreateUserForm
         })
+
+#lista los usuarios
+def listUsers(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'signin.html', { 'usuarios' : usuarios })
+
+
+#lee un usuario especifico y actualizarlo
+def readUser(request, email):
+    if request.method == 'GET':
+        usuario = get_object_or_404(Usuario, email=email)
+        form = CreateUserForm(instance=usuario)
+        return render(request, 'signin.html', { 'usuario' : usuario , 'form' : form })
+    else:
+        try:
+            usuario = get_object_or_404(Usuario, email=email)
+            form = CreateUserForm(request.POST, instance=usuario)
+            form.save()
+            return redirect('')
+        except ValueError:
+            return render(request, 'signin.html', {
+                'usuario' : CreateUserForm,
+                'form' : form,
+                'error' : 'Error al actualizar usuario'
+            })
+
+
+def deleteUser(request, email):
+    usuario = get_object_or_404(Usuario, email=email)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('')

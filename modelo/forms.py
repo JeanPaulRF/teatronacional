@@ -44,5 +44,3 @@ class CreateUserForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'contrasena', 'tUsuario']
-
-
