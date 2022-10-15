@@ -7,6 +7,9 @@ from .forms import *
 
 
 # Create your views here.
+def areasInfoAdmin(request):
+    return render(request, 'areasInfoAdmin.html')
+
 def areasLista(request):
     return render(request, 'listaAreas.html')
 

@@ -97,9 +97,13 @@ footer {
 
 /* listaAreas */
 
-#mainListaContainer {
-    width: 1000px;
-    height: 100%;
+#mainTwoSide {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* align-items: center; */
+
 }
 
 .tituloLista {
@@ -173,4 +177,33 @@ footer {
 
 .botonesColor {
     color: red;
+}
+
+.sides {
+    width: 591px;
+    height: 643px;
+    background-color: #D9D9D9;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.imageContainer {
+    /* width: 183px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 176px;
+    margin: auto;
+}
+
+.imagenAreaLista {
+    height: 176px;
+    border-radius: 20px;
+}
+
+#imagesContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
 }
