@@ -1,4 +1,5 @@
 from contextlib import nullcontext
+from enum import unique
 from django.db import models
 from django.utils.html import mark_safe
 import uuid
@@ -85,12 +86,11 @@ class Usuario(models.Model):
 
     tUsuario = models.CharField(max_length=25 , choices=TUsuario.choices, default=TUsuario.OPERATIVO)
     contrasena = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.email
 
-usuario = Usuario()
 
 #deterioros
 class AgenteDeterioro(models.Model):
