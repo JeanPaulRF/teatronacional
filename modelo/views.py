@@ -116,6 +116,7 @@ def createArea(request):
 #lista las areas
 def listAreas(request):
     areas = Area.objects.all()
+    print(areas)
     return render(request, 'listaAreas.html', { 'areas' : areas })
 
 
