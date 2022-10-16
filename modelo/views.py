@@ -7,6 +7,9 @@ from .forms import *
 
 
 # Create your views here.
+def agregarElemento(request):
+    return render(request, 'agregarElemento.html')
+
 def agregarArea(request):
     return render(request, 'agregarArea.html')
 
