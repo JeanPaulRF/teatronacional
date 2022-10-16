@@ -93,19 +93,19 @@ def createArea(request):
             area.user = request.user
             area.save()
 
-            return render(request, 'signin.html', {
+            return render(request, 'agregarArea.html', {
                 'form' : CreateAreaForm,
                 'error' : 'Area creada correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'agregarArea.html', {
                 'form' : CreateAreaForm,
                 'error' : 'Error al crear area'
             })
 
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'agregarArea.html', {
             'form' : CreateAreaForm
         })
 
@@ -113,7 +113,7 @@ def createArea(request):
 #lista las areas
 def listAreas(request):
     areas = Area.objects.all()
-    return render(request, 'signin.html', { 'areas' : areas })
+    return render(request, 'listaAreas.html', { 'areas' : areas })
 
 
 #lee un area especifica y actualizarla
