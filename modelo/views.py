@@ -151,13 +151,16 @@ def deleteArea(request, id_):
 
 # crud Elemento
 
-def createElemento(request):
+def createElemento(request, idArea):
     if request.method == 'POST':
         try:
             form = CreateElementoForm(request.POST)
             elemento = form.save(commit=False)
             elemento.user = request.user
             elemento.save()
+
+            area = get_object_or_404(Area, id=idArea)
+            area.listaElementos.add(elemento)
 
             return render(request, 'signin.html', {
                 'form' : CreateElementoForm,
@@ -177,8 +180,9 @@ def createElemento(request):
 
 
 #lista las areas
-def listElementos(request):
-    elementos = Elemento.objects.all()
+def listElementos(request, idArea):
+    area = get_object_or_404(Area, id=idArea)
+    elementos = area.listaElementos.objects.all()
     return render(request, 'signin.html', { 'elementos' : elementos })
 
 
