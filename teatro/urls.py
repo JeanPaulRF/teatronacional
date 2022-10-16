@@ -27,10 +27,11 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
-    path('menuAdmin/listaAreas/', views.listAreas, name='listaAreas'),
-    path('menuAdmin/listaAreas/agregarArea/', views.agregarArea, name='agregarArea'),
+    path('menuAdmin/listaAreas/', views.listAreas, name='listAreas'),
+    path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
     path('menuAdmin/listaAreas/deleteArea/<int:id_>', views.deleteArea, name='deleteArea'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>', views.readArea, name='areasInfoAdmin'),
+    path('menuAdmin/listaAreas/updateArea/<int:id_>', views.updateArea, name='updateArea'),
     path('elementoInfoAdmin/', views.elementoInfoAdmin, name='elementoInfoAdmin'),
     path('menuAdmin/agregarElemento/', views.agregarElemento, name='agregarElemento'),
 ] 

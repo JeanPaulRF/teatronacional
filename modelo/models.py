@@ -17,8 +17,8 @@ class Parte(models.Model):
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
     imagen1 = models.ImageField()
-    imagen2 = models.ImageField(null=True)
-    imagen3 = models.ImageField(null=True)
+    imagen2 = models.ImageField(null=True, blank=True)
+    imagen3 = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.nombre

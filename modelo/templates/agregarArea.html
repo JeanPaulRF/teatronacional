@@ -9,9 +9,17 @@
   <form action="" method="POST">
     {% csrf_token %}
     {{form.as_p}}
+
     <button class="botonEstandar btn167">
-      <span class="letraEstandar">INGRESAR</span>
+      <span class="letraEstandar">AGREGAR</span>
     </button>
+  </form>
+
+  <form action="listAreas" method="post">
+    <button class="botonEstandar btn167">
+      <span class="letraEstandar">Volver</span>
+    </button>
+  </form>
 </div>
 
 {% endblock content %}

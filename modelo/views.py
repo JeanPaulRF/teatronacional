@@ -89,28 +89,23 @@ def encargados(request):
 
 # crud Area
 def createArea(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'agregarArea.html', {
+            'form' : CreateAreaForm,
+        })
+    else:
         try:
             form = CreateAreaForm(request.POST)
             area = form.save(commit=False)
             area.user = request.user
             area.save()
+            return redirect ('agregarArea')
 
-            return render(request, 'agregarArea.html', {
-                'form' : CreateAreaForm,
-                'error' : 'Area creada correctamente'
-            })
-
-        except Exception as e:
+        except ValueError:
             return render(request, 'agregarArea.html', {
                 'form' : CreateAreaForm,
                 'error' : 'Error al crear area'
             })
-
-    else:
-        return render(request, 'agregarArea.html', {
-            'form' : CreateAreaForm
-        })
 
 
 #lista las areas
