@@ -21,6 +21,8 @@ body {
 	position : absolute;
 	width : 100%;
 	height : 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #mainContainer {
@@ -28,8 +30,11 @@ body {
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    height: 100vh;
-    width: 100%;
+    height: auto;
+    /* width: 100vw; */
+    min-height: 100%;
+    max-width: 100%;
+    /* overflow: auto; */
     /* background-color: aqua; */
 }
 
@@ -262,4 +267,22 @@ footer {
 
 .elementosMarginTop {
     margin-top: 50px;
+}
+
+.formularioContainer {
+    width: 570px;
+    height: 860px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn167 {
+    width: 167px;
+    height: 41px;
 }
