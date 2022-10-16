@@ -16,7 +16,7 @@
     </div>
     <div id="listaGeneralContainer">
         {% for area in areas %}
-        <div class="cardEstandar" action="">
+        <div class="cardEstandar" href="{% url 'areasInfoAdmin' %}">
             <div class="cardImg"><image class="imageList" src={{area.imagen1.url}} alt="imagen des teatro nacional"></div>
             <div class="cardInfo">
                 <div class="filaCard"><span>Código: {{area.codigo}}</span></div>
