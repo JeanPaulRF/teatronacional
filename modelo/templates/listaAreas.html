@@ -10,8 +10,8 @@
     <div id="listaGeneralContainer">
         {% for area in areas %}
         <div class="cardEstandar">
-            <div class="cardImg"><image class="imageList" src="{% static '/images/logoOscuro.jpg'%}" alt="imagen des teatro nacional"></div>
-            <div class="cardInfo">
+            <div class="cardImg"><image class="imageList" {% url '{{area.imagen1.url}}' %} alt="imagen des teatro nacional"></div>
+            <div class="cardInfo" action="">
                 <div class="filaCard"><span>Código: {{area.codigo}}</span></div>
                 <div class="filaCard"><span>Nombre: {{area.nombre}}</span></div>
                 <div class="filaCard"><span>Piso: {{area.ubicacion}}</span></div>
