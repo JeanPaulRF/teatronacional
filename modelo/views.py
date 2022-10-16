@@ -141,10 +141,12 @@ def readArea(request, id_):
 
 
 def deleteArea(request, id_):
-    area = get_object_or_404(Area, id=id_)
     if request.method == 'POST':
+        area = get_object_or_404(Area, id=id_)
         area.delete()
-    return redirect('listaAreas/')
+        return redirect('listaAreas/')
+    else:
+        return render(request, 'listaAreas.html')
 
 
 
