@@ -1,4 +1,5 @@
 import email
+from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
@@ -97,16 +98,24 @@ def createArea(request):
     else:
         try:
             form = CreateAreaForm(request.POST)
-            area = form.save(commit=False)
-            area.user = request.user
-            area.save()
-            return redirect ('agregarArea')
-
+            if form.is_valid():
+                area = form.save(commit=False)
+                area.save()
+                return render(request, 'agregarArea.html', {
+                    'form' : CreateAreaForm,
+                    'error' : 'Area creada correctamente'
+                })
+            else:
+                return render(request, 'agregarArea.html', {
+                'form' : CreateAreaForm,
+                'error' : 'Error al crear area'
+            })
         except ValueError:
             return render(request, 'agregarArea.html', {
                 'form' : CreateAreaForm,
                 'error' : 'Error al crear area'
             })
+       
 
 
 #lista las areas
@@ -117,7 +126,8 @@ def listAreas(request):
 
 def readArea(request, id_):
     area = get_object_or_404(Area, id=id_)
-    return render(request, 'listaAreas.html', { 'area' : area })
+    elementos = area.listaElementos.all()
+    return render(request, 'areasInfoAdmin.html', { 'area' : area })
 
 
 #lee un area especifica y actualizarla
@@ -164,19 +174,19 @@ def createElemento(request, idArea):
             area = get_object_or_404(Area, id=idArea)
             area.listaElementos.add(elemento)
 
-            return render(request, 'signin.html', {
+            return render(request, 'agregarElemento.html', {
                 'form' : CreateElementoForm,
                 'error' : 'Elemento creado correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'agregarElemento.html', {
                 'form' : CreateElementoForm,
                 'error' : 'Error al crear elemento'
             })
 
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'agregarElemento.html', {
             'form' : CreateElementoForm
         })
 
@@ -188,20 +198,20 @@ def listElementos(request, idArea):
     return render(request, 'signin.html', { 'elementos' : elementos })
 
 
-def readElemento(request, id_):
-    elemento = get_object_or_404(Elemento, id=id_)
+def readElemento(request, idArea, idElemento):
+    elemento = get_object_or_404(Elemento, id=idElemento)
     return render(request, 'signin.html', { 'elemento' : elemento })
 
 
 #lee un area especifica y actualizarla
-def updateElemento(request, id_):
+def updateElemento(request, idArea, idElemento):
     if request.method == 'GET':
-        elemento = get_object_or_404(Elemento, id=id_)
+        elemento = get_object_or_404(Elemento, id=idElemento)
         form = CreateElementoForm(instance=elemento)
         return render(request, 'signin.html', { 'elemento' : elemento , 'form' : form })
     else:
         try:
-            elemento = get_object_or_404(Elemento, id=id_)
+            elemento = get_object_or_404(Elemento, id=idElemento)
             form = CreateElementoForm(request.POST, instance=elemento)
             form.save()
             return redirect('')
@@ -213,11 +223,13 @@ def updateElemento(request, id_):
             })
 
 
-def deleteElemento(request, id_):
-    elemento = get_object_or_404(Elemento, id=id_)
+def deleteElemento(request, idArea, idElemento):
     if request.method == 'POST':
+        elemento = get_object_or_404(Elemento, id=idElemento)
         elemento.delete()
-        return redirect('')
+        return redirect('adminInfoArea/{{idArea}}')
+    else:
+        return redirect('adminInfoArea/{{idArea}}')
 
 
 
