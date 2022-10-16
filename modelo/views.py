@@ -10,6 +10,10 @@ import os
 
 
 # Create your views here.
+def verAreasTraajo(request):
+    areas = Area.objects.all()
+    return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
+
 def agregarElemento(request):
     return render(request, 'agregarElemento.html')
 
@@ -27,7 +31,7 @@ def areasLista(request):
     print(areas)
     return render(request, 'listaAreas.html', { 'areas' : areas })
     # return render(request, 'listaAreas.html')
-
+#''''''''''''''''''''''''''''''''''''''
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
 
