@@ -120,8 +120,13 @@ def listAreas(request):
     return render(request, 'listaAreas.html', { 'areas' : areas })
 
 
-#lee un area especifica y actualizarla
 def readArea(request, id_):
+    area = get_object_or_404(Area, id=id_)
+    return render(request, 'listaAreas.html', { 'area' : area })
+
+
+#lee un area especifica y actualizarla
+def updateArea(request, id_):
     if request.method == 'GET':
         area = get_object_or_404(Area, id=id_)
         form = CreateAreaForm(instance=area)
@@ -188,8 +193,13 @@ def listElementos(request, idArea):
     return render(request, 'signin.html', { 'elementos' : elementos })
 
 
-#lee un area especifica y actualizarla
 def readElemento(request, id_):
+    elemento = get_object_or_404(Elemento, id=id_)
+    return render(request, 'signin.html', { 'elemento' : elemento })
+
+
+#lee un area especifica y actualizarla
+def updateElemento(request, id_):
     if request.method == 'GET':
         elemento = get_object_or_404(Elemento, id=id_)
         form = CreateElementoForm(instance=elemento)
@@ -248,8 +258,13 @@ def listUsers(request):
     return render(request, 'signin.html', { 'usuarios' : usuarios })
 
 
-#lee un usuario especifico y actualizarlo
 def readUser(request, id_):
+    usuario = get_object_or_404(Usuario, id=id_)
+    return render(request, 'signin.html', { 'usuario' : usuario })
+
+
+#lee un usuario especifico y actualizarlo
+def updateUser(request, id_):
     if request.method == 'GET':
         usuario = get_object_or_404(Usuario, id=id_)
         form = CreateUserForm(instance=usuario)
@@ -310,8 +325,13 @@ def listAgentes(request):
     return render(request, 'signin.html', { 'agentes' : agentes })
 
 
-#lee un usuario especifico y actualizarlo
 def readAgente(request, id_):
+    agente = get_object_or_404(AgenteDeterioro, id=id_)
+    return render(request, 'signin.html', { 'agente' : agente })
+
+
+#lee un usuario especifico y actualizarlo
+def updateAgente(request, id_):
     if request.method == 'GET':
         agente = get_object_or_404(AgenteDeterioro, id=id_)
         form = CreateAgenteForm(instance=agente)
@@ -370,8 +390,13 @@ def listEncargados(request):
     return render(request, 'signin.html', { 'encargados' : encargados })
 
 
+def readEncargado(request, id_):
+    encargado = get_object_or_404(Encargado, id=id_)
+    return render(request, 'signin.html', { 'encargado' : encargado })
+
+
 #lee un usuario especifico y actualizarlo
-def readAgente(request, id_):
+def updateEncargado(request, id_):
     if request.method == 'GET':
         encargado = get_object_or_404(Encargado, id=id_)
         form = CreateEncargadoForm(instance=encargado)
@@ -430,8 +455,13 @@ def listInspeccion(request):
     return render(request, 'signin.html', { 'inspecciones' : inspecciones })
 
 
+def readInspeccion(request, id_):
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    return render(request, 'signin.html', { 'inspeccion' : inspeccion })
+
+
 #lee un usuario especifico y actualizarlo
-def readAgente(request, id_):
+def updateInspeccion(request, id_):
     if request.method == 'GET':
         inspeccion = get_object_or_404(Inspeccion, id=id_)
         form = CreateInspeccionForm(instance=inspeccion)
