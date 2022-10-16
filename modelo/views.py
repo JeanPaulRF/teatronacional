@@ -134,15 +134,19 @@ def updateArea(request, id_):
     if request.method == 'GET':
         area = get_object_or_404(Area, id=id_)
         form = CreateAreaForm(instance=area)
-        return render(request, 'signin.html', { 'area' : area , 'form' : form })
+        return render(request, 'editarAreaAdmin.html', { 'area' : area , 'form' : form })
     else:
         try:
             area = get_object_or_404(Area, id=id_)
             form = CreateAreaForm(request.POST, instance=area)
             form.save()
-            return redirect('')
+            return render(request, 'editarAreaAdmin.html', {
+                'area' : area,
+                'form' : form,
+                'error' : 'Area actualizada correctamente'
+            })
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarAreaAdmin.html', {
                 'area' : area,
                 'form' : form,
                 'error' : 'Error al actualizar area'
