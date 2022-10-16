@@ -161,6 +161,7 @@ footer {
     width: 116px;
     height: 97px;
     margin: auto;
+    border-radius: 20px;
 }
 
 .filaCard {
