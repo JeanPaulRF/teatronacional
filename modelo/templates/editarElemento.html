@@ -1,0 +1,25 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+{% load static %}
+<div class="tituloLista">
+  <h2>EDITAR ELEMENTO</h2>
+</div>
+<div class="formularioContainer">
+  {{error}}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button class="botonEstandar btn167">
+      <span class="letraEstandar">ACEPTAR</span>
+    </button>
+  </form>
+
+  <form action="listAreas" method="post">
+    <button class="botonEstandar btn167">
+      <span class="letraEstandar">Volver</span>
+    </button>
+  </form>
+</div>
+
+{% endblock content %}
