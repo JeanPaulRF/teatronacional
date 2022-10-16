@@ -39,7 +39,7 @@ urlpatterns = [
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
-   
+    path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
