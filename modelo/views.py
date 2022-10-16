@@ -37,7 +37,7 @@ def signin(request):
                 if usuario.tUsuario == 'ADMINISTRADOR':
                     return redirect('menuAdmin/')
                 elif usuario.tUsuario == 'SUPERUSUARIO':
-                    return redirect('home/')
+                    return redirect('listaUsuarios/')
                 elif usuario.tUsuario == 'OPERATIVO':
                     return redirect('home/')
             else:
@@ -249,7 +249,7 @@ def createUser(request):
 #lista los usuarios
 def listUsers(request):
     usuarios = Usuario.objects.all()
-    return render(request, 'signin.html', { 'usuarios' : usuarios })
+    return render(request, 'listaUsuarios.html', { 'usuarios' : usuarios })
 
 
 def readUser(request, id_):
@@ -278,10 +278,12 @@ def updateUser(request, id_):
 
 
 def deleteUser(request, id_):
-    usuario = get_object_or_404(Usuario, id=id_)
     if request.method == 'POST':
+        usuario = get_object_or_404(Usuario, id=id_)
         usuario.delete()
-        return redirect('')
+        return render(request, 'listaUsuarios.html')
+    else:
+        return render(request, 'listaUsuarios.html')
 
 
 
