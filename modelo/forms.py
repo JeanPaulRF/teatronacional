@@ -1,3 +1,4 @@
+from asyncore import read
 from django.forms import ModelForm
 from .models import *
 
@@ -13,7 +14,8 @@ class SigninForm(ModelForm):
 class CreateAreaForm(ModelForm):
     class Meta:
         model = Area
-        fields = ['nombre', 'ubicacion', 'descripcion', 'dimensiones', 'listaElementos','imagen1', 'imagen2', 'imagen3']
+        exclude = ['codigo', ]
+        fields = ['codigo', 'nombre', 'ubicacion', 'descripcion', 'dimensiones', 'listaElementos','imagen1', 'imagen2', 'imagen3']
 
 
 class CreateElementoForm(ModelForm):
