@@ -113,6 +113,7 @@ class Inspeccion(models.Model):
     class TResultado(models.TextChoices):
         CONSERVACION = 'CONSERVACION', 'CONSERVACION'
         RESTAURACION = 'RESTAURACION', 'RESTAURACION'
+        SIN_DEFINIR = 'SIN_DEFINIR', 'SIN_DEFINIR'
 
     class TEstado(models.TextChoices):
         POR_SUCEDER = 'POR_SUCEDER', 'POR_SUCEDER'

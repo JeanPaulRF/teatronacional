@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
@@ -37,7 +38,7 @@ def signin(request):
                 if usuario.tUsuario == 'ADMINISTRADOR':
                     return redirect('menuAdmin/')
                 elif usuario.tUsuario == 'SUPERUSUARIO':
-                    return redirect('listaUsuarios/')
+                    return redirect('listaUsuarios/{{usuario.id}}')
                 elif usuario.tUsuario == 'OPERATIVO':
                     return redirect('home/')
             else:
@@ -481,3 +482,12 @@ def deleteInspecion(request, id_):
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('')
+
+
+
+
+def listInspeccionesUser(request, id_):
+    usuario = get_object_or_404(Usuario, id=id_)
+    encargado = get_object_or_404(Encargado, email=usuario.email)
+    inspecciones = Inspeccion.objects.all(encargado=encargado)
+    return render(request, 'signin.html', { 'inspecciones' : inspecciones })

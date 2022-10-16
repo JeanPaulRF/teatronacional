@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout/', views.signout, name='signout'),
     path('listaUsuarios/', views.listUsers, name='listUsuarios'),
     path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
+    path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
     path('menuAdmin/listaAreas/', views.listAreas, name='listAreas'),
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
