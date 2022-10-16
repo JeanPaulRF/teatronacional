@@ -15,7 +15,7 @@ class CreateAreaForm(ModelForm):
     class Meta:
         model = Area
         exclude = ['codigo', ]
-        fields = ['codigo', 'nombre', 'ubicacion', 'descripcion', 'dimensiones', 'listaElementos','imagen1', 'imagen2', 'imagen3']
+        #fields = ['codigo', 'nombre', 'ubicacion', 'descripcion', 'dimensiones', 'listaElementos','imagen1', 'imagen2', 'imagen3']
 
 
 class CreateElementoForm(ModelForm):

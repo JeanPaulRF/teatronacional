@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, get_user_model
 from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
 from .forms import *
+import os
 
 
 # Create your views here.
@@ -101,9 +102,10 @@ def createArea(request):
         })
     else:
         try:
-            form = CreateAreaForm(request.POST)
+            form = CreateAreaForm(request.POST, request.FILES)
             if form.is_valid():
                 area = form.save(commit=False)
+                print(area.imagen1)
                 area.save()
                 return render(request, 'agregarArea.html', {
                     'form' : CreateAreaForm,
@@ -112,7 +114,7 @@ def createArea(request):
             else:
                 return render(request, 'agregarArea.html', {
                 'form' : CreateAreaForm,
-                'error' : 'Error al crear area'
+                'error' : 'Error al crear area form no valido'
             })
         except ValueError:
             return render(request, 'agregarArea.html', {
@@ -143,7 +145,19 @@ def updateArea(request, id_):
         try:
             area = get_object_or_404(Area, id=id_)
             form = CreateAreaForm(request.POST, instance=area)
-            form.save()
+            area = form.save(commit=False)
+            if len(request.FILES) != 0:
+                if len(area.imagen1) > 0:
+                    os.remove(area.imagen1.path)
+                area.imagen1 = request.FILES['imagen1']
+
+                if len(area.imagen2) > 0:
+                    os.remove(area.imagen2.path)
+                area.imagen2 = request.FILES['imagen2']
+
+                if len(area.imagen3) > 0:
+                    os.remove(area.imagen3.path)
+            area.save()
             return render(request, 'editarAreaAdmin.html', {
                 'area' : area,
                 'form' : form,

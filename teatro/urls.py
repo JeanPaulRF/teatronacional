@@ -34,19 +34,16 @@ urlpatterns = [
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
     path('menuAdmin/listaAreas/deleteArea/<int:id_>', views.deleteArea, name='deleteArea'),
     path('menuAdmin/listaAreas/updateArea/<int:id_>', views.updateArea, name='updateArea'),
-    path('elementoInfoAdmin/', views.elementoInfoAdmin, name='elementoInfoAdmin'),
-    path('menuAdmin/agregarElemento/', views.agregarElemento, name='agregarElemento'),
-    path('menuAdmin/editarElemento/', views.updateElemento, name='editarElemento'),
-    path('menuAdmin/verAreasTrabajosAdmin/', views.verAreasTrabajosAdmin, name='verAreasTrabajosAdmin'),
-    path('menuAdmin/verTrabajosAsignadosAdmin/', views.verAreasTrabajosAdmin, name='verTrabajosAsignadosAdmin'),
-    path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
-] 
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>', views.readArea, name='areasInfoAdmin'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>/', views.createElemento, name='agregarElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
+   
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#if settings.DEBUG:
+#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
