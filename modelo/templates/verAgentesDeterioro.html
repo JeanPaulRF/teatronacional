@@ -2,18 +2,15 @@
 {% block content %}
 {% load static %}
 <div class="tituloLista">
-    <h2>ASIGNACIÓN TRABAJOS</h2>
+    <h2>AGENTES DETERIORO</h2>
 </div>
 <div id="listaGeneralContainer">
-    {% for area in areas %}
-    <div class="cardEstandar" action="elementoInfoAdmin">
-        <div class="cardImg">
-            <image class="imageList" src={{area.imagen1.url}} alt="imagen des teatro nacional">
-        </div>
+    {% for agente in agentes %}
+    <div class="cardEstandarMini    " action="elementoInfoAdmin">
         <div class="cardInfo">
-            <div class="filaCard"><span>Código: {{area.codigo}}</span></div>
-            <div class="filaCard"><span>Nombre: {{area.nombre}}</span></div>
-            <div class="filaCard"><span>Piso: {{area.ubicacion}}</span></div>
+            <div class="filaCard"><span>Código: {{agente.codigo}}</span></div>
+            <div class="filaCard"><span>Nombre: {{agente.nombre}}</span></div>
+            <div class="filaCard"><span>Indole: {{agente.ubicacion}}</span></div>
             <div class="filaCard">
                 <form action="areasInfoAdmin/{{area.id}}" method="post">
                     {% csrf_token %}
