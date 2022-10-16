@@ -116,7 +116,6 @@ def createArea(request):
 #lista las areas
 def listAreas(request):
     areas = Area.objects.all()
-    print(areas)
     return render(request, 'listaAreas.html', { 'areas' : areas })
 
 
@@ -149,7 +148,7 @@ def deleteArea(request, id_):
     if request.method == 'POST':
         area = get_object_or_404(Area, id=id_)
         area.delete()
-        return redirect('listaAreas/')
+        return render(request, 'listaAreas.html')
     else:
         return render(request, 'listaAreas.html')
 
