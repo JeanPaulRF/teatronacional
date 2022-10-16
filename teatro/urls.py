@@ -34,12 +34,19 @@ urlpatterns = [
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
     path('menuAdmin/listaAreas/deleteArea/<int:id_>', views.deleteArea, name='deleteArea'),
     path('menuAdmin/listaAreas/updateArea/<int:id_>', views.updateArea, name='updateArea'),
+<<<<<<< HEAD
+    path('elementoInfoAdmin/', views.elementoInfoAdmin, name='elementoInfoAdmin'),
+    path('menuAdmin/agregarElemento/', views.agregarElemento, name='agregarElemento'),
+    # path('menuAdmin/editarArea/', views.updateArea, name='editarArea'),
+    path('menuAdmin/editarElemento/', views.updateElemento, name='editarElemento'),
+=======
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>', views.readArea, name='areasInfoAdmin'),
     path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>/', views.createElemento, name='agregarElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
    
+>>>>>>> 35f3b7c0d0c0d965e3cf57810e7538dd1e574179
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
