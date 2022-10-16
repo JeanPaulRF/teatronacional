@@ -183,6 +183,10 @@ footer {
     border:none;
 }
 
+.btnListasCard {
+    width: 100px;
+}
+
 .botonesColor {
     color: red;
 }

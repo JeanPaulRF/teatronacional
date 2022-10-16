@@ -15,7 +15,7 @@
 </div>
     <div id="listaGeneralContainer">
         {% for area in areas %}
-        <div class="cardEstandar" href="{% url 'areasInfoAdmin' %}">
+        <div class="cardEstandar" action="elementoInfoAdmin">
             <div class="cardImg">
                 <image class="imageList" src={{area.imagen1.url}} alt="imagen des teatro nacional">
             </div>
@@ -23,6 +23,7 @@
                 <div class="filaCard"><span>Código: {{area.codigo}}</span></div>
                 <div class="filaCard"><span>Nombre: {{area.nombre}}</span></div>
                 <div class="filaCard"><span>Piso: {{area.ubicacion}}</span></div>
+                <div class="filaCard"><form action="menuAdmin/listaAreas/areasInfoAdmin/{{area.id}}"><button class="botonEstandar btnListasCard">Ver detalles</button></form></div>
                 <div class="filaCard fila_rowR">
                 <form action="agregarArea/" method="post">
                     {% csrf_token %}
