@@ -20,7 +20,10 @@ def areasInfoAdmin(request):
     return render(request, 'areasInfoAdmin.html')
 
 def areasLista(request):
-    return render(request, 'listaAreas.html')
+    areas = Area.objects.all()
+    print(areas)
+    return render(request, 'listaAreas.html', { 'areas' : areas })
+    # return render(request, 'listaAreas.html')
 
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
