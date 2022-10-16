@@ -16,7 +16,7 @@ class Parte(models.Model):
     readonly_fields = ('codigo',)
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
-    imagen1 = models.ImageField(null=True)
+    imagen1 = models.ImageField()
     imagen2 = models.ImageField(null=True)
     imagen3 = models.ImageField(null=True)
 
