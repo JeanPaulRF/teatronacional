@@ -13,30 +13,14 @@ import uuid
 class Parte(models.Model):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
-    readonly_fields = ('codigo',)
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
-    imagen1 = models.ImageField()
-    imagen2 = models.ImageField(null=True, blank=True)
-    imagen3 = models.ImageField(null=True, blank=True)
+    imagen1 = models.ImageField(null=True, blank=True, upload_to='images/')
+    imagen2 = models.ImageField(null=True, blank=True, upload_to='images/')
+    imagen3 = models.ImageField(null=True, blank=True, upload_to='images/')
 
     def __str__(self):
         return self.nombre
-
-    def img_preview1(self): #new
-        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
-             url = self.imagen1.url
-         ))
-
-    def img_preview2(self): #new
-        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
-             url = self.imagen2.url
-         ))
-
-    def img_preview3(self): #new
-        return mark_safe('<img scr = "{url}" witdh = "30" height = "30"/>'.format(
-             url = self.imagen3.url
-         ))
 
     class Meta:
         abstract = True
@@ -123,7 +107,6 @@ class Inspeccion(models.Model):
         RETRASADA = 'RETRASADA', 'RETRASADA'
 
     codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
-    readonly_fields = ('codigo',)
     fechaInicio = models.DateField(null=False)
     fechaFin = models.DateField(null=False)
     tResultado = models.CharField(max_length=25 , choices=TResultado.choices)
