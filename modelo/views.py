@@ -117,7 +117,7 @@ def listAreas(request):
 
 def readArea(request, id_):
     area = get_object_or_404(Area, id=id_)
-    return render(request, 'listaAreas.html', { 'area' : area })
+    return render(request, 'areasInfoAdmin.html', { 'area' : area })
 
 
 #lee un area especifica y actualizarla
@@ -198,7 +198,7 @@ def updateElemento(request, id_):
     if request.method == 'GET':
         elemento = get_object_or_404(Elemento, id=id_)
         form = CreateElementoForm(instance=elemento)
-        return render(request, 'signin.html', { 'elemento' : elemento , 'form' : form })
+        return render(request, 'editarElemento.html', { 'elemento' : elemento , 'form' : form })
     else:
         try:
             elemento = get_object_or_404(Elemento, id=id_)
