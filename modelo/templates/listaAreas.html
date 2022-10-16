@@ -9,11 +9,12 @@
       </svg></button>
     </div>
     <div id="listaGeneralContainer">
+        {% for area in areas %}
         <div class="cardEstandar">
             <div class="cardImg"><image class="imageList" src="{% static '/images/logoOscuro.jpg'%}" alt="imagen des teatro nacional"></div>
             <div class="cardInfo">
                 <div class="filaCard"><span>Código:</span></div>
-                <div class="filaCard"><span>Nombre:</span></div>
+                <div class="filaCard"><span>Nombre:{{area.Area}}</span></div>
                 <div class="filaCard"><span>Piso:</span></div>
                 <div class="filaCard fila_rowR">
                     <button class="botonCard botonesColor">
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 {% endblock content %}
