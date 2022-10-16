@@ -144,7 +144,7 @@ def deleteArea(request, id_):
     area = get_object_or_404(Area, id=id_)
     if request.method == 'POST':
         area.delete()
-        return redirect('')
+    return redirect('listaAreas/')
 
 
 
