@@ -37,6 +37,7 @@ urlpatterns = [
     path('elementoInfoAdmin/', views.elementoInfoAdmin, name='elementoInfoAdmin'),
     path('menuAdmin/agregarElemento/', views.agregarElemento, name='agregarElemento'),
     path('menuAdmin/editarElemento/', views.updateElemento, name='editarElemento'),
+    path('menuAdmin/verAreasTrabajosAdmin/', views.updateElemento, name='asignacionTrabajo'),
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
