@@ -30,7 +30,8 @@ urlpatterns = [
     path('menuAdmin/listaAreas/', views.listAreas, name='listaAreas'),
     path('areasInfoAdmin/', views.areasInfoAdmin, name='areasInfoAdmin'),
     path('elementoInfoAdmin/', views.elementoInfoAdmin, name='elementoInfoAdmin'),
-    path('menuAdmin/agregarArea/', views.agregarArea, name='agregarArea'),
+    path('menuAdmin/listaAreas/agregarArea/', views.agregarArea, name='agregarArea'),
+    path('menuAdmin/listaAreas/deleteArea/<int:id_>', views.deleteArea, name='deleteArea'),
     path('menuAdmin/agregarElemento/', views.agregarElemento, name='agregarElemento'),
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
