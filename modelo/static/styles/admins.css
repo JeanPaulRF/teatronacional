@@ -152,7 +152,7 @@ footer {
 
 .cardEstandarMini {
     width: 600px;
-    height: 100px;
+    height: 150px;
     margin-top: 20px;
     background-color: #EAE9E9;
     border-radius: 20px;
@@ -160,6 +160,11 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.cardInfoMini {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cardImg {
