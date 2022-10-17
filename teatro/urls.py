@@ -44,6 +44,7 @@ urlpatterns = [
     path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
     path('menuAdmin/asignacionTrabajo/', views.asignacionTrabajo, name='asignacionTrabajo'),
     path('menuAdmin/asignacionTrabajo/preAsignacionTrabajo/<int:id_>', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

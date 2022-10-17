@@ -9,6 +9,12 @@ import os
 
 
 # Create your views here.
+
+def temporal(request, id_):
+    area = get_object_or_404(Area, id=id_)
+    elementos = area.listaElementos.all()
+    return render(request, 'preAsignacionTrabajo.html', { 'area' : area ,'elementos' : elementos })
+
 def preAsignacionTrabajo(request,id_):
     area = get_object_or_404(Area, id=id_)
     elementos = area.listaElementos.all()
@@ -18,30 +24,9 @@ def asignacionTrabajo(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
 
-def agregarElemento(request):
-    return render(request, 'agregarElemento.html')
-
-def agregarArea(request):
-    return render(request, 'agregarArea.html')
-
-def elementoInfoAdmin(request):
-    return render(request, 'elementoInfoAdmin.html')
-
-def areasInfoAdmin(request):
-    return render(request, 'areasInfoAdmin.html')
-
-def areasLista(request):
-    areas = Area.objects.all()
-    print(areas)
-    return render(request, 'listaAreas.html', { 'areas' : areas })
-    # return render(request, 'listaAreas.html')
 #''''''''''''''''''''''''''''''''''''''
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
-
-
-
-
 
 def signin(request):
     if request.method == 'POST':
@@ -596,9 +581,6 @@ def deleteInspecion(request, id_):
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('')
-
-
-
 
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
