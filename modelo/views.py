@@ -132,7 +132,8 @@ def listAreas(request):
 
 def readArea(request, id_):
     area = get_object_or_404(Area, id=id_)
-    return render(request, 'areasInfoAdmin.html', { 'area' : area })
+    elementos = area.listaElementos.all()
+    return render(request, 'areasInfoAdmin.html', { 'area' : area ,'elementos' : elementos })
 
 
 #lee un area especifica y actualizarla
@@ -185,31 +186,32 @@ def deleteArea(request, id_):
 # crud Elemento
 
 def createElemento(request, idArea):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'agregarElemento.html', {
+            'form' : CreateElementoForm,
+        })
+    else:
         try:
-            form = CreateElementoForm(request.POST)
-            elemento = form.save(commit=False)
-            elemento.user = request.user
-            elemento.save()
-
-            area = get_object_or_404(Area, id=idArea)
-            area.listaElementos.add(elemento)
-
-            return render(request, 'agregarElemento.html', {
+            form = CreateElementoForm(request.POST, request.FILES)
+            if form.is_valid():
+                elemento = form.save(commit=False)
+                elemento.save()
+                area = Area.objects.get(id=idArea)
+                area.listaElementos.add(elemento)
+                return render(request, 'agregarElemento.html', {
+                    'form' : CreateElementoForm,
+                    'error' : 'Elemento creado correctamente'
+                })
+            else:
+                return render(request, 'agregarElemento.html', {
                 'form' : CreateElementoForm,
-                'error' : 'Elemento creado correctamente'
+                'error' : 'Error al crear elemento form no valido'
             })
-
-        except Exception as e:
+        except ValueError:
             return render(request, 'agregarElemento.html', {
                 'form' : CreateElementoForm,
                 'error' : 'Error al crear elemento'
             })
-
-    else:
-        return render(request, 'agregarElemento.html', {
-            'form' : CreateElementoForm
-        })
 
 
 #lista las areas
@@ -248,9 +250,9 @@ def deleteElemento(request, idArea, idElemento):
     if request.method == 'POST':
         elemento = get_object_or_404(Elemento, id=idElemento)
         elemento.delete()
-        return redirect('adminInfoArea/{{idArea}}')
+        return redirect('/menuAdmin/listaAreas/areasInfoAdmin/{}'.format(idArea))
     else:
-        return redirect('adminInfoArea/{{idArea}}')
+        return redirect('/menuAdmin/listaAreas/areasInfoAdmin/{}'.format(idArea))
 
 
 
