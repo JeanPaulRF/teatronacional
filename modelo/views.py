@@ -35,6 +35,10 @@ def areasLista(request):
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
 
+
+
+
+
 def signin(request):
     if request.method == 'POST':
         try:
@@ -44,7 +48,7 @@ def signin(request):
                 if usuario.tUsuario == 'ADMINISTRADOR':
                     return redirect('menuAdmin/')
                 elif usuario.tUsuario == 'SUPERUSUARIO':
-                    return redirect('listaUsuarios/{{usuario.id}}')
+                    return redirect('listaUsuarios/')
                 elif usuario.tUsuario == 'OPERATIVO':
                     return redirect('home/')
             else:
@@ -256,31 +260,59 @@ def deleteElemento(request, idArea, idElemento):
 
 
 
+def createArea(request):
+    if request.method == 'GET':
+        return render(request, 'agregarArea.html', {
+            'form' : CreateAreaForm,
+        })
+    else:
+        try:
+            form = CreateAreaForm(request.POST, request.FILES)
+            if form.is_valid():
+                area = form.save(commit=False)
+                area.save()
+                return render(request, 'agregarArea.html', {
+                    'form' : CreateAreaForm,
+                    'error' : 'Area creada correctamente'
+                })
+            else:
+                return render(request, 'agregarArea.html', {
+                'form' : CreateAreaForm,
+                'error' : 'Error al crear area form no valido'
+            })
+        except ValueError:
+            return render(request, 'agregarArea.html', {
+                'form' : CreateAreaForm,
+                'error' : 'Error al crear area'
+            })
+
+
 # crud Usuarios
 
 def createUser(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'agregarUsuario.html', {
+            'form' : CreateUserForm
+        })
+    else:
         try:
             form = CreateUserForm(request.POST)
-            usuario = form.save(commit=False)
-            usuario.user = request.user
-            usuario.save()
-
-            return render(request, 'signin.html', {
+            if form.is_valid():
+                usuario = form.save(commit=False)
+                usuario.user = request.user
+                usuario.save()
+            return render(request, 'agregarUsuario.html', {
                 'form' : CreateUserForm,
                 'error' : 'Usuario creado correctamente'
             })
 
-        except Exception as e:
-            return render(request, 'signin.html', {
+        except ValueError:
+            return render(request, 'agregarUsuario.html', {
                 'form' : CreateUserForm,
                 'error' : 'Error al crear usuario'
             })
 
-    else:
-        return render(request, 'signin.html', {
-            'form' : CreateUserForm
-        })
+    
 
 #lista los usuarios
 def listUsers(request):
@@ -298,28 +330,71 @@ def updateUser(request, id_):
     if request.method == 'GET':
         usuario = get_object_or_404(Usuario, id=id_)
         form = CreateUserForm(instance=usuario)
-        return render(request, 'signin.html', { 'usuario' : usuario , 'form' : form })
+        return render(request, 'editarUsuario.html', { 'usuario' : usuario , 'form' : form })
     else:
         try:
             usuario = get_object_or_404(Usuario, id=id_)
             form = CreateUserForm(request.POST, instance=usuario)
             form.save()
-            return redirect('')
+            return render(request, 'editarUsuario.html', { 
+                'usuario' : usuario , 
+                'form' : form ,
+                'error' : 'Usuario actualizado correctamente'
+            })
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarUsuario.html', {
                 'usuario' : usuario,
                 'form' : form,
                 'error' : 'Error al actualizar usuario'
             })
 
 
+
+
+def updateArea(request, id_):
+    if request.method == 'GET':
+        area = get_object_or_404(Area, id=id_)
+        form = CreateAreaForm(instance=area)
+        return render(request, 'editarAreaAdmin.html', { 'area' : area , 'form' : form })
+    else:
+        try:
+            area = get_object_or_404(Area, id=id_)
+            form = CreateAreaForm(request.POST, instance=area)
+            area = form.save(commit=False)
+            if len(request.FILES) != 0:
+                if len(area.imagen1) > 0:
+                    os.remove(area.imagen1.path)
+                area.imagen1 = request.FILES['imagen1']
+
+                if len(area.imagen2) > 0:
+                    os.remove(area.imagen2.path)
+                area.imagen2 = request.FILES['imagen2']
+
+                if len(area.imagen3) > 0:
+                    os.remove(area.imagen3.path)
+            area.save()
+            return render(request, 'editarAreaAdmin.html', {
+                'area' : area,
+                'form' : form,
+                'error' : 'Area actualizada correctamente'
+            })
+        except ValueError:
+            return render(request, 'editarAreaAdmin.html', {
+                'area' : area,
+                'form' : form,
+                'error' : 'Error al actualizar area'
+            })
+
+
+
+
 def deleteUser(request, id_):
     if request.method == 'POST':
         usuario = get_object_or_404(Usuario, id=id_)
         usuario.delete()
-        return render(request, 'listaUsuarios.html')
+        return redirect('/listaUsuarios/')
     else:
-        return render(request, 'listaUsuarios.html')
+        return redirect('/listaUsuarios/')
 
 
 
