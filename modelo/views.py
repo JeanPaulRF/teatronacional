@@ -10,7 +10,7 @@ import os
 
 
 # Create your views here.
-def verAreasTraajo(request):
+def verAreasTrabajosAdmin(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
 
@@ -352,9 +352,9 @@ def createAgente(request):
 
 
 #lista los agentes
-def listAgentes(request):
+def verAgentesDeterioro(request):
     agentes = AgenteDeterioro.objects.all()
-    return render(request, 'signin.html', { 'agentes' : agentes })
+    return render(request, 'verAgentesDeterioro.html', { 'agentes' : agentes })
 
 
 def readAgente(request, id_):

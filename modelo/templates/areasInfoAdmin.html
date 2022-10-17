@@ -18,12 +18,16 @@
             <div class="imageContainer">
                 <image class="imagenAreaLista" src={{area.imagen1.url}} alt="Logo teatro nacional">
             </div>
+            {% if area.imagen2 %}
             <div class="imageContainer">
                 <image class="imagenAreaLista" src={{area.imagen2.url}} alt="Logo teatro nacional">
             </div>
+            {% endif %}
+            {% if area.imagen3 %}
             <div class="imageContainer">
                 <image class="imagenAreaLista" src={{area.imagen3.url}} alt="Logo teatro nacional">
             </div>
+            {% endif %}
         </div>
         <div id="infoAreaAdmin">
             <div class="filaInfoArea"><span>Código: {{area.codigo}}</span></div>
