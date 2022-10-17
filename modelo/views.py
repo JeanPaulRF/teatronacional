@@ -10,7 +10,7 @@ import os
 
 
 # Create your views here.
-def verAreasTrabajosAdmin(request):
+def asignacionTrabajo(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
 
@@ -223,7 +223,7 @@ def listElementos(request, idArea):
 
 def readElemento(request, idArea, idElemento):
     elemento = get_object_or_404(Elemento, id=idElemento)
-    return render(request, 'signin.html', { 'elemento' : elemento })
+    return render(request, 'elementoInfoAdmin.html', { 'elemento' : elemento, 'idArea': idArea })
 
 
 #lee un area especifica y actualizarla

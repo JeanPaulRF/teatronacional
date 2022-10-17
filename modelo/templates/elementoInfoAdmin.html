@@ -5,15 +5,25 @@
 <div id="mainOneSide">
     <div class="sides">
         <div class="imagesContainer">
-            <div class="imageContainer elementosMarginTop"><image class="imagenAreaLista" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"></div>
-            <div class="imageContainer elementosMarginTop"><image class="imagenAreaLista" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"></div>
-            <div class="imageContainer elementosMarginTop"><image class="imagenAreaLista" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"></div>
+            <div class="imageContainer">
+                <image class="imagenAreaLista" src={{elemento.imagen1.url}} alt="Logo teatro nacional">
+            </div>
+            {% if area.imagen2 %}
+            <div class="imageContainer">
+                <image class="imagenAreaLista" src={{elemento.imagen2.url}} alt="Logo teatro nacional">
+            </div>
+            {% endif %}
+            {% if area.imagen3 %}
+            <div class="imageContainer">
+                <image class="imagenAreaLista" src={{elemento.imagen3.url}} alt="Logo teatro nacional">
+            </div>
+            {% endif %}
         </div>
         <div id="infoAreaAdmin">
             <div class="filaInfoArea"><span>Código: {{elemento.codigo}}</span></div>
             <div class="filaInfoArea"><span>Nombre: {{elemento.nombre}}</span></div>
-            <div class="filaInfoArea"><span>Ubicación: {{elemento.ubicacion}}/span></div>
-            <div class="filaInfoArea"><span>Area: {{elemento.area}}</span></div>
+            <div class="filaInfoArea"><span>Ubicación: {{elemento.ubicacion}}</span></div>
+            <div class="filaInfoArea"><span>Area: {{idArea.idArea}}</span></div>
             <div class="filaInfoArea"><span>Descripción: {{elemento.descripcion}}</span></div>
             <div class="filaInfoArea reverRowButton">
                 <button class="botonCard botonesColor">

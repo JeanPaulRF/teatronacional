@@ -27,19 +27,20 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('listaUsuarios/', views.listUsers, name='listUsuarios'),
-    path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
-    path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
+    path('listaUsuarios/deleteUsuario/<int:id_>/', views.deleteUser, name='deleteUsuario'),
+    path('listaInspeccionesUser/<int:id_>/', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
     path('menuAdmin/listaAreas/', views.listAreas, name='listAreas'),
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
     path('menuAdmin/listaAreas/deleteArea/<int:id_>', views.deleteArea, name='deleteArea'),
     path('menuAdmin/listaAreas/updateArea/<int:id_>', views.updateArea, name='updateArea'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>', views.readArea, name='areasInfoAdmin'),
-    path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>', views.createElemento, name='agregarElemento'),
-    path('menuAdmin/listaAreas/areasInfoAdmin/deleteElemento/<int:idArea>/<int:idElemento>', views.deleteElemento, name='deleteElemento'),
-    path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>', views.readElemento, name='readElemento'),
-    path('menuAdmin/listaAreas/areasInfoAdmin/updateElemento/<int:idArea>/<int:idElemento>', views.updateElemento, name='updateElemento'),
-   
+    path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>/', views.createElemento, name='agregarElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
+    path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
+    path('menuAdmin/asignacionTrabajo/', views.asignacionTrabajo, name='asignacionTrabajo'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
