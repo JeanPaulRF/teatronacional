@@ -3,13 +3,17 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
-from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
 from .forms import *
 import os
 
 
 # Create your views here.
+def preAsignacionTrabajo(request,id_):
+    area = get_object_or_404(Area, id=id_)
+    elementos = area.listaElementos.all()
+    return render(request, 'preAsignacionTrabajo.html', { 'area' : area ,'elementos' : elementos })
+
 def asignacionTrabajo(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
