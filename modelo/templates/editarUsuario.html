@@ -1,0 +1,25 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+{% load static %}
+<div class="tituloLista">
+    <h2>EDITAR USUARIO</h2>
+</div>
+<div class="formularioContainer">
+    {{error}}
+    <form action="">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <button class="botonEstandar btn167">
+            <span class="letraEstandar">ACEPTAR</span>
+        </button>
+    </form>
+
+    <a href="{{request.META.HTTP_REFERER}}">
+        <button class="botonEstandar btn167">
+            <span class="letraEstandar">VOLVER</span>
+        </button>
+    </a>
+</div>
+
+{% endblock content %}

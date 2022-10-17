@@ -27,8 +27,15 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('listaUsuarios/', views.listUsers, name='listUsuarios'),
+<<<<<<< HEAD
     path('listaUsuarios/deleteUsuario/<int:id_>/', views.deleteUser, name='deleteUsuario'),
     path('listaInspeccionesUser/<int:id_>/', views.listInspeccionesUser, name='listInspeccionesUser'),
+=======
+    path('listaUsuarios/agregarUsuario/', views.createUser, name='agregarUsuario'),
+    path('listaUsuarios/updateUsuario/<int:id_>', views.updateUser, name='updateUsuario'),
+    path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
+    path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
+>>>>>>> 4f8b0493d521dbb178cf5c25964313264203a1cb
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
     path('menuAdmin/listaAreas/', views.listAreas, name='listAreas'),
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
