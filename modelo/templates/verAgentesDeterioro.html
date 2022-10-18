@@ -21,14 +21,11 @@
     {% for agente in agentes %}
     <div class="cardEstandarMini" action="elementoInfoAdmin">
         <div class="cardInfoMini">
-            <div class="filaCard"><span>Código: {{agente.codigo}}</span></div>
+            <div class="filaCard"><span>Tipo de Deterioro: {{agente.tDeterioro}}</span></div>
             <div class="filaCard"><span>Nombre: {{agente.nombre}}</span></div>
-            <div class="filaCard"><span>Indole: {{agente.ubicacion}}</span></div>
+            <div class="filaCard"><span>Descripcion: {{agente.descripcion}}</span></div>
             <div class="filaCard">
-                <form action="areasInfoAdmin/{{area.id}}" method="post">
-                    {% csrf_token %}
-                    <button class="botonEstandar btnListasCard">Asignar trabajo</button>
-                </form>
+
             </div>
             <div class="filaCard fila_rowR">
                 <form action="deleteArea/{{area.id}}" method="post">
@@ -41,7 +38,7 @@
                         </svg>
                     </button>
                 </form>
-    
+
                 <form action="updateArea/{{area.id}}">
                     {% csrf_token %}
                     <button class="botonCard">

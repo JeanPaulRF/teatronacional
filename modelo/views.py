@@ -169,9 +169,9 @@ def deleteArea(request, id_):
     if request.method == 'POST':
         area = get_object_or_404(Area, id=id_)
         area.delete()
-        return render(request, 'listaAreas.html')
+        return redirect('/menuAdmin/listaAreas/')
     else:
-        return render(request, 'listaAreas.html')
+        return redirect('/menuAdmin/listaAreas/')
 
 
 
@@ -230,9 +230,13 @@ def updateElemento(request, idArea, idElemento):
             elemento = get_object_or_404(Elemento, id=idElemento)
             form = CreateElementoForm(request.POST, instance=elemento)
             form.save()
-            return redirect('')
+            return render(request, 'editarElemento.html', {
+                'elemento' : elemento,
+                'form' : form,
+                'error' : 'Elemento actualizado correctamente'
+            })
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarElemento.html', {
                 'elemento' : elemento,
                 'form' : form,
                 'error' : 'Error al actualizar elemento'
