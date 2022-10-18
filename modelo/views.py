@@ -654,18 +654,27 @@ def agentes_pdf(request):
     textob.setTextOrigin(inch, inch)
     textob.setFont("Helvetica", 14)
 
-    agentes = AgenteDeterioro.objects.all()
+    agentes_ = AgenteDeterioro.objects.all()
+    agentes = sorted(agentes_, key=lambda x: x.nombre)
+
     lines = []
 
     #loop
+    lines.append("TIPO NATURAL")
     for agente in agentes:
-        lines.append("agente")
-        lines.append("codigo: " + agente.codigo)
-        lines.append("nombre: " + agente.nombre)
-        lines.append("apellido: " + agente.apellido)
-        lines.append("email: " + agente.email)
-        lines.append(" ")
+        if agente.tDeterioro == "NATURAL":
+            lines.append("    agente")
+            lines.append("    nombre: " + agente.nombre)
+            lines.append("    descripcion: " + agente.descripcion)
+            lines.append(" ")
 
+    lines.append("TIPO CIRCUNSTANCIAL")
+    for agente in agentes:
+        if agente.tDeterioro != "NATURAL":
+            lines.append("    agente")
+            lines.append("    nombre: " + agente.nombre)
+            lines.append("    descripcion: " + agente.descripcion)
+            lines.append(" ")
 
     for line in lines:
         textob.textLine(line)
@@ -675,4 +684,4 @@ def agentes_pdf(request):
     c.save()
     buf.seek(0)
 
-    return FileResponse(buf, as_attachment=True, filename='Agentes-inspecciones.pdf')
+    return FileResponse(buf, as_attachment=True, filename='Agentes.pdf')
