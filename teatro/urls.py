@@ -50,6 +50,9 @@ urlpatterns = [
     #Links de super usuario
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores
+    #Reportes
+    path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
+    path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

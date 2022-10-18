@@ -3,9 +3,16 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
-from modelo.models import Usuario
+from modelo.models import Usuario, AgenteDeterioro
 from .forms import *
 import os
+
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
 
 
 # Create your views here.
@@ -591,3 +598,81 @@ def listInspeccionesUser(request, id_):
     user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
     inspecciones = Inspeccion.objects.exclude(pk__in=user_inspecciones)
     return render(request, 'listaInspeccionesUser.html', { 'inspecciones' : inspecciones })
+
+
+def menuReportes(request):
+    return render(request, 'reportes.html')
+
+
+def areas_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    areas = Area.objects.all()
+    lines = []
+
+    #loop
+    for area in areas:
+        lines.append("area")
+        lines.append("codigo: " + area.codigo)
+        lines.append("nombre: " + area.nombre)
+        lines.append("ubicacion: " + area.ubicacion)
+        lines.append("descripcion: " + area.descripcion)
+        lines.append("dimensiones: " + area.dimensiones)
+        lines.append(" ")
+
+        elementos = Elemento.objects.filter(area=area.id)
+        for elemento in elementos:
+            lines.append("elemento")
+            lines.append("    codigo: " + elemento.codigo)
+            lines.append("    nombre: " + elemento.nombre)
+            lines.append("    ubicacion: " + elemento.ubicacion)
+            lines.append("    descripcion: " + elemento.descripcion)
+            lines.append(" ")
+
+        lines.append(" ")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='Areas-elementos.pdf')
+
+
+
+def agentes_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    agentes = AgenteDeterioro.objects.all()
+    lines = []
+
+    #loop
+    for agente in agentes:
+        lines.append("agente")
+        lines.append("codigo: " + agente.codigo)
+        lines.append("nombre: " + agente.nombre)
+        lines.append("apellido: " + agente.apellido)
+        lines.append("email: " + agente.email)
+        lines.append(" ")
+
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='Agentes-inspecciones.pdf')
