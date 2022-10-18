@@ -118,4 +118,4 @@ class Inspeccion(models.Model):
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 
     def __str__(self):
-        return self.codigo
+        return self.tEstado
