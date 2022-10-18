@@ -42,9 +42,15 @@ urlpatterns = [
     path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
     path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
-    path('menuAdmin/asignacionTrabajo/', views.asignacionTrabajo, name='asignacionTrabajo'),
-    path('menuAdmin/asignacionTrabajo/preAsignacionTrabajo/<int:id_>', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
-    
+    path('menuAdmin/asignacionTrabajoLista/', views.asignacionTrabajoLista, name='asignacionTrabajoLista'),
+    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>/', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
+    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>/asignacion/<int:idA>', views.createInspeccion, name='asignacion'),
+    path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
+    path('menuAdmin/listaUsuarios/', views.listUsers, name='listaUsuarios'),
+    #Links de super usuario
+    path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
+    #Links de trabajadores
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -20,7 +20,7 @@ def preAsignacionTrabajo(request,id_):
     elementos = area.listaElementos.all()
     return render(request, 'preAsignacionTrabajo.html', { 'area' : area ,'elementos' : elementos })
 
-def asignacionTrabajo(request):
+def asignacionTrabajoLista(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
 
@@ -520,7 +520,7 @@ def deleteEncargado(request, id_):
 
 
 #crud Inspeccion
-def createInspeccion(request):
+def createInspeccion(request, id_, idA):
     if request.method == 'POST':
         try:
             form = CreateInspeccionForm(request.POST)
@@ -528,19 +528,18 @@ def createInspeccion(request):
             inspeccion.user = request.user
             inspeccion.save()
 
-            return render(request, 'signin.html', {
+            return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
                 'error' : 'Inspeccion creada correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
                 'error' : 'Error al crear inspeccion'
             })
-
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'asignacion.html', {
             'form' : CreateInspeccionForm
         })
 
@@ -548,7 +547,7 @@ def createInspeccion(request):
 #lista los agentes
 def listInspeccion(request):
     inspecciones = Inspeccion.objects.all()
-    return render(request, 'signin.html', { 'inspecciones' : inspecciones })
+    return render(request, 'listaInspecciones.html', { 'inspecciones' : inspecciones })
 
 
 def readInspeccion(request, id_):

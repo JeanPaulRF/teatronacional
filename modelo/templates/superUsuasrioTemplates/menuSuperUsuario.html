@@ -1,4 +1,4 @@
-{% extends 'baseAdmin.html' %}
+{% extends '../baseAdmin.html' %}
 {% block content %}
 
 <div id="menuContainer">
@@ -12,10 +12,8 @@
     <form action="asignacionTrabajoLista/">
         <button class="botonEstandar bma">ASIGNACIÓN DE TRABAJOS</button>
     </form>
-    <form action="listInspeccion/">
-        <button class="botonEstandar bma">TRABAJOS ASIGNADOS</button>
-    </form>
-    <form action="listaUsuarios/">
+    {% comment %} <button class="botonEstandar bma">INSPECCIONES</button> {% endcomment %}
+    <form action="verAgentesDeterioro">
         <button class="botonEstandar bma">ENCARGADOS</button>
     </form>
     <button class="botonEstandar bma">REPORTES</button>
