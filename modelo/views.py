@@ -3,41 +3,30 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
-from django.http import HttpResponse, JsonResponse
 from modelo.models import Usuario
 from .forms import *
 import os
 
 
 # Create your views here.
-def asignacionTrabajo(request):
+
+def temporal(request, id_):
+    area = get_object_or_404(Area, id=id_)
+    elementos = area.listaElementos.all()
+    return render(request, 'preAsignacionTrabajo.html', { 'area' : area ,'elementos' : elementos })
+
+def preAsignacionTrabajo(request,id_):
+    area = get_object_or_404(Area, id=id_)
+    elementos = area.listaElementos.all()
+    return render(request, 'preAsignacionTrabajo.html', { 'area' : area ,'elementos' : elementos })
+
+def asignacionTrabajoLista(request):
     areas = Area.objects.all()
     return render(request, 'asignacionTrabajo.html', { 'areas' : areas })
 
-def agregarElemento(request):
-    return render(request, 'agregarElemento.html')
-
-def agregarArea(request):
-    return render(request, 'agregarArea.html')
-
-def elementoInfoAdmin(request):
-    return render(request, 'elementoInfoAdmin.html')
-
-def areasInfoAdmin(request):
-    return render(request, 'areasInfoAdmin.html')
-
-def areasLista(request):
-    areas = Area.objects.all()
-    print(areas)
-    return render(request, 'listaAreas.html', { 'areas' : areas })
-    # return render(request, 'listaAreas.html')
 #''''''''''''''''''''''''''''''''''''''
 def menuAdmin(request):
     return render(request, 'menuAdmin.html')
-
-
-
-
 
 def signin(request):
     if request.method == 'POST':
@@ -531,7 +520,7 @@ def deleteEncargado(request, id_):
 
 
 #crud Inspeccion
-def createInspeccion(request):
+def createInspeccion(request, id_, idA):
     if request.method == 'POST':
         try:
             form = CreateInspeccionForm(request.POST)
@@ -539,19 +528,18 @@ def createInspeccion(request):
             inspeccion.user = request.user
             inspeccion.save()
 
-            return render(request, 'signin.html', {
+            return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
                 'error' : 'Inspeccion creada correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
                 'error' : 'Error al crear inspeccion'
             })
-
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'asignacion.html', {
             'form' : CreateInspeccionForm
         })
 
@@ -559,7 +547,7 @@ def createInspeccion(request):
 #lista los agentes
 def listInspeccion(request):
     inspecciones = Inspeccion.objects.all()
-    return render(request, 'signin.html', { 'inspecciones' : inspecciones })
+    return render(request, 'listaInspecciones.html', { 'inspecciones' : inspecciones })
 
 
 def readInspeccion(request, id_):
@@ -592,9 +580,6 @@ def deleteInspecion(request, id_):
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('')
-
-
-
 
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)

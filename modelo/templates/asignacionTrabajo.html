@@ -15,7 +15,7 @@
             <div class="filaCard"><span>Nombre: {{area.nombre}}</span></div>
             <div class="filaCard"><span>Piso: {{area.ubicacion}}</span></div>
             <div class="filaCard">
-                <form action="areasInfoAdmin/{{area.id}}" method="post">
+                <form action="preAsignacionTrabajo/{{area.id}}">
                     {% csrf_token %}
                     <button class="botonEstandar btnListasCard">Asignar trabajo</button>
                 </form>
