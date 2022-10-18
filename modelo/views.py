@@ -584,7 +584,6 @@ def deleteInspecion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    user_inspecciones = Inspeccion.objects.filter(encargado=encargado)
+    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
     inspecciones = Inspeccion.objects.exclude(pk__in=user_inspecciones)
-    print(inspecciones)
     return render(request, 'listaInspeccionesUser.html', { 'inspecciones' : inspecciones })
