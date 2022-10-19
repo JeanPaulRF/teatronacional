@@ -448,7 +448,11 @@ def updateAgente(request, id_):
             agente = get_object_or_404(AgenteDeterioro, id=id_)
             form = CreateAgenteForm(request.POST, instance=agente)
             form.save()
-            return redirect('')
+            return redirect(request, 'editarAgenteDeterioro.html', {
+                'agente' : agente,
+                'form' : form,
+                'error' : 'Agente actualizado'
+            })
         except ValueError:
             return render(request, 'editarAgenteDeterioro.html', {
                 'agente' : agente,
