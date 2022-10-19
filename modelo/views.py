@@ -450,13 +450,22 @@ def updateAgente(request, id_):
             agente = get_object_or_404(AgenteDeterioro, id=id_)
             form = CreateAgenteForm(request.POST, instance=agente)
             form.save()
-            return redirect('')
+            return render(request, 'editarAgenteDeterioro.html', {
+                'agente' : agente,
+                'form' : form,
+                'error' : 'Agente actualizado correctamente'
+            })
         except ValueError:
             return render(request, 'editarAgenteDeterioro.html', {
                 'agente' : agente,
                 'form' : form,
                 'error' : 'Error al actualizar agente'
             })
+
+
+
+
+
 
 
 def deleteAgente(request, id_):
