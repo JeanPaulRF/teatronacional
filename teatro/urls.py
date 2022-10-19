@@ -27,7 +27,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('listaUsuarios/', views.listUsers, name='listUsuarios'),
-    path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
+    # path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('listaUsuarios/agregarUsuario/', views.createUser, name='agregarUsuario'),
     path('listaUsuarios/updateUsuario/<int:id_>', views.updateUser, name='updateUsuario'),
     path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
@@ -49,10 +49,12 @@ urlpatterns = [
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/asignacion/<int:id_>', views.createInspeccion, name='asignacion'),
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
-    path('menuAdmin/listaUsuarios/', views.listUsers, name='listaUsuarios'),
+    path('menuAdmin/listInspeccion/updateInspeccion/<int:id_>', views.updateInspeccion, name='updateInspeccion'),
+    path('menuAdmin/listEncargados/', views.listEncargados, name='listEncargados'),
     #Links de super usuario
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores
+    path('listInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     #Reportes
     path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),

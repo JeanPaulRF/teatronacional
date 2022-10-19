@@ -48,7 +48,7 @@ def signin(request):
                 elif usuario.tUsuario == 'SUPERUSUARIO':
                     return redirect('listaUsuarios/')
                 elif usuario.tUsuario == 'OPERATIVO':
-                    return redirect('listaInspeccionesUser/{}'.format(usuario.id))
+                    return redirect('listInspeccionesUser/{}'.format(usuario.id))
             else:
                 return render(request, 'signin.html', {
                     'form' : SigninForm,
@@ -509,7 +509,7 @@ def createEncargado(request):
 #lista los agentes
 def listEncargados(request):
     encargados = Encargado.objects.all()
-    return render(request, 'signin.html', { 'encargados' : encargados })
+    return render(request, 'listaUsuarios.html', { 'encargados' : encargados })
 
 
 def readEncargado(request, id_):
@@ -590,15 +590,15 @@ def updateInspeccion(request, id_):
     if request.method == 'GET':
         inspeccion = get_object_or_404(Trabajo, id=id_)
         form = CreateInspeccionForm(instance=inspeccion)
-        return render(request, 'signin.html', { 'inspeccion' : inspeccion , 'form' : form })
+        return render(request, 'ediatarTrabajoAsignadoAdmin.html', { 'inspeccion' : inspeccion , 'form' : form })
     else:
         try:
             inspeccion = get_object_or_404(Trabajo, id=id_)
             form = CreateInspeccionForm(request.POST, instance=inspeccion)
             form.save()
-            return redirect('')
+            return redirect('listInspeccion/')
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'ediatarTrabajoAsignadoAdmin.html', {
                 'inspeccion' : inspeccion,
                 'form' : form,
                 'error' : 'Error al actualizar inspeccion'
@@ -616,7 +616,7 @@ def listInspeccionesUser(request, id_):
     encargado = get_object_or_404(Encargado, email=usuario.email)
     user_inspecciones = Trabajo.objects.filter(encargado=encargado.id)
     inspecciones = Trabajo.objects.exclude(pk__in=user_inspecciones)
-    return render(request, 'listaInspeccionesUser.html', { 'inspecciones' : inspecciones })
+    return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : inspecciones })
 
 
 def menuReportes(request):

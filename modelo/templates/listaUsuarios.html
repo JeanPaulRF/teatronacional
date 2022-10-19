@@ -4,7 +4,7 @@
 <div class="tituloLista">
     <h2>USUARIOS</h2>
 </div>
-<form action="agregarUsuario/">
+{% comment %} <form action="agregarUsuario/">
     {% csrf_token %}
     <div id="agregarbotonContainer">
         <button id="agregarBoton"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
@@ -16,16 +16,17 @@
             </svg>
         </button>
     </div>
-</form>
+</form> {% endcomment %}
 <div id="listaGeneralContainer">
-    {% for usuario in usuarios %}
+    {% for usuario in encargados %}
     <div class="cardEstandar" action="elementoInfoAdmin">
         <div class="cardInfo">
+            <div class="filaCard"><span>Nombre: {{usuario.nombre}}</span></div>
             <div class="filaCard"><span>Email: {{usuario.email}}</span></div>
-            <div class="filaCard"><span>Contraseña: {{usuario.contrasena}}</span></div>
-            <div class="filaCard"><span>Tipo de usuario: {{usuario.tUsuario}}</span></div>
+            <div class="filaCard"><span>Identificación: {{usuario.identificacion}}</span></div>
+            <div class="filaCard"><span>Teléfono: {{usuario.telefono}}</span></div>
 
-            <div class="filaCard fila_rowR">
+            {% comment %} <div class="filaCard fila_rowR">
                 <form action="deleteUsuario/{{usuario.id}}" method="post">
                     {% csrf_token %}
                     <button class="botonCard botonesColor">
@@ -47,7 +48,7 @@
                         </svg>
                     </button>
                 </form>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
     {% endfor %}

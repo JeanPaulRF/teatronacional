@@ -2,23 +2,18 @@
 {% block content %}
 {% load static %}
 <div class="tituloLista">
-  <h2>EDITAR AGENTE DETERIORO</h2>
+  <h2>TRABAJO</h2>
 </div>
-<div id="menuContainer">
+<div class="formularioContainer">
   {{error}}
-  <form action="" method="post" enctype="multipart/form-data">
+  {{formato}}
+  <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.media}}
     {{form.as_p}}
     <button class="botonEstandar btn167">
       <span class="letraEstandar">ACEPTAR</span>
     </button>
-  </form>
-  <a href="{{request.META.HTTP_REFERER}}">
-    <button class="botonEstandar btn167">
-      <span class="letraEstandar">VOLVER</span>
-    </button>
-  </a>
 </div>
 
 {% endblock content %}
