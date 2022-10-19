@@ -472,9 +472,9 @@ def deleteAgente(request, id_):
     if request.method == 'POST':
         agente = get_object_or_404(AgenteDeterioro, id=id_)
         agente.delete()
-        return redirect('/verAgentesDeterioro/')
+        return redirect('/menuAdmin/verAgentesDeterioro/')
     else:
-        return redirect('/verAgentesDeterioro/')
+        return redirect('/menuAdmin/verAgentesDeterioro/')
 
 
 def deleteUser(request, id_):
