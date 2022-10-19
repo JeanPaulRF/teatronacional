@@ -1,3 +1,5 @@
+from datetime import date
+import datetime
 import email
 from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
@@ -750,3 +752,30 @@ def encargados_pdf(request):
     buf.seek(0)
 
     return FileResponse(buf, as_attachment=True, filename='Encargados.pdf')
+
+
+
+def reporteInspeccion(request):
+    return render(request, 'menuReporteInspeccion.html')
+
+
+def reporteInspeccionFechas(request):
+    if request.method == 'POST':
+        fechaInicio = request.POST['fechaInicio']
+        fechaFin = request.POST['fechaFin']
+        inspecciones = Trabajo.objects.filter(tResultado="INSPECCION")
+        try:
+            inspecciones=Trabajo.objects.filter(fechaInicio__range=[fechaInicio, fechaFin], fechaFin__range=[fechaInicio, fechaFin])
+            inspecciones = sorted(inspecciones, key=lambda x: x.fechaInicio)
+        except:
+            None
+        return render(request, 'reporteInspeccionFecha.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
+
+    else:
+        inspecciones = Trabajo.objects.all()
+        return render(request, 'reporteInspeccionFecha.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
+
+
+def reporteInspeccionFechasLista(request, fechaInicio, fechaFin):
+    print(inspecciones)
+    return render(request, 'reporteInspeccionFechaLista.html', { 'inspecciones' : inspecciones})
