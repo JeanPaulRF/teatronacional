@@ -6,7 +6,7 @@
 </div>
 <div class="formularioContainer">
     {{error}}
-    <form action="">
+    <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
 

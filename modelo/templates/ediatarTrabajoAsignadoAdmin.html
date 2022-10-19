@@ -7,9 +7,8 @@
 <div class="formularioContainer">
   {{error}}
   {{formato}}
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="" method="POST">
     {% csrf_token %}
-    {{form.media}}
     {{form.as_p}}
     <button class="botonEstandar btn167">
       <span class="letraEstandar">ACEPTAR</span>
