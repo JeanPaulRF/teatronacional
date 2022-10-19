@@ -1,0 +1,53 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+{% load static %}
+<div class="tituloLista">
+    <h2>REPORTE INSPECCIONES POR FECHA</h2>
+</div>
+<div class="formularioContainer">
+    {{error}}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="botonEstandar btn167">
+            <span class="letraEstandar">BUSCAR</span>
+        </button>
+    </form>
+    <a href="{{request.META.HTTP_REFERER}}">
+        <button class="botonEstandar btn167">
+            <span class="letraEstandar">VOLVER</span>
+        </button>
+    </a>
+</div>
+
+<div id="listaGeneralContainer">
+    {% for inspeccion in inspecciones %}
+    <div class="cardEstandar" action="">
+        <div class="cardImg">
+
+        </div>
+        <div class="cardInfo">
+            <div class="filaCard"><span>Código: {{inspeccion.codigo}}</span></div>
+            <div class="filaCard"><span>Fecha inicio: {{inspeccion.fechaInicio}}</span></div>
+            <div class="filaCard"><span>Fecha fin: {{inspeccion.fechaFin}}</span></div>
+            <div class="filaCard"><span>Resultado: {{inspeccion.tResultado}}</span></div>
+            <div class="filaCard"><span>Estado: {{inspeccion.tEstado}}</span></div>
+            <div class="filaCard"><span>Encargado: {{inspeccion.encargado.nombre}}</span></div>
+            <div class="filaCard"><span>Encargado identificacion: {{inspeccion.encargado.identificacion}}</span></div>
+            <div class="filaCard"><span>Area: {{inspeccion.area.nombre}}</span></div>
+            <div class="filaCard"><span>Area codigo: {{inspeccion.area.codigo}}</span></div>
+            <div class="filaCard"><span>Agente de deterioro: {{inspeccion.deterioro.nombre}}</span></div>
+            <div class="filaCard"><span>Comentario: {{inspeccion.comentario}}</span></div>
+            <div class="filaCard">
+
+            </div>
+            <div class="filaCard fila_rowR">
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

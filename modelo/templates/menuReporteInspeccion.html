@@ -1,0 +1,14 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+
+<div id="menuContainer">
+    <h2 id="tituloMenu">REPORTES ESTADO INSPECCIONES</h2>
+
+    <a class="nav-link" href="{% url 'menuFechas' %}">
+        <button class="botonEstandar bma">REPORTE POR RANGO DE FECHAS</button>
+    </a>
+    <a class="nav-link" href="{% url 'agentes_pdf' %}">
+        <button class="botonEstandar bma">REPORTE POR CODIGO</button>
+</div>
+
+{% endblock content %}

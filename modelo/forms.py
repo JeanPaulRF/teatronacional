@@ -46,3 +46,9 @@ class CreateUserForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'contrasena', 'tUsuario']
+
+
+class ReporteFechaForm(ModelForm):
+    class Meta:
+        model = Trabajo
+        fields = ['fechaInicio', 'fechaFin']

@@ -58,6 +58,9 @@ urlpatterns = [
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),
     path('menuAdmin/menuReportes/agentes_pdf/', views.agentes_pdf, name='agentes_pdf'),
     path('menuAdmin/menuReportes/encargados_pdf/', views.encargados_pdf, name='encargados_pdf'),
+    path('menuAdmin/menuReportes/reporteInspeccion/', views.reporteInspeccion, name='reporteInspeccion'),
+    path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/', views.reporteInspeccionFechas, name='menuFechas'),
+    path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/lista/<str:fechaInicio>/<str:fechaFin>', views.reporteInspeccionFechasLista, name='menuFechasLista'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
