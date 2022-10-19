@@ -6,11 +6,11 @@
 </div>
 
 <div id="listaGeneralContainer">
-    {% for inspeccion in inspeccinoes %}
+    {% for inspeccion in inspecciones %}
     <div class="cardEstandarMini" action="elementoInfoAdmin">
         <div class="cardInfoMini">
-            <div class="filaCard"><span>Codigo: {{inspe.codigo}}</span></div>
-            <div class="filaCard"><span>Area: {{inspeccion.area}}</span></div>
+            <div class="filaCard"><span>Codigo: {{inspeccion.codigo}}</span></div>
+            <div class="filaCard"><span>Area: {{inspeccion.area.nombre}}</span></div>
             <div class="filaCard"><span>Fecha Inicio: {{inspeccion.fechaInicio}}</span></div>
             <div class="filaCard"><span>Fecha Fin: {{inspeccion.fechaFin}}</span></div>
             <div class="filaCard"><span>Estado: {{inspeccion.tEstado}}</span></div>
