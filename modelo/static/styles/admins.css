@@ -306,6 +306,19 @@ footer {
     align-items: center;
 }
 
+.formularioContainer4 {
+    width: 570px;
+    height: 860px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .btn167 {
     width: 167px;
     height: 41px;
