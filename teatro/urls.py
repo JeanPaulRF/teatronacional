@@ -55,6 +55,7 @@ urlpatterns = [
     path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),
     path('menuAdmin/menuReportes/agentes_pdf/', views.agentes_pdf, name='agentes_pdf'),
+    path('menuAdmin/menuReportes/encargados_pdf/', views.encargados_pdf, name='encargados_pdf'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -92,12 +92,12 @@ class AgenteDeterioro(models.Model):
 
 
 #inspecciones
-class Inspeccion(models.Model):
+class Trabajo(models.Model):
 
     class TResultado(models.TextChoices):
         CONSERVACION = 'CONSERVACION', 'CONSERVACION'
         RESTAURACION = 'RESTAURACION', 'RESTAURACION'
-        SIN_DEFINIR = 'SIN_DEFINIR', 'SIN_DEFINIR'
+        INSPECCION = 'INSPECCION', 'INSPECCION'
 
     class TEstado(models.TextChoices):
         POR_SUCEDER = 'POR_SUCEDER', 'POR_SUCEDER'
@@ -113,7 +113,7 @@ class Inspeccion(models.Model):
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
     area = models.OneToOneField(Area, on_delete=models.CASCADE)
-    deterioro = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE)
+    deterioro = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE, unique=False)
     comentario = models.TextField(default='')
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 

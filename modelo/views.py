@@ -557,24 +557,24 @@ def createInspeccion(request, id_, idA):
 
 #lista los agentes
 def listInspeccion(request):
-    inspecciones = Inspeccion.objects.all()
+    inspecciones = Trabajo.objects.all()
     return render(request, 'listaInspecciones.html', { 'inspecciones' : inspecciones })
 
 
 def readInspeccion(request, id_):
-    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    inspeccion = get_object_or_404(Trabajo, id=id_)
     return render(request, 'signin.html', { 'inspeccion' : inspeccion })
 
 
 #lee un usuario especifico y actualizarlo
 def updateInspeccion(request, id_):
     if request.method == 'GET':
-        inspeccion = get_object_or_404(Inspeccion, id=id_)
+        inspeccion = get_object_or_404(Trabajo, id=id_)
         form = CreateInspeccionForm(instance=inspeccion)
         return render(request, 'signin.html', { 'inspeccion' : inspeccion , 'form' : form })
     else:
         try:
-            inspeccion = get_object_or_404(Inspeccion, id=id_)
+            inspeccion = get_object_or_404(Trabajo, id=id_)
             form = CreateInspeccionForm(request.POST, instance=inspeccion)
             form.save()
             return redirect('')
@@ -587,7 +587,7 @@ def updateInspeccion(request, id_):
 
 
 def deleteInspecion(request, id_):
-    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    inspeccion = get_object_or_404(Trabajo, id=id_)
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('')
@@ -595,8 +595,8 @@ def deleteInspecion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
-    inspecciones = Inspeccion.objects.exclude(pk__in=user_inspecciones)
+    user_inspecciones = Trabajo.objects.filter(encargado=encargado.id)
+    inspecciones = Trabajo.objects.exclude(pk__in=user_inspecciones)
     return render(request, 'listaInspeccionesUser.html', { 'inspecciones' : inspecciones })
 
 
@@ -685,3 +685,68 @@ def agentes_pdf(request):
     buf.seek(0)
 
     return FileResponse(buf, as_attachment=True, filename='Agentes.pdf')
+
+
+
+def encargados_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    trabajos = Trabajo.objects.all()
+    encargados = Encargado.objects.all()
+    conservaciones = []
+    restauraciones = []
+    inspecicones = []
+
+    #loop
+    for trabajo in trabajos:
+        if trabajo.tResultado == "CONSERVACION":
+            conservaciones.append("CONSERVACION")
+            conservaciones.append(" ")
+            conservaciones.append("    Encargado")
+            conservaciones.append("    Nombre: " + trabajo.encargado.nombre)
+            conservaciones.append("    Identificacion: " + trabajo.encargado.identificacion)
+            conservaciones.append("    Tipo: " + trabajo.encargado.tEncargado)
+            conservaciones.append("    Telefono: " + trabajo.encargado.telefono)
+            conservaciones.append("    Email: " + trabajo.encargado.email)
+        elif trabajo.tResultado == "RESTAURACION":
+            restauraciones.append("RESTAURACION")
+            restauraciones.append(" ")
+            restauraciones.append("    Encargado")
+            restauraciones.append("    Nombre: " + trabajo.encargado.nombre)
+            restauraciones.append("    Identificacion: " + trabajo.encargado.identificacion)
+            restauraciones.append("    Tipo: " + trabajo.encargado.tEncargado)
+            restauraciones.append("    Telefono: " + trabajo.encargado.telefono)
+            restauraciones.append("    Email: " + trabajo.encargado.email)
+        elif trabajo.tResultado == "INSPECCION":
+            inspecicones.append("INSPECCION")
+            inspecicones.append(" ")
+            inspecicones.append("    Encargado")
+            inspecicones.append("    Nombre: " + trabajo.encargado.nombre)
+            inspecicones.append("    Identificacion: " + trabajo.encargado.identificacion)
+            inspecicones.append("    Tipo: " + trabajo.encargado.tEncargado)
+            inspecicones.append("    Telefono: " + trabajo.encargado.telefono)
+            inspecicones.append("    Email: " + trabajo.encargado.email)
+
+    conservaciones.append(" ")
+    conservaciones.append(" ")
+    restauraciones.append(" ")
+    restauraciones.append(" ")
+    inspecicones.append(" ")
+    inspecicones.append(" ")
+
+    lines = []
+    lines = conservaciones + restauraciones + inspecicones
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='Encargados.pdf')
