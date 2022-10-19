@@ -18,7 +18,9 @@
     <form action="listaUsuarios/">
         <button class="botonEstandar bma">ENCARGADOS</button>
     </form>
-    <button class="botonEstandar bma">REPORTES</button>
+    <a class="nav-link" href="{% url 'menuReportes' %}">
+        <button class="botonEstandar bma">REPORTES</button>
+    </a>
 </div>
 
 {% endblock content %}

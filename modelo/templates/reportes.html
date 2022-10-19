@@ -1,0 +1,24 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+
+<div id="menuContainer">
+    <h2 id="tituloMenu">REPORTES</h2>
+
+    <a class="nav-link" href="{% url 'areas_pdf' %}">
+        <button class="botonEstandar bma">REPORTE ÁREAS Y ELEMENTOS</button>
+    </a>
+    <a class="nav-link" href="{% url 'agentes_pdf' %}">
+        <button class="botonEstandar bma">REPORTE AGENTES DE DETERIORO</button>
+    </a>
+    <form action="">
+        <button class="botonEstandar bma">REPORTE ENCARGADOS</button>
+    </form>
+    <form action="">
+        <button class="botonEstandar bma">REPORTE ESTADO INSPECCIONES</button>
+    </form>
+    <form action="">
+        <button class="botonEstandar bma">REPORTE INSPECCIONES DE ENCARGADO</button>
+    </form>
+</div>
+
+{% endblock content %}

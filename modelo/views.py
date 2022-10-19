@@ -3,9 +3,16 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
-from modelo.models import Usuario
+from modelo.models import Usuario, AgenteDeterioro
 from .forms import *
 import os
+
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
 
 
 # Create your views here.
@@ -39,7 +46,7 @@ def signin(request):
                 elif usuario.tUsuario == 'SUPERUSUARIO':
                     return redirect('listaUsuarios/')
                 elif usuario.tUsuario == 'OPERATIVO':
-                    return redirect('home/')
+                    return redirect('listaInspeccionesUser/{}'.format(usuario.id))
             else:
                 return render(request, 'signin.html', {
                     'form' : SigninForm,
@@ -169,9 +176,9 @@ def deleteArea(request, id_):
     if request.method == 'POST':
         area = get_object_or_404(Area, id=id_)
         area.delete()
-        return render(request, 'listaAreas.html')
+        return redirect('/menuAdmin/listaAreas/')
     else:
-        return render(request, 'listaAreas.html')
+        return redirect('/menuAdmin/listaAreas/')
 
 
 
@@ -230,9 +237,13 @@ def updateElemento(request, idArea, idElemento):
             elemento = get_object_or_404(Elemento, id=idElemento)
             form = CreateElementoForm(request.POST, instance=elemento)
             form.save()
-            return redirect('')
+            return render(request, 'editarElemento.html', {
+                'elemento' : elemento,
+                'form' : form,
+                'error' : 'Elemento actualizado correctamente'
+            })
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarElemento.html', {
                 'elemento' : elemento,
                 'form' : form,
                 'error' : 'Error al actualizar elemento'
@@ -584,5 +595,93 @@ def deleteInspecion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    inspecciones = Inspeccion.objects.all(encargado=encargado)
-    return render(request, 'signin.html', { 'inspecciones' : inspecciones })
+    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
+    inspecciones = Inspeccion.objects.exclude(pk__in=user_inspecciones)
+    return render(request, 'listaInspeccionesUser.html', { 'inspecciones' : inspecciones })
+
+
+def menuReportes(request):
+    return render(request, 'reportes.html')
+
+
+def areas_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    areas = Area.objects.all()
+    lines = []
+
+    #loop
+    for area in areas:
+        lines.append("area")
+        lines.append("codigo: " + area.codigo)
+        lines.append("nombre: " + area.nombre)
+        lines.append("ubicacion: " + area.ubicacion)
+        lines.append("descripcion: " + area.descripcion)
+        lines.append("dimensiones: " + area.dimensiones)
+        lines.append(" ")
+
+        elementos = Elemento.objects.filter(area=area.id)
+        for elemento in elementos:
+            lines.append("elemento")
+            lines.append("    codigo: " + elemento.codigo)
+            lines.append("    nombre: " + elemento.nombre)
+            lines.append("    ubicacion: " + elemento.ubicacion)
+            lines.append("    descripcion: " + elemento.descripcion)
+            lines.append(" ")
+
+        lines.append(" ")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='Areas-elementos.pdf')
+
+
+
+def agentes_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    agentes_ = AgenteDeterioro.objects.all()
+    agentes = sorted(agentes_, key=lambda x: x.nombre)
+
+    lines = []
+
+    #loop
+    lines.append("TIPO NATURAL")
+    for agente in agentes:
+        if agente.tDeterioro == "NATURAL":
+            lines.append("    agente")
+            lines.append("    nombre: " + agente.nombre)
+            lines.append("    descripcion: " + agente.descripcion)
+            lines.append(" ")
+
+    lines.append("TIPO CIRCUNSTANCIAL")
+    for agente in agentes:
+        if agente.tDeterioro != "NATURAL":
+            lines.append("    agente")
+            lines.append("    nombre: " + agente.nombre)
+            lines.append("    descripcion: " + agente.descripcion)
+            lines.append(" ")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='Agentes.pdf')

@@ -9,7 +9,7 @@ admin.site.register(Elemento)
 admin.site.register(AgenteDeterioro)
 admin.site.register(Encargado)
 admin.site.register(Inspeccion)
-#admin.site.register(Usuario)
+admin.site.register(Usuario)
 
 admin.site.unregister(User)
 admin.site.unregister(Group)

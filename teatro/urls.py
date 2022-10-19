@@ -27,7 +27,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
     path('listaUsuarios/', views.listUsers, name='listUsuarios'),
-    path('listaInspeccionesUser/<int:id_>/', views.listInspeccionesUser, name='listInspeccionesUser'),
+    path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('listaUsuarios/agregarUsuario/', views.createUser, name='agregarUsuario'),
     path('listaUsuarios/updateUsuario/<int:id_>', views.updateUser, name='updateUsuario'),
     path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
@@ -40,7 +40,7 @@ urlpatterns = [
     path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>/', views.createElemento, name='agregarElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
-    path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
     path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
     path('menuAdmin/asignacionTrabajoLista/', views.asignacionTrabajoLista, name='asignacionTrabajoLista'),
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>/', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
@@ -50,6 +50,10 @@ urlpatterns = [
     #Links de super usuario
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores
+    #Reportes
+    path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
+    path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),
+    path('menuAdmin/menuReportes/agentes_pdf/', views.agentes_pdf, name='agentes_pdf'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
