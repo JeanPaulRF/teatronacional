@@ -555,17 +555,20 @@ def createInspeccion(request, id_):
 
             return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
+                'formato' : 'Formato fecha yyyy-mm-dd',
                 'error' : 'Trabajo asignado correctamente'
             })
 
         except Exception as e:
             return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
+                'formato' : 'Formato fecha yyyy-mm-dd',
                 'error' : 'Error al asignar trabajo'
             })
     else:
         return render(request, 'asignacion.html', {
-            'form' : CreateInspeccionForm
+            'form' : CreateInspeccionForm,
+            'formato' : 'Formato fecha yyyy-mm-dd',
         })
 
 
