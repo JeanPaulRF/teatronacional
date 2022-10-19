@@ -796,3 +796,20 @@ def reporteInspeccionFechas(request):
 def reporteInspeccionFechasLista(request, fechaInicio, fechaFin):
     print(inspecciones)
     return render(request, 'reporteInspeccionFechaLista.html', { 'inspecciones' : inspecciones})
+
+
+
+def reporteInspeccionCodigo(request):
+    if request.method == 'POST':
+        codigo = request.POST['codigo']
+        inspecciones = Trabajo.objects.filter(codigo="INSPECCION")
+        try:
+            inspecciones=Trabajo.objects.filter(codigo=codigo)
+            inspecciones = sorted(inspecciones, key=lambda x: x.fechaInicio)
+        except:
+            None
+        return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteCodigoForm, 'inspecciones': inspecciones})
+
+    else:
+        inspecciones = Trabajo.objects.all()
+        return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteCodigoForm, 'inspecciones': inspecciones})

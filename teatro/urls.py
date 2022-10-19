@@ -63,6 +63,8 @@ urlpatterns = [
     path('menuAdmin/menuReportes/reporteInspeccion/', views.reporteInspeccion, name='reporteInspeccion'),
     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/', views.reporteInspeccionFechas, name='menuFechas'),
     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/lista/<str:fechaInicio>/<str:fechaFin>', views.reporteInspeccionFechasLista, name='menuFechasLista'),
+     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/codigo/', views.reporteInspeccionCodigo, name='reporteInspeccionCodigo'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
