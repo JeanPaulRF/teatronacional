@@ -546,28 +546,32 @@ def deleteEncargado(request, id_):
 
 
 #crud Inspeccion
-def createInspeccion(request, id_, idA):
+def createInspeccion(request, id_):
     if request.method == 'POST':
         try:
             form = CreateInspeccionForm(request.POST)
             inspeccion = form.save(commit=False)
-            inspeccion.user = request.user
             inspeccion.save()
 
             return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
-                'error' : 'Inspeccion creada correctamente'
+                'formato' : 'Formato fecha yyyy-mm-dd',
+                'error' : 'Trabajo asignado correctamente'
             })
 
         except Exception as e:
             return render(request, 'asignacion.html', {
                 'form' : CreateInspeccionForm,
-                'error' : 'Error al crear inspeccion'
+                'formato' : 'Formato fecha yyyy-mm-dd',
+                'error' : 'Error al asignar trabajo'
             })
     else:
         return render(request, 'asignacion.html', {
-            'form' : CreateInspeccionForm
+            'form' : CreateInspeccionForm,
+            'formato' : 'Formato fecha yyyy-mm-dd',
         })
+
+
 
 
 #lista los agentes

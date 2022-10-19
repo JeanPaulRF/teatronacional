@@ -6,6 +6,7 @@
 </div>
 <div class="formularioContainer">
   {{error}}
+  {{formato}}
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.media}}
