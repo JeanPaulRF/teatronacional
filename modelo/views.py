@@ -462,12 +462,6 @@ def updateAgente(request, id_):
                 'error' : 'Error al actualizar agente'
             })
 
-
-
-
-
-
-
 def deleteAgente(request, id_):
     if request.method == 'POST':
         agente = get_object_or_404(AgenteDeterioro, id=id_)
@@ -579,7 +573,7 @@ def createInspeccion(request, id_, idA):
 #lista los agentes
 def listInspeccion(request):
     inspecciones = Trabajo.objects.all()
-    return render(request, 'listaInspecciones.html', { 'inspecciones' : inspecciones })
+    return render(request, 'trabajosAsignadosAdmin.html', { 'inspecciones' : inspecciones })
 
 
 def readInspeccion(request, id_):
