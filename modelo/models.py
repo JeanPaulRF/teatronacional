@@ -112,8 +112,8 @@ class Trabajo(models.Model):
     tResultado = models.CharField(max_length=25 , choices=TResultado.choices)
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
-    area = models.OneToOneField(Area, on_delete=models.CASCADE)
-    deterioro = models.OneToOneField(AgenteDeterioro, on_delete=models.CASCADE, unique=False)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    deterioro = models.ForeignKey(AgenteDeterioro, on_delete=models.CASCADE)
     comentario = models.TextField(default='')
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 

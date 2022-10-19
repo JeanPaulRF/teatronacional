@@ -46,8 +46,8 @@ urlpatterns = [
     path('menuAdmin/verAgentesDeterioro/updateAgente/<int:id_>', views.updateAgente, name='updateAgente'),
     path('menuAdmin/verAgentesDeterioro/deleteAgente/<int:id_>', views.deleteAgente, name='deleteAgente'),
     path('menuAdmin/asignacionTrabajoLista/', views.asignacionTrabajoLista, name='asignacionTrabajoLista'),
-    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>/', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
-    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>/asignacion/<int:idA>', views.createInspeccion, name='asignacion'),
+    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
+    path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/asignacion/<int:id_>', views.createInspeccion, name='asignacion'),
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
     path('menuAdmin/listaUsuarios/', views.listUsers, name='listaUsuarios'),
     #Links de super usuario
