@@ -409,19 +409,19 @@ def createAgente(request):
             agente.user = request.user
             agente.save()
 
-            return render(request, 'signin.html', {
+            return render(request, 'agregarAgenteDeterioro.html', {
                 'form' : CreateAgenteForm,
                 'error' : 'Agente creado correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'agregarAgenteDeterioro.html', {
                 'form' : CreateAgenteForm,
                 'error' : 'Error al crear agente'
             })
 
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'agregarAgenteDeterioro.html', {
             'form' : CreateAgenteForm
         })
 
