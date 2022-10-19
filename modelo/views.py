@@ -442,7 +442,7 @@ def updateAgente(request, id_):
     if request.method == 'GET':
         agente = get_object_or_404(AgenteDeterioro, id=id_)
         form = CreateAgenteForm(instance=agente)
-        return render(request, 'signin.html', { 'agente' : agente , 'form' : form })
+        return render(request, 'editarAgenteDeterioro.html', { 'agente' : agente , 'form' : form })
     else:
         try:
             agente = get_object_or_404(AgenteDeterioro, id=id_)
@@ -450,7 +450,7 @@ def updateAgente(request, id_):
             form.save()
             return redirect('')
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarAgenteDeterioro.html', {
                 'agente' : agente,
                 'form' : form,
                 'error' : 'Error al actualizar agente'
