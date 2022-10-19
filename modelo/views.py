@@ -528,7 +528,11 @@ def updateEncargado(request, id_):
             encargado = get_object_or_404(Encargado, id=id_)
             form = CreateEncargadoForm(request.POST, instance=encargado)
             form.save()
-            return redirect('')
+            return render(request, 'signin.html', {
+                'encargado' : encargado,
+                'form' : form,
+                'error' : 'Encargado actualizado correctamente'
+            })
         except ValueError:
             return render(request, 'signin.html', {
                 'encargado' : encargado,
@@ -596,13 +600,18 @@ def updateInspeccion(request, id_):
             inspeccion = get_object_or_404(Trabajo, id=id_)
             form = CreateInspeccionForm(request.POST, instance=inspeccion)
             form.save()
-            return redirect('listInspeccion/')
+            return render(request, 'ediatarTrabajoAsignadoAdmin.html', {
+                'inspeccion' : inspeccion,
+                'form' : form,
+                'error' : 'Trabajo actualizado correctamente'
+            })
         except ValueError:
             return render(request, 'ediatarTrabajoAsignadoAdmin.html', {
                 'inspeccion' : inspeccion,
                 'form' : form,
                 'error' : 'Error al actualizar inspeccion'
             })
+
 
 
 def deleteInspecion(request, id_):
@@ -796,3 +805,20 @@ def reporteInspeccionFechas(request):
 def reporteInspeccionFechasLista(request, fechaInicio, fechaFin):
     print(inspecciones)
     return render(request, 'reporteInspeccionFechaLista.html', { 'inspecciones' : inspecciones})
+
+
+
+def reporteInspeccionCodigo(request):
+    if request.method == 'POST':
+        codigo = request.POST['codigo']
+        inspecciones = Trabajo.objects.filter(codigo="INSPECCION")
+        try:
+            inspecciones=Trabajo.objects.filter(codigo=codigo)
+            inspecciones = sorted(inspecciones, key=lambda x: x.fechaInicio)
+        except:
+            None
+        return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
+
+    else:
+        inspecciones = Trabajo.objects.all()
+        return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
