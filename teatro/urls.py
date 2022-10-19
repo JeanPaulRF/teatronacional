@@ -27,7 +27,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
-    path('menuAdmin/listUsuarios/', views.listUsers, name='listUsuarios'),
+    path('listaUsuarios/', views.listUsers, name='listUsuarios'),
     # path('listaInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('listaUsuarios/agregarUsuario/', views.createUser, name='agregarUsuario'),
     path('listaUsuarios/updateUsuario/<int:id_>', views.updateUser, name='updateUsuario'),
@@ -64,6 +64,8 @@ urlpatterns = [
     path('menuAdmin/menuReportes/reporteInspeccion/', views.reporteInspeccion, name='reporteInspeccion'),
     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/', views.reporteInspeccionFechas, name='menuFechas'),
     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/lista/<str:fechaInicio>/<str:fechaFin>', views.reporteInspeccionFechasLista, name='menuFechasLista'),
+     path('menuAdmin/menuReportes/reporteInspeccion/menuFechas/codigo/', views.reporteInspeccionCodigo, name='reporteInspeccionCodigo'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
