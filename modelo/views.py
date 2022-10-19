@@ -469,11 +469,21 @@ def updateAgente(request, id_):
 
 
 def deleteAgente(request, id_):
-    agente = get_object_or_404(AgenteDeterioro, id=id_)
     if request.method == 'POST':
+        agente = get_object_or_404(AgenteDeterioro, id=id_)
         agente.delete()
-        return redirect('')
+        return redirect('/verAgentesDeterioro/')
+    else:
+        return redirect('/verAgentesDeterioro/')
 
+
+def deleteUser(request, id_):
+    if request.method == 'POST':
+        usuario = get_object_or_404(Usuario, id=id_)
+        usuario.delete()
+        return redirect('/listaUsuarios/')
+    else:
+        return redirect('/listaUsuarios/')
 
 
 #crud Encargado
