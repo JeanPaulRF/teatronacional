@@ -509,7 +509,7 @@ def createEncargado(request):
 #lista los agentes
 def listEncargados(request):
     encargados = Encargado.objects.all()
-    return render(request, 'listaUsuarios.html', { 'encargados' : encargados })
+    return render(request, 'listaEncargados.html', { 'encargados' : encargados })
 
 
 def readEncargado(request, id_):
