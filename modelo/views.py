@@ -489,19 +489,19 @@ def createEncargado(request):
             encargado.user = request.user
             encargado.save()
 
-            return render(request, 'signin.html', {
+            return render(request, 'agregarOperarios.html', {
                 'form' : CreateEncargadoForm,
                 'error' : 'Encargado creado correctamente'
             })
 
         except Exception as e:
-            return render(request, 'signin.html', {
+            return render(request, 'agregarOperarios.html', {
                 'form' : CreateEncargadoForm,
                 'error' : 'Error al crear encargado'
             })
 
     else:
-        return render(request, 'signin.html', {
+        return render(request, 'agregarOperarios.html', {
             'form' : CreateEncargadoForm
         })
 
@@ -522,19 +522,19 @@ def updateEncargado(request, id_):
     if request.method == 'GET':
         encargado = get_object_or_404(Encargado, id=id_)
         form = CreateEncargadoForm(instance=encargado)
-        return render(request, 'signin.html', { 'encargado' : encargado , 'form' : form })
+        return render(request, 'editarOperario.html', { 'encargado' : encargado , 'form' : form })
     else:
         try:
             encargado = get_object_or_404(Encargado, id=id_)
             form = CreateEncargadoForm(request.POST, instance=encargado)
             form.save()
-            return render(request, 'signin.html', {
+            return render(request, 'editarOperario.html', {
                 'encargado' : encargado,
                 'form' : form,
                 'error' : 'Encargado actualizado correctamente'
             })
         except ValueError:
-            return render(request, 'signin.html', {
+            return render(request, 'editarOperario.html', {
                 'encargado' : encargado,
                 'form' : form,
                 'error' : 'Error al actualizar encargado'

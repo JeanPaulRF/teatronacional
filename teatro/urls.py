@@ -24,6 +24,7 @@ urlpatterns = [
     #links de admin
     path('admin/', admin.site.urls),
     path('', views.signin, name='signin'),
+    path('signin', views.signin, name='signin'),
     path('home/', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
     path('logout/', views.signout, name='signout'),
@@ -53,6 +54,8 @@ urlpatterns = [
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
     path('menuAdmin/listInspeccion/updateInspeccion/<int:id_>', views.updateInspeccion, name='updateInspeccion'),
     path('menuAdmin/listEncargados/', views.listEncargados, name='listEncargados'),
+    path('menuAdmin/listEncargados/createEncargado/', views.createEncargado, name='createEncargado'),
+    path('menuAdmin/listEncargados/updateEncargado/<int:id_>', views.updateEncargado, name='updateEncargado'),
     #Links de super usuario
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores
