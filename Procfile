@@ -1,1 +1,1 @@
-web: gunicorn teatronacional.wsgi
+web gunicorn teatro.wsgi
