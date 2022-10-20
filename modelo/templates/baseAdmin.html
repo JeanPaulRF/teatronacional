@@ -12,7 +12,12 @@
     <div id="mainContainer">
       <header>
         <div class="logoContenedor">
-          <image id="logoPrincipal" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"/>
+          <a class="logoContenedor" href="/menuAdmin">
+            <button class="botonEstandar btn167">
+              <image id="logoPrincipal" src="{% static '/images/logoOscuro.jpg'%}" alt="Logo teatro nacional"/>
+            </button>
+          </a>
+
         </div>
       </header>    
       {% block content %}{% endblock content %}
