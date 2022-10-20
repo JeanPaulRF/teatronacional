@@ -624,8 +624,7 @@ def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
     user_inspecciones = Trabajo.objects.filter(encargado=encargado.id)
-    inspecciones = Trabajo.objects.exclude(pk__in=user_inspecciones)
-    return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : inspecciones })
+    return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : user_inspecciones })
 
 
 def menuReportes(request):

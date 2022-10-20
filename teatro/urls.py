@@ -32,6 +32,7 @@ urlpatterns = [
     path('listaUsuarios/agregarUsuario/', views.createUser, name='agregarUsuario'),
     path('listaUsuarios/updateUsuario/<int:id_>', views.updateUser, name='updateUsuario'),
     path('listaUsuarios/deleteUsuario/<int:id_>', views.deleteUser, name='deleteUsuario'),
+    
     path('menuAdmin/', views.menuAdmin, name='menuAdmin'),
     path('menuAdmin/listaAreas/', views.listAreas, name='listAreas'),
     path('menuAdmin/listaAreas/agregarArea/', views.createArea, name='agregarArea'),
