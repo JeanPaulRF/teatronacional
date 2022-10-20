@@ -53,9 +53,11 @@ urlpatterns = [
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/asignacion/<int:id_>', views.createInspeccion, name='asignacion'),
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
     path('menuAdmin/listInspeccion/updateInspeccion/<int:id_>', views.updateInspeccion, name='updateInspeccion'),
+    path('menuAdmin/listInspeccion/deleteInspeccion/<int:id_>', views.deleteInspeccion, name='deleteInspeccion'),
     path('menuAdmin/listEncargados/', views.listEncargados, name='listEncargados'),
     path('menuAdmin/listEncargados/createEncargado/', views.createEncargado, name='createEncargado'),
     path('menuAdmin/listEncargados/updateEncargado/<int:id_>', views.updateEncargado, name='updateEncargado'),
+    path('menuAdmin/listEncargados/deleteEncargado/<int:id_>', views.deleteEncargado, name='deleteEncargado'),
     #Links de super usuario
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores

@@ -462,6 +462,8 @@ def updateAgente(request, id_):
                 'error' : 'Error al actualizar agente'
             })
 
+
+
 def deleteAgente(request, id_):
     if request.method == 'POST':
         agente = get_object_or_404(AgenteDeterioro, id=id_)
@@ -470,14 +472,6 @@ def deleteAgente(request, id_):
     else:
         return redirect('/menuAdmin/verAgentesDeterioro/')
 
-
-def deleteUser(request, id_):
-    if request.method == 'POST':
-        usuario = get_object_or_404(Usuario, id=id_)
-        usuario.delete()
-        return redirect('/listaUsuarios/')
-    else:
-        return redirect('/listaUsuarios/')
 
 
 #crud Encargado
@@ -545,7 +539,7 @@ def deleteEncargado(request, id_):
     encargado = get_object_or_404(Encargado, id=id_)
     if request.method == 'POST':
         encargado.delete()
-        return redirect('')
+        return redirect('/menuAdmin/listEncargados/')
 
 
 
@@ -614,11 +608,11 @@ def updateInspeccion(request, id_):
 
 
 
-def deleteInspecion(request, id_):
+def deleteInspeccion(request, id_):
     inspeccion = get_object_or_404(Trabajo, id=id_)
     if request.method == 'POST':
         inspeccion.delete()
-        return redirect('')
+        return redirect('/menuAdmin/listInspeccion/')
 
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
