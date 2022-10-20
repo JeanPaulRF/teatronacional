@@ -1,5 +1,6 @@
 from contextlib import nullcontext
 from enum import unique
+from hashlib import new
 from django.db import models
 from django.utils.html import mark_safe
 import uuid
@@ -76,6 +77,10 @@ class Usuario(models.Model):
         return self.email
 
 
+
+
+
+
 #deterioros
 class AgenteDeterioro(models.Model):
 
@@ -89,6 +94,18 @@ class AgenteDeterioro(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+#Factory agentes
+class FactoryAgente(models.Model):
+
+    def createAgente(nombre, descripcion, tDeterioro):
+        return AgenteDeterioro.objects.create(nombre, descripcion, tDeterioro)
+
+    class Meta:
+        abstract = True
+
+
 
 
 #inspecciones
