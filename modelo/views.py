@@ -401,6 +401,7 @@ def deleteUser(request, id_):
 
 
 
+
 # crud AgenteDeterioro
 
 def createAgente(request):
@@ -408,7 +409,6 @@ def createAgente(request):
         try:
             form = CreateAgenteForm(request.POST)
             agente = form.save(commit=False)
-            agente.user = request.user
             agente.save()
 
             return render(request, 'agregarAgenteDeterioro.html', {
