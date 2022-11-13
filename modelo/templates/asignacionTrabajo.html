@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <div class="tituloLista">
-    <h2>ASIGNACIÓN TRABAJOS</h2>
+    <h2>ASIGNACIÓN DE INSPECCIONES</h2>
 </div>
 <div id="listaGeneralContainer">
     {% for area in areas %}
@@ -17,7 +17,7 @@
             <div class="filaCard">
                 <form action="preAsignacionTrabajo/{{area.id}}">
                     {% csrf_token %}
-                    <button class="botonEstandar btnListasCard">Asignar trabajo</button>
+                    <button class="botonEstandar btnListasCard">Asignar inspeccion</button>
                 </form>
             </div>
         </div>
