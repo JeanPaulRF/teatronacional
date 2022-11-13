@@ -49,6 +49,8 @@ def signin(request):
                     return redirect('listaUsuarios/')
                 elif usuario.tUsuario == 'OPERATIVO':
                     return redirect('listInspeccionesUser/{}'.format(usuario.id))
+                elif usuario.tUsuario == 'DIRECCION':
+                    return redirect('menuDireccion/')
             else:
                 return render(request, 'signin.html', {
                     'form' : SigninForm,
@@ -574,24 +576,24 @@ def createInspeccion(request, id_):
 
 #lista los agentes
 def listInspeccion(request):
-    inspecciones = Trabajo.objects.all()
+    inspecciones = Inspeccion.objects.all()
     return render(request, 'trabajosAsignadosAdmin.html', { 'inspecciones' : inspecciones })
 
 
 def readInspeccion(request, id_):
-    inspeccion = get_object_or_404(Trabajo, id=id_)
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
     return render(request, 'signin.html', { 'inspeccion' : inspeccion })
 
 
 #lee un usuario especifico y actualizarlo
 def updateInspeccion(request, id_):
     if request.method == 'GET':
-        inspeccion = get_object_or_404(Trabajo, id=id_)
+        inspeccion = get_object_or_404(Inspeccion, id=id_)
         form = CreateInspeccionForm(instance=inspeccion)
         return render(request, 'ediatarTrabajoAsignadoAdmin.html', { 'inspeccion' : inspeccion , 'form' : form })
     else:
         try:
-            inspeccion = get_object_or_404(Trabajo, id=id_)
+            inspeccion = get_object_or_404(Inspeccion, id=id_)
             form = CreateInspeccionForm(request.POST, instance=inspeccion)
             form.save()
             return render(request, 'ediatarTrabajoAsignadoAdmin.html', {
@@ -609,7 +611,7 @@ def updateInspeccion(request, id_):
 
 
 def deleteInspeccion(request, id_):
-    inspeccion = get_object_or_404(Trabajo, id=id_)
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('/menuAdmin/listInspeccion/')
@@ -617,7 +619,7 @@ def deleteInspeccion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    user_inspecciones = Trabajo.objects.filter(encargado=encargado.id)
+    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
     return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : user_inspecciones })
 
 
@@ -716,7 +718,7 @@ def encargados_pdf(request):
     textob.setTextOrigin(inch, inch)
     textob.setFont("Helvetica", 14)
 
-    trabajos = Trabajo.objects.all()
+    trabajos = Inspeccion.objects.all()
     encargados = Encargado.objects.all()
     conservaciones = []
     restauraciones = []
@@ -782,16 +784,16 @@ def reporteInspeccionFechas(request):
     if request.method == 'POST':
         fechaInicio = request.POST['fechaInicio']
         fechaFin = request.POST['fechaFin']
-        inspecciones = Trabajo.objects.filter(tResultado="INSPECCION")
+        inspecciones = Inspeccion.objects.filter(tResultado="INSPECCION")
         try:
-            inspecciones=Trabajo.objects.filter(fechaInicio__range=[fechaInicio, fechaFin], fechaFin__range=[fechaInicio, fechaFin])
+            inspecciones=Inspeccion.objects.filter(fechaInicio__range=[fechaInicio, fechaFin], fechaFin__range=[fechaInicio, fechaFin])
             inspecciones = sorted(inspecciones, key=lambda x: x.fechaInicio)
         except:
             None
         return render(request, 'reporteInspeccionFecha.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
 
     else:
-        inspecciones = Trabajo.objects.all()
+        inspecciones = Inspeccion.objects.all()
         return render(request, 'reporteInspeccionFecha.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
 
 
@@ -804,14 +806,19 @@ def reporteInspeccionFechasLista(request, fechaInicio, fechaFin):
 def reporteInspeccionCodigo(request):
     if request.method == 'POST':
         codigo = request.POST['codigo']
-        inspecciones = Trabajo.objects.filter(codigo="INSPECCION")
+        inspecciones = Inspeccion.objects.filter(codigo="INSPECCION")
         try:
-            inspecciones=Trabajo.objects.filter(codigo=codigo)
+            inspecciones=Inspeccion.objects.filter(codigo=codigo)
             inspecciones = sorted(inspecciones, key=lambda x: x.fechaInicio)
         except:
             None
         return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
 
     else:
-        inspecciones = Trabajo.objects.all()
+        inspecciones = Inspeccion.objects.all()
         return render(request, 'reporteInspeccionCodigo.html', { 'form' : ReporteFechaForm, 'inspecciones': inspecciones})
+
+
+
+def menuDireccion(request):
+    return render(request, 'menuDireccion.html')

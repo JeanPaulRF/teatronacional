@@ -68,6 +68,7 @@ class Usuario(models.Model):
         ADMINISTRADOR = 'ADMINISTRADOR', 'ADMINISTRADOR'
         SUPERUSUARIO = 'SUPERUSUARIO', 'SUPERUSUARIO'
         OPERATIVO = 'OPERATIVO', 'OPERATIVO'
+        DIRECCION = 'DIRECCION', 'DIRECCION'
 
     tUsuario = models.CharField(max_length=25 , choices=TUsuario.choices, default=TUsuario.OPERATIVO)
     contrasena = models.CharField(max_length=100)
@@ -106,15 +107,24 @@ class FactoryAgente(models.Model):
         abstract = True
 
 
+#registros de inspeccion
+class RegistroInspeccion(models.Model):
+
+    imagen = models.ImageField(null=True, blank=True, upload_to='images/')
+    deterioro = models.ForeignKey(AgenteDeterioro, on_delete=models.CASCADE, null=True)
+    observacion = models.TextField(default='', null=True)
+    recomendacion = models.TextField(default='', null=True)
+
+    def __str__(self):
+        return self.tEstado
 
 
 #inspecciones
-class Trabajo(models.Model):
+class Inspeccion(models.Model):
 
     class TResultado(models.TextChoices):
         CONSERVACION = 'CONSERVACION', 'CONSERVACION'
         RESTAURACION = 'RESTAURACION', 'RESTAURACION'
-        INSPECCION = 'INSPECCION', 'INSPECCION'
 
     class TEstado(models.TextChoices):
         POR_SUCEDER = 'POR_SUCEDER', 'POR_SUCEDER'
@@ -124,15 +134,19 @@ class Trabajo(models.Model):
         RETRASADA = 'RETRASADA', 'RETRASADA'
 
     codigo = models.CharField(max_length=100, default=uuid.uuid1, editable=False, unique=True, )
+    registros = models.ManyToManyField(RegistroInspeccion, blank=True, null=True)
     fechaInicio = models.DateField(null=False)
     fechaFin = models.DateField(null=False)
-    tResultado = models.CharField(max_length=25 , choices=TResultado.choices)
+    tResultado = models.CharField(max_length=25 , choices=TResultado.choices, null=True)
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
-    deterioro = models.ForeignKey(AgenteDeterioro, on_delete=models.CASCADE)
-    comentario = models.TextField(default='')
+    deterioro = models.ForeignKey(AgenteDeterioro, on_delete=models.CASCADE, null=True)
+    comentario = models.TextField(default='', null=True)
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
 
     def __str__(self):
         return self.tEstado
+        
+
+
