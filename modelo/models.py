@@ -13,7 +13,7 @@ import uuid
 #areas
 class Parte(models.Model):
     nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
+    codigo = models.CharField(max_length=100, default=uuid.uuid1, editable=False, unique=True, )
     ubicacion = models.CharField(max_length=100)
     descripcion = models.TextField()
     imagen1 = models.ImageField(null=True, blank=True, upload_to='images/')
@@ -123,7 +123,7 @@ class Trabajo(models.Model):
         EJECUTADA_CON_RETRASO = 'EJECUTADA_CON_RETRASO', 'EJECUTADA_CON_RETRASO'
         RETRASADA = 'RETRASADA', 'RETRASADA'
 
-    codigo = models.CharField(max_length=8, default=uuid.uuid1, editable=False, unique=True, )
+    codigo = models.CharField(max_length=100, default=uuid.uuid1, editable=False, unique=True, )
     fechaInicio = models.DateField(null=False)
     fechaFin = models.DateField(null=False)
     tResultado = models.CharField(max_length=25 , choices=TResultado.choices)

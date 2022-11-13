@@ -1,0 +1,335 @@
+/* Estilos globales */
+
+@font-face {
+    font-family:'Inria Serif';
+    src:url(InriaSerif-Regular.ttf)
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family:'Inria Serif';
+}
+
+html {
+	width:100vw;
+	height:100vh; 
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+	position : absolute;
+	width : 100%;
+	height : 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    /* width: 100vw; */
+    min-height: 100%;
+    max-width: 100%;
+    /* overflow: auto; */
+    /* background-color: aqua; */
+}
+
+#logoPrincipal {
+    height: 110px;
+}
+
+header {
+    background-color: black;
+    color: white;
+    height: 114px;
+    width: 100%;
+    text-align: center;
+    line-height: 114px;
+    grid-column: auto;
+
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 61px;
+    width: 100%;
+    background-color: #D9D9D9;
+    color: black;
+    margin-top: auto;
+}
+
+#copy {
+    margin: auto;
+}
+
+.botonEstandar {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#petriscar {
+    width: 570px;
+    height: 460px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.purumOnbo {
+    width: 570px;
+    height: 460px;
+    background-color: #EAE9E9;
+}
+
+/* Estilos variables */
+/* Menus admin */
+.bma {
+    width: 371px;
+    height: 41px;
+    margin-top: 40px;
+}
+
+#menuContainer {
+    background-color: #EAE9E9;
+    height: 644px;
+    width: 655px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+#tituloMenu {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/* listaAreas */
+
+#mainTwoSide {
+    width: 100%;
+    height: auto;
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 50% 50%;
+    /* align-items: center; */
+
+}
+
+.tituloLista {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+#agregarbotonContainer {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#agregarBoton {
+    background: none;
+    border:none;
+}
+
+#listaGeneralContainer {
+    height: auto;
+}
+
+.cardEstandar {
+    width: 600px;
+    height: 180px;
+    margin-top: 20px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cardEstandarMini {
+    width: 600px;
+    height: 150px;
+    margin-top: 20px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cardInfoMini {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cardImg {
+    width: 156px;
+    height: 183;
+    display: flex;
+    border-right: 1px;
+}
+
+.imageList {
+    width: 116px;
+    height: 97px;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.filaCard {
+    width: 430px;
+    margin-top: 5px;
+}
+
+.fila_rowR {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.botonCard {
+    background: none;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+    border:none;
+    cursor: pointer;
+}
+
+.btnListasCard {
+    width: 100px;
+}
+
+.botonesColor {
+    color: red;
+}
+
+.subTituloLista {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.subtituloLista {
+    width: 50%;
+    border-bottom: 1px solid black;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sides {
+    width: 591px;
+    height: 643px;
+    background-color: #D9D9D9;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.imageContainer {
+    /* width: 183px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 176px;
+    margin: auto;
+}
+
+.imagenAreaLista {
+    height: 176px;
+    width: 183px;
+    border-radius: 20px;
+}
+
+.imagesContainer {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+#infoAreaAdmin {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+}
+
+.filaInfoArea {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.reverRowButton {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btnAreas {
+    height: 41px;
+    width: 167px;
+    margin-right: 5px;
+}
+
+#sideRight {
+    width: 591px;
+    /* height: 643px; */
+    /* background-color: #D9D9D9; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FontSize20 {
+    font-size: 20px;
+}
+
+.elementosMarginTop {
+    margin-top: 50px;
+}
+
+.formularioContainer {
+    width: 570px;
+    height: 860px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn167 {
+    width: 167px;
+    height: 41px;
+}
+
+.marginAuto {
+    margin: auto;
+}
