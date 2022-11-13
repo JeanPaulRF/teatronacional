@@ -2,7 +2,7 @@
 {% block content %}
 
 <div id="menuContainer">
-    <h2 id="tituloMenu">REPORTES DE ADMINISTRADOR</h2>
+    <h2 id="tituloMenu">REPORTES DE DIRECCION</h2>
 
     <a class="nav-link" href="{% url 'areas_pdf' %}">
         <button class="botonEstandar bma">REPORTE ÁREAS Y ELEMENTOS</button>
@@ -16,9 +16,12 @@
     <a class="nav-link" href="{% url 'reporteInspeccion' %}">
         <button class="botonEstandar bma">REPORTE ESTADO INSPECCIONES</button>
     </a>
-    <form action="">
-        <button class="botonEstandar bma">REPORTE INSPECCIONES DE ENCARGADO</button>
-    </form>
+    <a class="nav-link" href="">
+        <button class="botonEstandar bma">GRAFICO DE INSPECCIONES POR ESTADO</button>
+    </a>
+    <a class="nav-link" href="">
+        <button class="botonEstandar bma">GRAFICO DE INSPECCIONES DE ENCARGADO</button>
+    </a>
 </div>
 
 {% endblock content %}

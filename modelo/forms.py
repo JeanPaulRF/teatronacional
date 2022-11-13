@@ -38,8 +38,10 @@ class CreateEncargadoForm(ModelForm):
 
 class CreateInspeccionForm(ModelForm):
     class Meta:
-        model = Trabajo
-        fields = ['fechaInicio', 'fechaFin', 'tResultado', 'tEstado', 'encargado', 'area', 'deterioro', 'comentario', 'pdf']
+        model = Inspeccion
+        fields = ['fechaInicio', 'fechaFin', 'encargado', 'area']
+
+
 
 
 class CreateUserForm(ModelForm):
@@ -50,5 +52,5 @@ class CreateUserForm(ModelForm):
 
 class ReporteFechaForm(ModelForm):
     class Meta:
-        model = Trabajo
+        model = Inspeccion
         fields = ['fechaInicio', 'fechaFin']
