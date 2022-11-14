@@ -624,8 +624,45 @@ def deleteInspeccion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
+    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id, completada=False)
     return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : user_inspecciones })
+
+
+def inspeccionInfo(request, id_):
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    registros = inspeccion.registros.all()
+    return render(request, 'inspeccionInfo.html', { 'inspeccion' : inspeccion ,'registros' : registros })
+
+
+def agregarRegistro(request, idInspeccion):
+    if request.method == 'GET':
+        return render(request, 'agregarRegistro.html', {
+            'form' : CreateRegistroForm,
+        })
+    else:
+        try:
+            form = CreateRegistroForm(request.POST, request.FILES)
+            if form.is_valid():
+                registro = form.save(commit=False)
+                registro.save()
+                inspeccion = Inspeccion.objects.get(id=idInspeccion)
+                inspeccion.registros.add(registro)
+                return render(request, 'agregarRegistro.html', {
+                    'form' : CreateRegistroForm,
+                    'error' : 'Elemento creado correctamente'
+                })
+            else:
+                return render(request, 'agregarRegistro.html', {
+                'form' : CreateRegistroForm,
+                'error' : 'Error al crear registro form no valido'
+            })
+        except ValueError:
+            return render(request, 'agregarRegistro.html', {
+                'form' : CreateRegistroForm,
+                'error' : 'Error al crear registro'
+            })
+
+
 
 
 def menuReportes(request):
@@ -637,7 +674,7 @@ def areas_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    textob.setFont("Arial", 12)
 
     areas = Area.objects.all()
     lines = []

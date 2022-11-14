@@ -45,16 +45,20 @@ urlpatterns = [
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
+    
     path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),
     path('menuAdmin/verAgentesDeterioro/agregarAgenteDeterioro/', views.createAgente, name='agregarAgenteDeterioro'),
     path('menuAdmin/verAgentesDeterioro/updateAgente/<int:id_>', views.updateAgente, name='updateAgente'),
     path('menuAdmin/verAgentesDeterioro/deleteAgente/<int:id_>', views.deleteAgente, name='deleteAgente'),
+    
     path('menuAdmin/asignacionTrabajoLista/', views.asignacionTrabajoLista, name='asignacionTrabajoLista'),
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/<int:id_>', views.preAsignacionTrabajo, name='preAsignacionTrabajo'),
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/asignacion/<int:id_>', views.createInspeccion, name='asignacion'),
+    
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
     path('menuAdmin/listInspeccion/updateInspeccion/<int:id_>', views.updateInspeccion, name='updateInspeccion'),
     path('menuAdmin/listInspeccion/deleteInspeccion/<int:id_>', views.deleteInspeccion, name='deleteInspeccion'),
+    
     path('menuAdmin/listEncargados/', views.listEncargados, name='listEncargados'),
     path('menuAdmin/listEncargados/createEncargado/', views.createEncargado, name='createEncargado'),
     path('menuAdmin/listEncargados/updateEncargado/<int:id_>', views.updateEncargado, name='updateEncargado'),
@@ -63,6 +67,10 @@ urlpatterns = [
     path('menuSuper/', views.menuAdmin, name='menuSuperUsuario'),
     #Links de trabajadores
     path('listInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
+    path('listInspeccionesUser/inspeccionInfo/<int:id_>', views.inspeccionInfo, name='inspeccionInfo'),
+    path('listInspeccionesUser/inspeccionInfo/editarInspeccion/<int:id_>/', views.inspeccionInfo, name='inspeccionInfo'),
+    path('listInspeccionesUser/inspeccionInfo/finalizarInspeccion/<int:id_>/', views.inspeccionInfo, name='inspeccionInfo'),
+    path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>/', views.agregarRegistro, name='agregarRegistro'),
     #Reportes
     path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),
