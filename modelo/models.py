@@ -141,9 +141,9 @@ class Inspeccion(models.Model):
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
-    deterioro = models.ForeignKey(AgenteDeterioro, on_delete=models.CASCADE, null=True)
     comentario = models.TextField(default='', null=True)
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
+    completada = models.BooleanField(default=False)
 
     def __str__(self):
         return self.tEstado

@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <div class="tituloLista">
-    <h2>TRABAJOS</h2>
+    <h2>INSPECCIONES</h2>
 </div>
 
 <div id="listaGeneralContainer">
@@ -10,15 +10,16 @@
     <div class="cardEstandar" action="elementoInfoAdmin">
         <div class="cardInfo marginAuto">
             <div class="filaCard"><span>Codigo: {{inspeccion.codigo}}</span></div>
-            <div class="filaCard"><span>Resultado: {{inspeccion.tResultado}}</span></div>
             <div class="filaCard"><span>Area: {{inspeccion.area}}</span></div>
             <div class="filaCard"><span>Fecha Inicio: {{inspeccion.fechaInicio}}</span></div>
             <div class="filaCard"><span>Fecha Fin: {{inspeccion.fechaFin}}</span></div>
             <div class="filaCard"><span>Estado: {{inspeccion.tEstado}}</span></div>
             <div class="filaCard"><span>Encargado: {{inspeccion.encargado}}</span></div>
-
-            <div class="filaCard fila_rowR">
-
+            <div class="filaCard">
+                <form action="inspeccionInfo/{{inspeccion.id}}" method="post">
+                    {% csrf_token %}
+                    <button class="botonEstandar btnListasCard">Ver Detalles</button>
+                </form>
             </div>
         </div>
     </div>
