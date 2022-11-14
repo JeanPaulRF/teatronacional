@@ -52,15 +52,12 @@
                 </button>
             </div>
             <div class="filaInfoArea reverRowButton">
-                <form action="readAreaReportes/{{area.id}}">
-                    {% csrf_token %}
-                    <button class="botonEstandar btnAreas FontSize20">Reportes</button>
-                </form>
+                <button class="botonEstandar btnAreas FontSize20">Reportes</button>
             </div>
         </div>
     </div>
     <div id="sideRight">
-        <form action="agregarElemento/{{area.id}}", method="post">
+        <form action="agregarElemento/{{area.id}}">
             {% csrf_token %}
             <div id="agregarbotonContainer"><button id="agregarBoton"><svg xmlns="http://www.w3.org/2000/svg" width="35"
                         height="35" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">

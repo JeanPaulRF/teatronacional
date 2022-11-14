@@ -139,6 +139,11 @@ def readArea(request, id_):
     elementos = area.listaElementos.all()
     return render(request, 'areasInfoAdmin.html', { 'area' : area ,'elementos' : elementos })
 
+#La informacion de una area y la lista de reportes de contenga el area <--- temporal/revisar
+def readAreaReportes(request, idA_):
+    area = get_object_or_404(Area, id=idA_)
+    elementos = area.listaElementos.all()
+    return render(request, 'areaInfoReportes.html', { 'area' : area ,'elementos' : elementos })
 
 #lee un area especifica y actualizarla
 def updateArea(request, id_):
