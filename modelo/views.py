@@ -629,6 +629,36 @@ def inspeccionInfo(request, id_):
     return render(request, 'inspeccionInfo.html', { 'inspeccion' : inspeccion ,'registros' : registros })
 
 
+def agregarRegistro(request, idInspeccion):
+    if request.method == 'GET':
+        return render(request, 'agregarRegistro.html', {
+            'form' : CreateRegistroForm,
+        })
+    else:
+        try:
+            form = CreateRegistroForm(request.POST, request.FILES)
+            if form.is_valid():
+                registro = form.save(commit=False)
+                registro.save()
+                inspeccion = Inspeccion.objects.get(id=idInspeccion)
+                inspeccion.registros.add(registro)
+                return render(request, 'agregarRegistro.html', {
+                    'form' : CreateRegistroForm,
+                    'error' : 'Elemento creado correctamente'
+                })
+            else:
+                return render(request, 'agregarRegistro.html', {
+                'form' : CreateRegistroForm,
+                'error' : 'Error al crear registro form no valido'
+            })
+        except ValueError:
+            return render(request, 'agregarRegistro.html', {
+                'form' : CreateRegistroForm,
+                'error' : 'Error al crear registro'
+            })
+
+
+
 
 def menuReportes(request):
     return render(request, 'reportes.html')

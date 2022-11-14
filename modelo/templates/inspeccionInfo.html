@@ -27,13 +27,23 @@
             <div class="filaInfoArea reverRowButton">
 
             </div>
+
             <div class="filaInfoArea reverRowButton">
-                <button class="botonEstandar btnAreas FontSize20">Formulario</button>
+                <form action="finalizarInspeccion/{{inspeccion.id}}" method="post">
+                    {% csrf_token %}
+                    <button class="botonEstandar btnAreas FontSize20">Finalizar</button>
+                </form>
+                <form action="editarInspeccion/{{inspeccion.id}}" method="post">
+                    {% csrf_token %}
+                    <button class="botonEstandar btnAreas FontSize20">Editar</button>
+                </form>
             </div>
+
         </div>
     </div>
+
     <div id="sideRight">
-        <form action="agregarElemento/{{area.id}}">
+        <form action="agregarRegistro/{{inspeccion.id}}">
             {% csrf_token %}
             <div id="agregarbotonContainer"><button id="agregarBoton"><svg xmlns="http://www.w3.org/2000/svg" width="35"
                         height="35" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -57,10 +67,7 @@
                 <div class="filaCard"><span>Observacion:{{registro.observacion}}</span></div>
                 <div class="filaCard"><span>Recomendaciones:{{registro.recomendacion}}</span></div>
                 <div class="filaCard">
-                    <form action="readElemento/{{area.id}}/{{elemento.id}}">
-                        {% csrf_token %}
-                        <button class="botonEstandar btnListasCard">Ver detalles</button>
-                    </form>
+
                 </div>
                 <div class="filaCard fila_rowR">
                     <form action="deleteElemento/{{area.id}}/{{elemento.id}}" , method="post">
