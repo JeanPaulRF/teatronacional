@@ -2,12 +2,12 @@
 {% block content %}
 {% load static %}
 <div class="tituloLista">
-    <h2>ADMINIATRADOR INSPECCIONES</h2>
+    <h2>ADMINISTRADOR INSPECCIONES</h2>
 </div>
 
 <div id="listaGeneralContainer">
     {% for inspeccion in inspecciones %}
-    <div class="cardEstandar" action="elementoInfoAdmin">
+    <div class="cardEstandar2" action="elementoInfoAdmin">
         <div class="cardInfo marginAuto">
             <div class="filaCard"><span>Codigo: {{inspeccion.codigo}}</span></div>
             <div class="filaCard"><span>Area: {{inspeccion.area}}</span></div>
