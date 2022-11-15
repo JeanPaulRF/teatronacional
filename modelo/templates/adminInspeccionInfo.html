@@ -1,0 +1,65 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+{% load static %}
+<div class="tituloLista">
+    <h2>ADMINISTRADOR INSPECCION Y REGISTROS</h2>
+</div>
+<div class="subTituloLista">
+    <div class="subtituloLista">
+        <h3>INSPECCION</h3>
+    </div>
+    <div class="subtituloLista">
+        <h3>REGISTROS</h3>
+    </div>
+</div>
+<div id="mainTwoSide">
+    <div id="sideLeft" class="sides">
+        <div class="imagesContainer">
+        </div>
+        <div id="infoAreaAdmin">
+            <div class="filaInfoArea"><span>Código: {{inspeccion.codigo}}</span></div>
+            <div class="filaInfoArea"><span>Fecha Inicio: {{inspeccion.fechaInicio}}</span></div>
+            <div class="filaInfoArea"><span>Fehca Fin: {{inspeccion.fechaFin}}</span></div>
+            <div class="filaInfoArea"><span>Estado: {{inspeccion.tEstado}}</span></div>
+            <div class="filaInfoArea"><span>Encargado: {{inspeccion.encargado}}</span></div>
+            <div class="filaInfoArea"><span>Area: {{inspeccion.area}}</span></div>
+            <div class="filaInfoArea"><span>Comentario: {{inspeccion.comentario}}</span></div>
+            <div class="filaInfoArea"><span>Completada: {{inspeccion.completada}}</span></div>
+            <div class="filaInfoArea reverRowButton">
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div id="sideRight">
+
+
+        {% for registro in registros %}
+        <div class="cardEstandar">
+            {% if registro.imagen %}
+            <div class="cardImg">
+                <image class="imageList" src="{{registro.imagen.url}}/" alt="imagen des teatro nacional">
+            </div>
+            {% endif %}
+            <div class="cardInfo">
+                <div class="filaCard"><span>Agente de Deterioro:{{registro.deterioro}}</span></div>
+                <div class="filaCard"><span>Observacion:{{registro.observacion}}</span></div>
+                <div class="filaCard"><span>Recomendaciones:{{registro.recomendacion}}</span></div>
+                <div class="filaCard">
+
+                </div>
+                <div class="filaCard fila_rowR">
+
+
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -585,6 +585,12 @@ def listInspeccion(request):
     return render(request, 'trabajosAsignadosAdmin.html', { 'inspecciones' : inspecciones })
 
 
+def adminInspeccionInfo(request, id_):
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    registros = inspeccion.registros.all()
+    return render(request, 'adminInspeccionInfo.html', { 'inspeccion' : inspeccion ,'registros' : registros })
+
+
 def readInspeccion(request, id_):
     inspeccion = get_object_or_404(Inspeccion, id=id_)
     return render(request, 'signin.html', { 'inspeccion' : inspeccion })
@@ -620,6 +626,8 @@ def deleteInspeccion(request, id_):
     if request.method == 'POST':
         inspeccion.delete()
         return redirect('/menuAdmin/listInspeccion/')
+
+
 
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
@@ -663,14 +671,16 @@ def editarInspeccion(request, idInspec):
 
 
 def finalizarInspeccion(request, id_):
-    inspeccion = get_object_or_404(Inspeccion, id=id_)
-    usuario = get_object_or_404(Usuario, email=inspeccion.encargado.email)
     if request.method == 'POST':
+        inspeccion = get_object_or_404(Inspeccion, id=id_)
         inspeccion.completada = True
-        inspeccion.fechaFin = datetime.now()
+        inspeccion.tEstado = 'EJECUTADA'
+        inspeccion.fechaFin = datetime.date.today()
         inspeccion.save()
-    return redirect('/listInspeccionesUser/{}'.format(usuario.id))
-
+        usuario = get_object_or_404(Usuario, email=inspeccion.encargado.email)
+        encargado = get_object_or_404(Encargado, email=usuario.email)
+        user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id, completada=False)
+        return redirect ('/listInspeccionesUser/{}'.format(usuario.id))
 
 def agregarRegistro(request, idInspeccion):
     if request.method == 'GET':
@@ -700,6 +710,40 @@ def agregarRegistro(request, idInspeccion):
                 'error' : 'Error al crear registro'
             })
 
+
+def editarRegistro(request, idInspeccion):
+    if request.method == 'POST':
+        try:
+            registro = get_object_or_404(RegistroInspeccion, id=idInspeccion)
+            form = EditarInspeccionForm(request.POST, instance=inspeccion)
+            inspeccion = form.save(commit=False)
+            if len(request.FILES) != 0:
+                if len(inspeccion.imagen) > 0:
+                    os.remove(inspeccion.imagen.path)
+                inspeccion.imagen = request.FILES['imagen']
+            inspeccion.save()
+            return render(request, 'editarInspeccion.html', {
+                'inspeccion' : inspeccion,
+                'form' : form,
+                'error' : 'Inspeccion actualizada correctamente'
+            })
+        except ValueError:
+            return render(request, 'editarInspeccion.html', {
+                'inspeccion' : inspeccion,
+                'form' : form,
+                'error' : 'Error al actualizar inspeccion'
+            })
+    else:
+        inspeccion = get_object_or_404(Inspeccion, id=idInspeccion)
+        form = EditarInspeccionForm(instance=inspeccion)
+        return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
+
+
+def eliminarRegistro(request, id_):
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    if request.method == 'POST':
+        inspeccion.delete()
+        return redirect('/menuAdmin/listInspeccion/')
 
 
 

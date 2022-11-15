@@ -116,7 +116,7 @@ class RegistroInspeccion(models.Model):
     recomendacion = models.TextField(default='', null=True)
 
     def __str__(self):
-        return self.tEstado
+        return self.observacion
 
 
 #inspecciones
@@ -125,6 +125,7 @@ class Inspeccion(models.Model):
     class TResultado(models.TextChoices):
         CONSERVACION = 'CONSERVACION', 'CONSERVACION'
         RESTAURACION = 'RESTAURACION', 'RESTAURACION'
+        POR_DEFINIR = 'POR_DEFINIR', 'POR_DEFINIR'
 
     class TEstado(models.TextChoices):
         POR_SUCEDER = 'POR_SUCEDER', 'POR_SUCEDER'
@@ -137,7 +138,7 @@ class Inspeccion(models.Model):
     registros = models.ManyToManyField(RegistroInspeccion, blank=True, null=True)
     fechaInicio = models.DateField(null=False)
     fechaFin = models.DateField(null=False)
-    tResultado = models.CharField(max_length=25 , choices=TResultado.choices, null=True)
+    tResultado = models.CharField(max_length=25 , choices=TResultado.choices, default=TResultado.POR_DEFINIR)
     tEstado = models.CharField(max_length=25 , choices=TEstado.choices, default=TEstado.POR_SUCEDER)
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)

@@ -56,6 +56,7 @@ urlpatterns = [
     path('menuAdmin/asignacionTrabajoLista/preAsignacionTrabajo/asignacion/<int:id_>', views.createInspeccion, name='asignacion'),
     
     path('menuAdmin/listInspeccion/', views.listInspeccion, name='listInspeccion'),
+    path('menuAdmin/listInspeccion/adminInspeccionInfo/<int:id_>', views.adminInspeccionInfo, name='adminInspeccionInfo'),
     path('menuAdmin/listInspeccion/updateInspeccion/<int:id_>', views.updateInspeccion, name='updateInspeccion'),
     path('menuAdmin/listInspeccion/deleteInspeccion/<int:id_>', views.deleteInspeccion, name='deleteInspeccion'),
     
@@ -71,6 +72,9 @@ urlpatterns = [
     path('listInspeccionesUser/inspeccionInfo/editarInspeccion/<int:idInspec>', views.editarInspeccion, name='editarInspeccion'),
     path('listInspeccionesUser/inspeccionInfo/finalizarInspeccion/<int:id_>', views.finalizarInspeccion, name='finalizarInspeccion'),
     path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>', views.agregarRegistro, name='agregarRegistro'),
+    #path('listInspeccionesUser/inspeccionInfo/editarRegistro/<int:idInspeccion>', views.editarRegistro, name='editarRegistro'),
+    #path('listInspeccionesUser/inspeccionInfo/eliminarRegistro/<int:idInspeccion>', views.eliminarRegistro, name='eliminarRegistro'),
+
     #Reportes
     path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),
