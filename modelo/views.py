@@ -638,6 +638,44 @@ def inspeccionInfo(request, id_):
     return render(request, 'inspeccionInfo.html', { 'inspeccion' : inspeccion ,'registros' : registros })
 
 
+def editarInspeccion(request, idInspec):
+    if request.method == 'POST':
+        try:
+            inspeccion = get_object_or_404(Inspeccion, id=idInspec)
+            form = EditarInspeccionForm(request.POST, instance=inspeccion)
+            inspeccion = form.save(commit=False)
+            if len(request.FILES) != 0:
+                if len(inspeccion.imagen) > 0:
+                    os.remove(inspeccion.imagen.path)
+                inspeccion.imagen = request.FILES['imagen']
+            inspeccion.save()
+            return render(request, 'editarInspeccion.html', {
+                'inspeccion' : inspeccion,
+                'form' : form,
+                'error' : 'Inspeccion actualizada correctamente'
+            })
+        except ValueError:
+            return render(request, 'editarInspeccion.html', {
+                'inspeccion' : inspeccion,
+                'form' : form,
+                'error' : 'Error al actualizar inspeccion'
+            })
+    else:
+        inspeccion = get_object_or_404(Inspeccion, id=idInspec)
+        form = EditarInspeccionForm(instance=inspeccion)
+        return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
+
+
+def finalizarInspeccion(request, id_):
+    inspeccion = get_object_or_404(Inspeccion, id=id_)
+    usuario = get_object_or_404(Usuario, email=inspeccion.encargado.email)
+    if request.method == 'POST':
+        inspeccion.completada = True
+        inspeccion.fechaFin = datetime.now()
+        inspeccion.save()
+    return redirect('/listInspeccionesUser/{}'.format(usuario.id))
+
+
 def agregarRegistro(request, idInspeccion):
     if request.method == 'GET':
         return render(request, 'agregarRegistro.html', {
