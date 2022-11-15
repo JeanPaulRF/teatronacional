@@ -68,9 +68,9 @@ urlpatterns = [
     #Links de trabajadores
     path('listInspeccionesUser/<int:id_>', views.listInspeccionesUser, name='listInspeccionesUser'),
     path('listInspeccionesUser/inspeccionInfo/<int:id_>', views.inspeccionInfo, name='inspeccionInfo'),
-    path('listInspeccionesUser/inspeccionInfo/editarInspeccion/<int:id_>/', views.inspeccionInfo, name='inspeccionInfo'),
-    path('listInspeccionesUser/inspeccionInfo/finalizarInspeccion/<int:id_>/', views.inspeccionInfo, name='inspeccionInfo'),
-    path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>/', views.agregarRegistro, name='agregarRegistro'),
+    path('listInspeccionesUser/inspeccionInfo/editarInspeccion/<int:idInspec>', views.editarInspeccion, name='editarInspeccion'),
+    path('listInspeccionesUser/inspeccionInfo/finalizarInspeccion/<int:id_>', views.finalizarInspeccion, name='finalizarInspeccion'),
+    path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>', views.agregarRegistro, name='agregarRegistro'),
     #Reportes
     path('menuAdmin/menuReportes/', views.menuReportes, name='menuReportes'),
     path('menuAdmin/menuReportes/areas_pdf/', views.areas_pdf, name='areas_pdf'),

@@ -42,6 +42,12 @@ class CreateInspeccionForm(ModelForm):
         fields = ['fechaInicio', 'fechaFin', 'encargado', 'area']
 
 
+class EditarInspeccionForm(ModelForm):
+    class Meta:
+        model = Inspeccion
+        fields = ['tResultado', 'tEstado', 'comentario', 'pdf']
+
+
 class CreateRegistroForm(ModelForm):
     class Meta:
         model = RegistroInspeccion
