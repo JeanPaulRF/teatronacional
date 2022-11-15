@@ -44,6 +44,7 @@ urlpatterns = [
     path('menuAdmin/listaAreas/areasInfoAdmin/agregarElemento/<int:idArea>/', views.createElemento, name='agregarElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/<int:id_>/deleteElemento/<int:idArea>/<int:idElemento>/', views.deleteElemento, name='deleteElemento'),
     path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/<int:idArea>/<int:idElemento>/', views.readElemento, name='readElemento'),
+    path('menuAdmin/listaAreas/areasInfoAdmin/readElemento/', views.readElemento, name='readElementoReportes'),
     path('menuAdmin/listaAreas/areasInfoAdmin/updateElemento/<int:idArea>/<int:idElemento>/', views.updateElemento, name='updateElemento'),
     
     path('menuAdmin/verAgentesDeterioro/', views.verAgentesDeterioro, name='verAgentesDeterioro'),

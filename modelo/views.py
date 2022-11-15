@@ -234,6 +234,10 @@ def readElemento(request, idArea, idElemento):
     elemento = get_object_or_404(Elemento, id=idElemento)
     return render(request, 'elementoInfoAdmin.html', { 'elemento' : elemento, 'idArea': idArea })
 
+#Muestra los reportes de un elemento especifico  <--- funcion temporal
+def readElementoReportes(request, idArea, idElemento):
+    elemento = get_object_or_404(Elemento, id=idElemento)
+    return render(request, 'elementoReportes.html', { 'elemento' : elemento, 'idArea': idArea })
 
 #lee un area especifica y actualizarla
 def updateElemento(request, idArea, idElemento):
