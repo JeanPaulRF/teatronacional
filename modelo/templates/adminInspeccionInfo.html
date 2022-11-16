@@ -35,7 +35,15 @@
     </div>
 
     <div id="sideRight">
-
+        <div id="cardFiltroInspe">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button>
+                    Buscar
+                </button>
+            </form>
+        </div>
 
         {% for registro in registros %}
         <div class="cardEstandar">
