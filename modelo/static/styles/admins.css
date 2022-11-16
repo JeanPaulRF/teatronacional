@@ -345,3 +345,15 @@ footer {
 .marginAuto {
     margin: auto;
 }
+
+#cardFiltroInspe {
+    width: 600px;
+    height: 180px;
+    margin-top: 20px;
+    background-color: #EAE9E9;
+    border-radius: 20px;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

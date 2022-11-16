@@ -51,7 +51,7 @@ class EditarInspeccionForm(ModelForm):
 class BuscarInspeccionForm(ModelForm):
     class Meta:
         model = Inspeccion
-        fields = ['tEstado', 'fechaInicio', 'fechaFin', 'encargado', 'area', 'tResultado', 'comentario', 'pdf']
+        fields = ['tEstado', 'fechaInicio', 'fechaFin', 'encargado', 'area', 'tResultado']
 
 
 class CreateRegistroForm(ModelForm):

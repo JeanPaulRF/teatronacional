@@ -586,13 +586,16 @@ def createInspeccion(request, id_):
 #lista los agentes
 def listInspeccion(request):
     inspecciones = Inspeccion.objects.all()
-    return render(request, 'trabajosAsignadosAdmin.html', { 'inspecciones' : inspecciones })
+    return render(request, 'trabajosAsignadosAdmin.html', {
+        'inspecciones' : inspecciones})
 
 
 def adminInspeccionInfo(request, id_):
     inspeccion = get_object_or_404(Inspeccion, id=id_)
     registros = inspeccion.registros.all()
-    return render(request, 'adminInspeccionInfo.html', { 'inspeccion' : inspeccion ,'registros' : registros })
+    return render(request, 'adminInspeccionInfo.html', { 'inspeccion' : inspeccion ,
+    'registros' : registros,
+    'form' : BuscarInspeccionForm })
 
 
 def readInspeccion(request, id_):
