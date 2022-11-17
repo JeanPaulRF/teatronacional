@@ -15,6 +15,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
+# from patterns.Snapshop import Snapshop
+
 
 
 # Create your views here.
@@ -587,15 +589,15 @@ def createInspeccion(request, id_):
 def listInspeccion(request):
     inspecciones = Inspeccion.objects.all()
     return render(request, 'trabajosAsignadosAdmin.html', {
-        'inspecciones' : inspecciones})
+        'inspecciones' : inspecciones,
+        'form' : BuscarInspeccionForm})
 
 
 def adminInspeccionInfo(request, id_):
     inspeccion = get_object_or_404(Inspeccion, id=id_)
     registros = inspeccion.registros.all()
     return render(request, 'adminInspeccionInfo.html', { 'inspeccion' : inspeccion ,
-    'registros' : registros,
-    'form' : BuscarInspeccionForm })
+    'registros' : registros })
 
 
 def readInspeccion(request, id_):

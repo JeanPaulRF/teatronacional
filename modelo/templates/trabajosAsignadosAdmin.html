@@ -4,7 +4,15 @@
 <div class="tituloLista">
     <h2>ADMINISTRADOR INSPECCIONES</h2>
 </div>
-
+<div id="cardFiltroInspe">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>
+            Buscar
+        </button>
+    </form>
+</div>
 <div id="listaGeneralContainer">
     {% for inspeccion in inspecciones %}
     <div class="cardEstandarLarge" action="elementoInfoAdmin">
