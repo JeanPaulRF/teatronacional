@@ -15,9 +15,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
-# from patterns.Snapshop import Snapshop
+from modelo.patterns.Snapshopin import Snapshopin
 
-
+Snapshop = Snapshopin()
 
 # Create your views here.
 
@@ -641,7 +641,7 @@ def deleteInspeccion(request, id_):
 def listInspeccionesUser(request, id_):
     usuario = get_object_or_404(Usuario, id=id_)
     encargado = get_object_or_404(Encargado, email=usuario.email)
-    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id, completada=False)
+    user_inspecciones = Inspeccion.objects.filter(encargado=encargado.id)
     return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : user_inspecciones })
 
 
@@ -656,6 +656,13 @@ def editarInspeccion(request, idInspec):
         try:
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
             form = EditarInspeccionForm(request.POST, instance=inspeccion)
+            if (not inspeccion.completada):
+                
+                return render(request, 'editarInspeccion.html', {
+                    'inspeccion' : inspeccion,
+                    'form' : form,
+                    'error' : 'Actualización lista'
+                })
             inspeccion = form.save(commit=False)
             if len(request.FILES) != 0:
                 if len(inspeccion.imagen) > 0:

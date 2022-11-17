@@ -1,6 +1,6 @@
-from Memento import Memento
+from modelo.patterns.Memento import Memento
 
-class Snapshop(Memento):
+class Snapshopin(Memento):
     def __init__(self):
         self.codigo = ""
     
