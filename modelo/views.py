@@ -5,6 +5,7 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
+from django.db.models import Q
 from modelo.models import Usuario, AgenteDeterioro
 from .forms import *
 import os
@@ -585,12 +586,45 @@ def createInspeccion(request, id_):
 
 
 
-#lista los agentes
+#lista inspecciones para admin
 def listInspeccion(request):
+    busqueda = request.GET.get("buscar")
     inspecciones = Inspeccion.objects.all()
-    return render(request, 'trabajosAsignadosAdmin.html', {
-        'inspecciones' : inspecciones,
-        'form' : BuscarInspeccionForm})
+    inspecciones1 = Inspeccion.objects.none()
+    inspecciones2 = Inspeccion.objects.none()
+    inspecciones3 = Inspeccion.objects.none()
+
+    if busqueda:
+        inspecciones = Inspeccion.objects.filter(
+                Q(codigo = busqueda) | 
+                Q(tResultado = busqueda) |
+                Q(tEstado = busqueda)
+            )
+
+        try:
+            area = Area.objects.get(nombre=busqueda)
+            inspecciones1 = Inspeccion.objects.filter(area=area.id)
+        except:
+            pass
+
+        try:
+            encargado = Encargado.objects.get(nombre=busqueda)
+            inspecciones2 = Inspeccion.objects.filter(encargado=encargado.id)
+        except:
+            pass
+
+        try:
+            inspecciones3 = Inspeccion.objects.filter(
+                Q(fechaInicio = busqueda) |
+                Q(fechaFin = busqueda)
+            )
+        except:
+            pass
+
+        inspecciones = inspecciones | inspecciones1 | inspecciones2 | inspecciones3
+
+    return render(request, 'trabajosAsignadosAdmin.html', {'inspecciones' : inspecciones.distinct() })
+
 
 
 def adminInspeccionInfo(request, id_):
@@ -645,6 +679,9 @@ def listInspeccionesUser(request, id_):
     return render(request, 'trabajosAsignadosOperario.html', { 'inspecciones' : user_inspecciones })
 
 
+
+
+
 def inspeccionInfo(request, id_):
     inspeccion = get_object_or_404(Inspeccion, id=id_)
     registros = inspeccion.registros.all()
@@ -657,7 +694,7 @@ def editarInspeccion(request, idInspec):
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
             form = EditarInspeccionForm(request.POST, instance=inspeccion)
             if (not inspeccion.completada):
-                
+                Snapshop.setDatos
                 return render(request, 'editarInspeccion.html', {
                     'inspeccion' : inspeccion,
                     'form' : form,
