@@ -1,9 +1,8 @@
 class Memento:
     codigo = ""
-    registros = []
     fechaInicio = ""
     fechaFin = ""
-    tResultado =[]
+    tResultado = ""
     tEstado = ""
     encargado = ""
     area = ""

@@ -1,31 +1,29 @@
 from modelo.patterns.Memento import Memento
 
 class Snapshopin(Memento):
-    def __init__(self):
-        self.codigo = ""
+    def __init__(self, datos):
+        self.setDatos(datos)
     
     def setDatos(self, datos):
-        self.codigo = datos.codigo
-        self.registros = datos.registros
-        self.fechaInicio = datos.fechaInicio
-        self.fechaFin = datos.fechaFin
-        self.tResultado = datos.tResultado
-        self.tEstado = datos.tEstado
-        self.encargado = datos.encargado
-        self.area = datos.area
-        self.comentario = datos.comentario
-        self.completada = datos.completada
+        self.codigo = datos["Codigo"]
+        self.fechaInicio = datos["FechaInicio"]
+        self.fechaFin = datos["FechaFin"]
+        self.tResultado = datos["TResultado"]
+        self.tEstado = datos["TEstado"]
+        self.encargado = datos["Encargado"]
+        self.area = datos["Area"]
+        self.comentario = datos["Comentario"]
+        self.completada = datos["Completada"]
 
     def getDatos(self):
         return {
-            "codigo" : self.codigo,
-            "registros" : self.registros,
-            "fechaInicio" : self.fechaInicio,
-            "fechaFin" : self.fechaFin,
-            "tResultado" : self.tResultado,
-            "tEstado" : self.tEstado,
-            "encargado" : self.encargado,
-            "area" : self.area,
-            "comentario" : self.comentario,
-            "completada" : self.completada,
+            "Codigo" : self.codigo,
+            "FechaInicio" : self.fechaInicio,
+            "FechaFin" : self.fechaFin,
+            "TResultado" : self.tResultado,
+            "TEstado" : self.tEstado,
+            "Encargado" : self.encargado,
+            "Area" : self.area,
+            "Comentario" : self.comentario,
+            "Completada" : self.completada,
         }

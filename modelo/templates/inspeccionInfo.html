@@ -37,7 +37,7 @@
                         <button class="botonEstandar btnAreas FontSize20">Finalizar</button>
                     </form>
                 {% endif %}
-                <form action="editarInspeccion/{{inspeccion.id}}">
+                <form action="/{{inspeccion.id}}">
                     {% csrf_token %}
                     <button class="botonEstandar btnAreas FontSize20">Editar</button>
                 </form>

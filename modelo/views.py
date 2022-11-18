@@ -17,8 +17,10 @@ from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
 from modelo.patterns.Snapshopin import Snapshopin
+from modelo.patterns.Log import Log
 
-Snapshop = Snapshopin()
+log = Log()
+log.readFile()
 
 # Create your views here.
 
@@ -694,7 +696,7 @@ def editarInspeccion(request, idInspec):
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
             form = EditarInspeccionForm(request.POST, instance=inspeccion)
             if (not inspeccion.completada):
-                Snapshop.setDatos
+                # Snapshop.setDatos
                 return render(request, 'editarInspeccion.html', {
                     'inspeccion' : inspeccion,
                     'form' : form,
