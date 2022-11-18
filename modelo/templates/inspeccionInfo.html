@@ -24,20 +24,27 @@
             <div class="filaInfoArea"><span>Encargado: {{inspeccion.encargado}}</span></div>
             <div class="filaInfoArea"><span>Area: {{inspeccion.area}}</span></div>
             <div class="filaInfoArea"><span>Comentario: {{inspeccion.comentario}}</span></div>
-            {% comment %} <div class="filaInfoArea"><span>Completada: {{inspeccion.completada? "Si" : "No"}}</span></div> {% endcomment %}
-            <div class="filaInfoArea"><span>Completada: {% if inspeccion.completada %} Si {% else %} No {% endif %}</span></div>
+            {% comment %} <div class="filaInfoArea"><span>Completada: {{inspeccion.completada? "Si" : "No"}}</span>
+            </div> {% endcomment %}
+            <div class="filaInfoArea"><span>Completada:
+                    {% if inspeccion.completada %}
+                    Si
+                    {% else %}
+                    No
+                    {% endif %}
+                </span></div>
             <div class="filaInfoArea reverRowButton">
 
             </div>
 
             <div class="filaInfoArea reverRowButton">
                 {% if not inspeccion.completada %}
-                    <form action="finalizarInspeccion/{{inspeccion.id}}" method="POST">
-                        {% csrf_token %}
-                        <button class="botonEstandar btnAreas FontSize20">Finalizar</button>
-                    </form>
+                <form action="finalizarInspeccion/{{inspeccion.id}}" method="POST">
+                    {% csrf_token %}
+                    <button class="botonEstandar btnAreas FontSize20">Finalizar</button>
+                </form>
                 {% endif %}
-                <form action="/{{editarInspeccion.id}}">
+                <form action="editarInspeccion/{{inspeccion.id}}">
                     {% csrf_token %}
                     <button class="botonEstandar btnAreas FontSize20">Editar</button>
                 </form>
