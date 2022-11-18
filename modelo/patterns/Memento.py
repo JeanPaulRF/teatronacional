@@ -1,5 +1,5 @@
 class Memento:
-    codigo = ""
+    id = ""
     fechaInicio = ""
     fechaFin = ""
     tResultado = ""

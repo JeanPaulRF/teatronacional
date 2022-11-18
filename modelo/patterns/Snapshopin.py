@@ -5,7 +5,7 @@ class Snapshopin(Memento):
         self.setDatos(datos)
     
     def setDatos(self, datos):
-        self.codigo = datos["Codigo"]
+        self.codigo = datos["Id"]
         self.fechaInicio = datos["FechaInicio"]
         self.fechaFin = datos["FechaFin"]
         self.tResultado = datos["TResultado"]
@@ -17,7 +17,7 @@ class Snapshopin(Memento):
 
     def getDatos(self):
         return {
-            "Codigo" : self.codigo,
+            "Id" : self.codigo,
             "FechaInicio" : self.fechaInicio,
             "FechaFin" : self.fechaFin,
             "TResultado" : self.tResultado,

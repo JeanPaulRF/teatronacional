@@ -695,13 +695,13 @@ def editarInspeccion(request, idInspec):
         try:
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
             form = EditarInspeccionForm(request.POST, instance=inspeccion)
-            if (not inspeccion.completada):
-                # Snapshop.setDatos
-                return render(request, 'editarInspeccion.html', {
-                    'inspeccion' : inspeccion,
-                    'form' : form,
-                    'error' : 'Actualización lista'
-                })
+            # if (not inspeccion.completada):
+            #     # Snapshop.setDatos
+            #     return render(request, 'editarInspeccion.html', {
+            #         'inspeccion' : inspeccion,
+            #         'form' : form,
+            #         'error' : 'Actualización lista'
+            #     })
             inspeccion = form.save(commit=False)
             if len(request.FILES) != 0:
                 if len(inspeccion.imagen) > 0:
