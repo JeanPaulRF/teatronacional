@@ -19,8 +19,8 @@ from reportlab.lib.pagesizes import letter
 from modelo.patterns.Snapshopin import Snapshopin
 from modelo.patterns.Log import Log
 
-log = Log()
-log.readFile()
+# log = Log()
+# log.readFile()
 
 # Create your views here.
 

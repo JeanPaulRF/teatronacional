@@ -34,6 +34,7 @@ class Log:
         print(data)
         dato = data.split("-/*\n")
         dato.pop(-1)
+        print(dato)
         a = {
             "Id" : dato[-1].split(":")[1],
             "FechaInicio" : dato[3].split(":")[1],
@@ -48,7 +49,7 @@ class Log:
         self.add(Snapshopin(a))
 
     def readFile(self):
-        mensaje = self.file.read()
+        mensaje = self.fileR.read()
         # self.add(mensaje)
         # print(BASE_DIR)
         self.tranforn(mensaje)
