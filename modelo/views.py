@@ -813,7 +813,7 @@ def areas_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Arial", 12)
+    textob.setFont("Helvetica", 12)
 
     areas = Area.objects.all()
     lines = []
@@ -856,7 +856,7 @@ def agentes_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    textob.setFont("Helvetica", 12)
 
     agentes_ = AgenteDeterioro.objects.all()
     agentes = sorted(agentes_, key=lambda x: x.nombre)
@@ -897,7 +897,7 @@ def encargados_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    textob.setFont("Helvetica", 12)
 
     trabajos = Inspeccion.objects.all()
     encargados = Encargado.objects.all()
@@ -916,6 +916,7 @@ def encargados_pdf(request):
             conservaciones.append("    Tipo: " + trabajo.encargado.tEncargado)
             conservaciones.append("    Telefono: " + trabajo.encargado.telefono)
             conservaciones.append("    Email: " + trabajo.encargado.email)
+            conservaciones.append("    Direccion: " + trabajo.encargado.direccion)
         elif trabajo.tResultado == "RESTAURACION":
             restauraciones.append("RESTAURACION")
             restauraciones.append(" ")
@@ -925,7 +926,8 @@ def encargados_pdf(request):
             restauraciones.append("    Tipo: " + trabajo.encargado.tEncargado)
             restauraciones.append("    Telefono: " + trabajo.encargado.telefono)
             restauraciones.append("    Email: " + trabajo.encargado.email)
-        elif trabajo.tResultado == "INSPECCION":
+            restauraciones.append(" ")
+        else:
             inspecicones.append("INSPECCION")
             inspecicones.append(" ")
             inspecicones.append("    Encargado")
@@ -934,6 +936,7 @@ def encargados_pdf(request):
             inspecicones.append("    Tipo: " + trabajo.encargado.tEncargado)
             inspecicones.append("    Telefono: " + trabajo.encargado.telefono)
             inspecicones.append("    Email: " + trabajo.encargado.email)
+            inspecicones.append(" ")
 
     conservaciones.append(" ")
     conservaciones.append(" ")

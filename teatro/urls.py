@@ -88,6 +88,7 @@ urlpatterns = [
 
     #Direccion
     path('menuDireccion/', views.menuDireccion, name='menuDireccion'),
+    path('menuDireccion/reporte4/', views.reporteInspeccion, name='reporte4'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
