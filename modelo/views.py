@@ -596,6 +596,8 @@ def listInspeccion(request):
     inspecciones2 = Inspeccion.objects.none()
     inspecciones3 = Inspeccion.objects.none()
 
+    print(busqueda)
+
     if busqueda:
         inspecciones = Inspeccion.objects.filter(
                 Q(codigo = busqueda) | 
@@ -956,7 +958,36 @@ def encargados_pdf(request):
 
 
 def reporteInspeccion(request):
-    return render(request, 'menuReporteInspeccion.html')
+    fechaInicio = request.GET.get("fechaInicio")
+    fechaFin = request.GET.get("fechaFin")
+    codigo = request.GET.get("codigo")
+    inspecciones = Inspeccion.objects.all()
+    inspecciones1 = Inspeccion.objects.none()
+    inspecciones2 = Inspeccion.objects.none()
+    inspecciones3 = Inspeccion.objects.none()
+
+    if fechaInicio or fechaFin or codigo:
+
+        for inspeccion in inspecciones:
+            if fechaInicio:
+                try:
+                    if inspeccion.fechaInicio >= datetime.datetime.strptime(fechaInicio, "%Y-%m-%d").date():
+                        inspecciones1 = inspecciones1 | Inspeccion.objects.filter(id=inspeccion.id)
+                except:
+                    pass
+            if fechaFin:
+                try:
+                    if inspeccion.fechaFin <= datetime.datetime.strptime(fechaFin, "%Y-%m-%d").date():
+                        inspecciones2 = inspecciones2 | Inspeccion.objects.filter(id=inspeccion.id)
+                except:
+                    pass
+            if codigo:
+                if inspeccion.codigo == codigo:
+                    inspecciones3 = inspecciones3 | Inspeccion.objects.filter(id=inspeccion.id)
+
+    inspecciones = inspecciones1 | inspecciones2 | inspecciones3
+
+    return render(request, 'menuReporteInspeccion.html', {'inspecciones' : inspecciones.distinct() })
 
 
 def reporteInspeccionFechas(request):
