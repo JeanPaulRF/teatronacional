@@ -1,14 +1,42 @@
 {% extends 'baseAdmin.html' %}
 {% block content %}
-
-<div id="menuContainer">
-    <h2 id="tituloMenu">REPORTES ESTADO INSPECCIONES</h2>
-
-    <a class="nav-link" href="{% url 'menuFechas' %}">
-        <button class="botonEstandar bma">REPORTE POR RANGO DE FECHAS</button>
-    </a>
-    <a class="nav-link" href="{% url 'agentes_pdf' %}">
-        <button class="botonEstandar bma">REPORTE POR CODIGO</button>
+{% load static %}
+<div class="tituloLista">
+    <h2>ADMINISTRADOR INSPECCIONES</h2>
 </div>
+{% block buscador %}
 
+<form action="" method="GET">
+    <div class="input-group">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Fecha Inicio..." name="fechaInicio"
+            value="{{ request.POST.fechaInicio }}">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Fecha Fin..." name="fechaFin"
+            value="{{ request.POST.fechaFin }}">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Codigo..." name="codigo"
+            value="{{ request.POST.codigo }}">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                Buscar
+            </button>
+        </div>
+    </div>
+</form>
+
+{% endblock buscador %}
+<div id="listaGeneralContainer">
+    {% for inspeccion in inspecciones %}
+    <div class="cardEstandarLarge" action="elementoInfoAdmin">
+        <div class="cardInfo marginAuto">
+            <div class="filaCard"><span>Codigo: {{inspeccion.codigo}}</span></div>
+            <div class="filaCard"><span>Area: {{inspeccion.area}}</span></div>
+            <div class="filaCard"><span>Fecha Inicio: {{inspeccion.fechaInicio}}</span></div>
+            <div class="filaCard"><span>Fecha Fin: {{inspeccion.fechaFin}}</span></div>
+            <div class="filaCard"><span>Estado: {{inspeccion.tEstado}}</span></div>
+            <div class="filaCard"><span>Resultado: {{inspeccion.tResultado}}</span></div>
+            <div class="filaCard"><span>Encargado: {{inspeccion.encargado}}</span></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
 {% endblock content %}

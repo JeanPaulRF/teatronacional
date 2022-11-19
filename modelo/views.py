@@ -600,6 +600,8 @@ def listInspeccion(request):
     inspecciones2 = Inspeccion.objects.none()
     inspecciones3 = Inspeccion.objects.none()
 
+    print(busqueda)
+
     if busqueda:
         inspecciones = Inspeccion.objects.filter(
                 Q(codigo = busqueda) | 
@@ -829,7 +831,7 @@ def areas_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Arial", 12)
+    textob.setFont("Helvetica", 12)
 
     areas = Area.objects.all()
     lines = []
@@ -872,7 +874,7 @@ def agentes_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    textob.setFont("Helvetica", 12)
 
     agentes_ = AgenteDeterioro.objects.all()
     agentes = sorted(agentes_, key=lambda x: x.nombre)
@@ -913,7 +915,7 @@ def encargados_pdf(request):
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    textob.setFont("Helvetica", 12)
 
     trabajos = Inspeccion.objects.all()
     encargados = Encargado.objects.all()
@@ -932,6 +934,7 @@ def encargados_pdf(request):
             conservaciones.append("    Tipo: " + trabajo.encargado.tEncargado)
             conservaciones.append("    Telefono: " + trabajo.encargado.telefono)
             conservaciones.append("    Email: " + trabajo.encargado.email)
+            conservaciones.append("    Direccion: " + trabajo.encargado.direccion)
         elif trabajo.tResultado == "RESTAURACION":
             restauraciones.append("RESTAURACION")
             restauraciones.append(" ")
@@ -941,7 +944,8 @@ def encargados_pdf(request):
             restauraciones.append("    Tipo: " + trabajo.encargado.tEncargado)
             restauraciones.append("    Telefono: " + trabajo.encargado.telefono)
             restauraciones.append("    Email: " + trabajo.encargado.email)
-        elif trabajo.tResultado == "INSPECCION":
+            restauraciones.append(" ")
+        else:
             inspecicones.append("INSPECCION")
             inspecicones.append(" ")
             inspecicones.append("    Encargado")
@@ -950,6 +954,7 @@ def encargados_pdf(request):
             inspecicones.append("    Tipo: " + trabajo.encargado.tEncargado)
             inspecicones.append("    Telefono: " + trabajo.encargado.telefono)
             inspecicones.append("    Email: " + trabajo.encargado.email)
+            inspecicones.append(" ")
 
     conservaciones.append(" ")
     conservaciones.append(" ")
@@ -974,7 +979,36 @@ def encargados_pdf(request):
 
 
 def reporteInspeccion(request):
-    return render(request, 'menuReporteInspeccion.html')
+    fechaInicio = request.GET.get("fechaInicio")
+    fechaFin = request.GET.get("fechaFin")
+    codigo = request.GET.get("codigo")
+    inspecciones = Inspeccion.objects.all()
+    inspecciones1 = Inspeccion.objects.none()
+    inspecciones2 = Inspeccion.objects.none()
+    inspecciones3 = Inspeccion.objects.none()
+
+    if fechaInicio or fechaFin or codigo:
+
+        for inspeccion in inspecciones:
+            if fechaInicio:
+                try:
+                    if inspeccion.fechaInicio >= datetime.datetime.strptime(fechaInicio, "%Y-%m-%d").date():
+                        inspecciones1 = inspecciones1 | Inspeccion.objects.filter(id=inspeccion.id)
+                except:
+                    pass
+            if fechaFin:
+                try:
+                    if inspeccion.fechaFin <= datetime.datetime.strptime(fechaFin, "%Y-%m-%d").date():
+                        inspecciones2 = inspecciones2 | Inspeccion.objects.filter(id=inspeccion.id)
+                except:
+                    pass
+            if codigo:
+                if inspeccion.codigo == codigo:
+                    inspecciones3 = inspecciones3 | Inspeccion.objects.filter(id=inspeccion.id)
+
+    inspecciones = inspecciones1 | inspecciones2 | inspecciones3
+
+    return render(request, 'menuReporteInspeccion.html', {'inspecciones' : inspecciones.distinct() })
 
 
 def reporteInspeccionFechas(request):
