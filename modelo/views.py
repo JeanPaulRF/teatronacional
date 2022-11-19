@@ -18,9 +18,12 @@ from reportlab.lib.pagesizes import letter
 
 from modelo.patterns.Snapshopin import Snapshopin
 from modelo.patterns.Log import Log
+from modelo.patterns.Login import Login
 
-# log = Log()
-# log.readFile()
+log = Log()
+log.readFile()
+
+prox = Login()
 
 # Create your views here.
 
@@ -44,29 +47,30 @@ def menuAdmin(request):
 
 def signin(request):
     if request.method == 'POST':
-        try:
-            usuario = Usuario.objects.get(email=request.POST['email'])
+        return prox.login(request.POST['email'], request.POST['contrasena'], request)
+        # try:
+        #     usuario = Usuario.objects.get(email=request.POST['email'])
 
-            if usuario.contrasena == request.POST['contrasena']:
-                if usuario.tUsuario == 'ADMINISTRADOR':
-                    return redirect('menuAdmin/')
-                elif usuario.tUsuario == 'SUPERUSUARIO':
-                    return redirect('listaUsuarios/')
-                elif usuario.tUsuario == 'OPERATIVO':
-                    return redirect('listInspeccionesUser/{}'.format(usuario.id))
-                elif usuario.tUsuario == 'DIRECCION':
-                    return redirect('menuDireccion/')
-            else:
-                return render(request, 'signin.html', {
-                    'form' : SigninForm,
-                    'error' : 'Contraseña incorrecta'
-                })
+        #     if usuario.contrasena == request.POST['contrasena']:
+        #         if usuario.tUsuario == 'ADMINISTRADOR':
+        #             return redirect('menuAdmin/')
+        #         elif usuario.tUsuario == 'SUPERUSUARIO':
+        #             return redirect('listaUsuarios/')
+        #         elif usuario.tUsuario == 'OPERATIVO':
+        #             return redirect('listInspeccionesUser/{}'.format(usuario.id))
+        #         elif usuario.tUsuario == 'DIRECCION':
+        #             return redirect('menuDireccion/')
+        #     else:
+        #         return render(request, 'signin.html', {
+        #             'form' : SigninForm,
+        #             'error' : 'Contraseña incorrecta'
+        #         })
 
-        except Exception as e:
-            return render(request, 'signin.html', {
-                'form' : SigninForm,
-                'error' : 'El usuario no existe'
-            })
+        # except Exception as e:
+        #     return render(request, 'signin.html', {
+        #         'form' : SigninForm,
+        #         'error' : 'El usuario no existe'
+        #     })
 
     else:
         return render(request, 'signin.html', {
@@ -695,19 +699,33 @@ def editarInspeccion(request, idInspec):
         try:
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
             form = EditarInspeccionForm(request.POST, instance=inspeccion)
-            # if (not inspeccion.completada):
-            #     # Snapshop.setDatos
-            #     return render(request, 'editarInspeccion.html', {
-            #         'inspeccion' : inspeccion,
-            #         'form' : form,
-            #         'error' : 'Actualización lista'
-            #     })
             inspeccion = form.save(commit=False)
             if len(request.FILES) != 0:
                 if len(inspeccion.imagen) > 0:
                     os.remove(inspeccion.imagen.path)
                 inspeccion.imagen = request.FILES['imagen']
             inspeccion.save()
+            inspeccion = get_object_or_404(Inspeccion, id=idInspec)
+            if (inspeccion.completada):
+                a = {
+                    "Id" : inspeccion.id,
+                    "FechaInicio" : inspeccion.fechaInicio.strftime('%m/%d/%Y'),
+                    "FechaFin" : inspeccion.fechaFin.strftime('%m/%d/%Y'),
+                    "TResultado" : inspeccion.tResultado,
+                    "TEstado" : inspeccion.tEstado,
+                    "Encargado" : inspeccion.encargado.nombre,
+                    "Area" : inspeccion.area.nombre,
+                    "Comentario" : inspeccion.comentario,
+                    "Completada" : inspeccion.completada,
+                }
+                tem = Snapshopin(a)
+                log.add(tem)
+                log.write(tem)
+                return render(request, 'editarInspeccion.html', {
+                    'inspeccion' : inspeccion,
+                    'form' : form,
+                    'error' : 'Actualización lista'
+            })
             return render(request, 'editarInspeccion.html', {
                 'inspeccion' : inspeccion,
                 'form' : form,

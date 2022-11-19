@@ -1,6 +1,6 @@
-from modelo.patterns.Memento import Memento
+from modelo.patterns.Observer import Observer
 
-class Snapshopin(Memento):
+class Snapshopin(Observer):
     def __init__(self, datos):
         self.setDatos(datos)
     

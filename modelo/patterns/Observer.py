@@ -1,4 +1,4 @@
-class Memento:
+class Observer:
     id = ""
     fechaInicio = ""
     fechaFin = ""
@@ -9,9 +9,9 @@ class Memento:
     comentario = ""
     completada = ""
 
-    def getDatos(datos):
+    def getDatos():
         pass
 
-    def setDatos():
+    def setDatos(datos):
         pass
         
