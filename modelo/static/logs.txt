@@ -18,3 +18,73 @@ Area:Arias-/*
 TEstado:EJECUTADA-/*
 Completada:True-/*
 ----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todo-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todos-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todes-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todus-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todas-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todas-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----
+Id:1-/*
+TResultado:POR_DEFINIR-/*
+Comentario:Hola todas-/*
+FechaInicio:10/10/2000-/*
+FechaFin:11/16/2022-/*
+Encargado:juan-/*
+Area:Arias-/*
+TEstado:EJECUTADA-/*
+Completada:True-/*
+----#----

@@ -19,10 +19,11 @@ from reportlab.lib.pagesizes import letter
 from modelo.patterns.Snapshopin import Snapshopin
 from modelo.patterns.Log import Log
 from modelo.patterns.Login import Login
+from modelo.patterns.Memento import Memento
+from modelo.patterns.Historial import Historial
 
 log = Log()
 log.readFile()
-
 prox = Login()
 
 # Create your views here.
@@ -48,30 +49,6 @@ def menuAdmin(request):
 def signin(request):
     if request.method == 'POST':
         return prox.login(request.POST['email'], request.POST['contrasena'], request)
-        # try:
-        #     usuario = Usuario.objects.get(email=request.POST['email'])
-
-        #     if usuario.contrasena == request.POST['contrasena']:
-        #         if usuario.tUsuario == 'ADMINISTRADOR':
-        #             return redirect('menuAdmin/')
-        #         elif usuario.tUsuario == 'SUPERUSUARIO':
-        #             return redirect('listaUsuarios/')
-        #         elif usuario.tUsuario == 'OPERATIVO':
-        #             return redirect('listInspeccionesUser/{}'.format(usuario.id))
-        #         elif usuario.tUsuario == 'DIRECCION':
-        #             return redirect('menuDireccion/')
-        #     else:
-        #         return render(request, 'signin.html', {
-        #             'form' : SigninForm,
-        #             'error' : 'Contraseña incorrecta'
-        #         })
-
-        # except Exception as e:
-        #     return render(request, 'signin.html', {
-        #         'form' : SigninForm,
-        #         'error' : 'El usuario no existe'
-        #     })
-
     else:
         return render(request, 'signin.html', {
             'form' : SigninForm
@@ -697,6 +674,7 @@ def inspeccionInfo(request, id_):
 
 
 def editarInspeccion(request, idInspec):
+    historial = Historial()
     if request.method == 'POST':
         try:
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
@@ -723,6 +701,7 @@ def editarInspeccion(request, idInspec):
                 tem = Snapshopin(a)
                 log.add(tem)
                 log.write(tem)
+                historial.add(Memento(form))
                 return render(request, 'editarInspeccion.html', {
                     'inspeccion' : inspeccion,
                     'form' : form,
@@ -740,9 +719,21 @@ def editarInspeccion(request, idInspec):
                 'error' : 'Error al actualizar inspeccion'
             })
     else:
+        historial = Historial()
         inspeccion = get_object_or_404(Inspeccion, id=idInspec)
         form = EditarInspeccionForm(instance=inspeccion)
+        historial.add(Memento(form))
         return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
+
+def undo(request, idInspec):
+    historial = Historial()
+    inspeccion = get_object_or_404(Inspeccion, id=idInspec)
+    form = None
+    if (not historial.isEmpy()):
+        form = historial.get(-1).get_state()
+    else:
+        form = EditarInspeccionForm(instance=inspeccion)
+    return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
 
 
 def finalizarInspeccion(request, id_):
