@@ -73,7 +73,7 @@ urlpatterns = [
     path('listInspeccionesUser/inspeccionInfo/editarInspeccion/<int:idInspec>', views.editarInspeccion, name='editarInspeccion'),
     path('listInspeccionesUser/inspeccionInfo/finalizarInspeccion/<int:id_>', views.finalizarInspeccion, name='finalizarInspeccion'),
     path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>', views.agregarRegistro, name='agregarRegistro'),
-        path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>', views.undo, name='undo'),
+        # path('listInspeccionesUser/inspeccionInfo/agregarRegistro/<int:idInspeccion>', views.undo, name='undo'),
     #path('listInspeccionesUser/inspeccionInfo/editarRegistro/<int:idInspeccion>', views.editarRegistro, name='editarRegistro'),
     #path('listInspeccionesUser/inspeccionInfo/eliminarRegistro/<int:idInspeccion>', views.eliminarRegistro, name='eliminarRegistro'),
 

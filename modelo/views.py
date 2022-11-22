@@ -674,7 +674,7 @@ def inspeccionInfo(request, id_):
 
 
 def editarInspeccion(request, idInspec):
-    historial = Historial()
+    # historial = Historial()
     if request.method == 'POST':
         try:
             inspeccion = get_object_or_404(Inspeccion, id=idInspec)
@@ -701,7 +701,7 @@ def editarInspeccion(request, idInspec):
                 tem = Snapshopin(a)
                 log.add(tem)
                 log.write(tem)
-                historial.add(Memento(form))
+                # historial.add(Memento(form))
                 return render(request, 'editarInspeccion.html', {
                     'inspeccion' : inspeccion,
                     'form' : form,
@@ -719,21 +719,21 @@ def editarInspeccion(request, idInspec):
                 'error' : 'Error al actualizar inspeccion'
             })
     else:
-        historial = Historial()
+        # historial = Historial()
         inspeccion = get_object_or_404(Inspeccion, id=idInspec)
         form = EditarInspeccionForm(instance=inspeccion)
-        historial.add(Memento(form))
+        # historial.add(Memento(form))
         return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
 
-def undo(request, idInspec):
-    historial = Historial()
-    inspeccion = get_object_or_404(Inspeccion, id=idInspec)
-    form = None
-    if (not historial.isEmpy()):
-        form = historial.get(-1).get_state()
-    else:
-        form = EditarInspeccionForm(instance=inspeccion)
-    return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
+# def undo(request, idInspec):
+#     historial = Historial()
+#     inspeccion = get_object_or_404(Inspeccion, id=idInspec)
+#     form = None
+#     if (not historial.isEmpy()):
+#         form = historial.get(-1).get_state()
+#     else:
+#         form = EditarInspeccionForm(instance=inspeccion)
+#     return render(request, 'editarInspeccion.html', { 'inspeccion' : inspeccion , 'form' : form })
 
 
 def finalizarInspeccion(request, id_):
